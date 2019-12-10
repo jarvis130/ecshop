@@ -330,6 +330,19 @@
         }
 
 		_reload();
+
+
+        API.auth.base
+            .signin({username:username, password:password})
+            .then(function(success){
+                if (success) {
+                    $scope.toast('登录成功');
+                    $scope.goHome();
+                }
+                else{
+                    $scope.toast('用户名或密码错误');
+                }
+            });
 	}
 
 })();

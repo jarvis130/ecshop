@@ -368,4 +368,10 @@ $_LANG['mobile_setting'] = 'APP应用配置';
 $_LANG['h5_setting'] = 'H5应用配置';
 $_LANG['wxa_setting'] = '小程序应用配置';
 $_LANG['leancloud'] = 'APP推送管理';
+
+/*视频*/
+$_LANG['01_video_manage'] = '视频管理';
+$_LANG['01_video_list'] = '视频列表';
+$_LANG['02_video_add'] = '添加新视频';
+$_LANG['03_video_trash'] = '视频回收站';
 ?>

@@ -23,8 +23,9 @@ if (!defined('IN_ECS'))
 //$modules['01_certificate_manage']['sms_resource']     = 'sms_resource.php';//短信平台
 //$modules['01_certificate_manage']['logistic_tracking']  = 'logistic_tracking.php';//云起物流
 
-$modules['01_video_manage']['01_video_list']       = 'goods.php?act=list';
-$modules['01_video_manage']['02_video_add']        = 'goods.php?act=add';          // 添加商品
+$modules['01_video_manage']['01_video_list']       = 'video.php?act=list';
+$modules['01_video_manage']['02_video_add']        = 'video.php?act=add';          // 添加视频
+$modules['01_video_manage']['03_video_trash']      = 'video.php?act=trash';        // 视频回收站
 
 $modules['02_cat_and_goods']['01_goods_list']       = 'goods.php?act=list';         // 商品列表
 $modules['02_cat_and_goods']['02_goods_add']        = 'goods.php?act=add';          // 添加商品

@@ -169,4 +169,8 @@ if (!defined('IN_ECS'))
     $purview['wxa_setting']          = 'wxa_setting';
     $purview['leancloud']            = 'leancloud';
 
+// 视频管理
+    $purview['01_video_list']        = array('video_manage', 'remove_back');
+    $purview['02_video_add']         = 'video_manage';
+    $purview['03_video_trash']       = array('video_manage', 'remove_back');
 ?>

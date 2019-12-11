@@ -136,6 +136,14 @@ html {
   background-image: url(../images/nav/goods.on.png);
 }
 
+#menu-list > ul .icon-video {
+  background-image: url(../images/nav/video.png);
+}
+
+#menu-list > ul .icon-video.active, #menu-list > ul .icon-video:hover {
+  background-image: url(../images/nav/video.on.png);
+}
+
 #menu-list > ul .icon-promotion {
   background-image: url(../images/nav/promotion.png);
 }

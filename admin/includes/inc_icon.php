@@ -22,7 +22,7 @@ if (!defined('IN_ECS'))
     $icon['01_certificate_manage'] = 'certificate';
 
     //视频管理
-    $icon['01_video_manage']       = 'certificate';
+    $icon['01_video_manage']       = 'video';
 
     //商品管理
     $icon['02_cat_and_goods']      = 'goods';

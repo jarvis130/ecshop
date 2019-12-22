@@ -1020,6 +1020,10 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
 
         $db->query($sql);
 
+        //jarvis
+        $areaAttribution = '';
+        $typeAttribution = '';
+
         /* 插入、更新、删除数据 */
         foreach ($goods_attr_list as $attr_id => $attr_value_list)
         {
@@ -1039,8 +1043,30 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
                     $sql = "DELETE FROM " .$ecs->table('goods_attr'). " WHERE goods_attr_id = '$info[goods_attr_id]' LIMIT 1";
                 }
                 $db->query($sql);
+
+                //jarvis
+                if($attr_id == 38){
+                    $areaAttribution = $attr_value;
+                }
+                if($attr_id == 45){
+                    $typeAttribution = $attr_value;
+                }
             }
         }
+
+        // 处理视频属性
+        $sql = "SELECT count(1)
+                FROM " . $ecs->table('goods_video_attr') . " AS g
+                WHERE g.goods_id = '$goods_id'";
+        $count = $db->getOne($sql);
+        if($count == 0){
+            $sql = "INSERT INTO " .$ecs->table('goods_video_attr'). " (goods_id, attr_value1, attr_value2)".
+                "VALUES ('$goods_id', '$areaAttribution', '$typeAttribution')";
+        }else{
+            $sql = "UPDATE " .$ecs->table('goods_video_attr'). " SET attr_value1 = '$areaAttribution', attr_value2 = '$typeAttribution' WHERE goods_id = '$good_id' LIMIT 1";
+        }
+        $db->query($sql);
+
     }
 
     /* 处理会员价格 */

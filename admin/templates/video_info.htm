@@ -31,9 +31,9 @@
     <!-- tab body -->
     <div id="tabbody-div">
       <form enctype="multipart/form-data" action="" method="post" name="theForm" id="test">
-        <!-- éˆâ‚¬æ¾¶Ñ„æƒæµ å •æªºé’ -->
+        <!-- ´óÎÄ¼ş -->
         <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
-        <!-- é–«æ°±æ•¤æ·‡â„ƒä¼… -->
+        <!-- Í¨ÓÃĞÅÏ¢ -->
         <table width="90%" id="general-table" align="center" class="gk-table">
           <tr>
             <td class="label">{$lang.lab_goods_name}</td>
@@ -117,7 +117,7 @@
           </tr>
           {/if}
 
-          <!--éŸå——æ§æµ¼æ¨»å„¬æµ é”‹ç‰¸-->
+          <!--ÉÌÆ·ÓÅ»İ¼Û¸ñ-->
           <tr>
             <td class="label"><a href="javascript:showNotice('volumePrice');" title="{$lang.form_notice}"><img src="images/notice.svg" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>{$lang.lab_volume_price}</td>
             <td>
@@ -139,7 +139,7 @@
               <span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="volumePrice">{$lang.notice_volume_price}</span>
             </td>
           </tr>
-          <!--éŸå——æ§æµ¼æ¨»å„¬æµ é”‹ç‰¸ end -->
+          <!--ÉÌÆ·ÓÅ»İ¼Û¸ñ end -->
 
           <tr>
             <td class="label">{$lang.lab_market_price}</td>
@@ -221,14 +221,14 @@
           </tr>
         </table>
 
-        <!-- ç’‡ï¸¾ç²é»å¿šå ª -->
+        <!-- ÏêÏ¸ÃèÊö -->
         <table width="90%" id="detail-table" style="display:none">
           <tr>
             <td>{$FCKeditor}</td>
           </tr>
         </table>
 
-        <!-- éæœµç²¬æ·‡â„ƒä¼… -->
+        <!-- ÆäËûĞÅÏ¢ -->
         <table width="90%" id="mix-table" style="display:none" align="center">
           {if $code eq ''}
           <tr>
@@ -280,7 +280,7 @@
           </tr>
         </table>
 
-        <!-- çç‚´â‚¬Ñ‚ç¬Œç‘™å‹¬ç‰¸ -->
+        <!-- ÊôĞÔÓë¹æ¸ñ -->
         {if $goods_type_list}
         <table width="90%" id="properties-table" style="display:none" align="center">
           <tr>
@@ -298,9 +298,9 @@
         </table>
         {/if}
 
-        <!-- éŸå——æ§é©ç¨¿å”½ -->
+        <!--  ÉÌÆ·Ïà²á -->
         <table width="90%" id="gallery-table" class="aaa" style="display:none" align="center">
-          <!-- é¥å‰§å¢–é’æ¥„ã€ƒ -->
+          <!-- Í¼Æ¬ÁĞ±í -->
           <tr>
             <td class="up-title">{$lang.lab_picture}</td>
             <td>
@@ -325,7 +325,7 @@
             </td>
           </tr>
           <tr><td>&nbsp;</td></tr>
-          <!-- æ¶“å©ç´¶é¥å‰§å¢– -->
+          <!-- ÉÏ´«Í¼Æ¬ -->
           <tr>
             <td>
               <!-- <a href="javascript:;" onclick="addImg(this)">[+]</a>
@@ -337,9 +337,9 @@
           </tr>
         </table>
 
-        <!-- éå® ä»ˆéŸå——æ§ -->
+        <!-- ¹ØÁªÉÌÆ· -->
         <table width="90%" id="linkgoods-table" style="display:none" align="center">
-          <!-- éŸå——æ§é¼æ»…å‚¨ -->
+          <!-- ÉÌÆ·ËÑË÷ -->
           <tr>
             <td colspan="3">
               <img src="images/icon_search.svg" width="26" height="22" border="0" alt="SEARCH" />
@@ -350,7 +350,7 @@
                 onclick="searchGoods(sz1, 'cat_id1','brand_id1','keyword1')" />
             </td>
           </tr>
-          <!-- éŸå——æ§é’æ¥„ã€ƒ -->
+          <!-- ÉÌÆ·ÁĞ±í -->
           <tr>
             <th>{$lang.all_goods}</th>
             <th>{$lang.handler}</th>
@@ -378,9 +378,9 @@
           </tr>
         </table>
 
-        <!-- é–°å¶„æ¬¢ -->
+        <!-- Åä¼ş -->
         <table width="90%" id="groupgoods-table" style="display:none" align="center">
-          <!-- éŸå——æ§é¼æ»…å‚¨ -->
+          <!-- ÉÌÆ·ËÑË÷ -->
           <tr>
             <td colspan="3">
               <img src="images/icon_search.svg" width="26" height="22" border="0" alt="SEARCH" />
@@ -390,7 +390,7 @@
               <input type="button" value="{$lang.button_search}" onclick="searchGoods(sz2, 'cat_id2', 'brand_id2', 'keyword2')" class="button" />
             </td>
           </tr>
-          <!-- éŸå——æ§é’æ¥„ã€ƒ -->
+          <!-- ÉÌÆ·ÁĞ±í -->
           <tr>
             <th>{$lang.all_goods}</th>
             <th>{$lang.handler}</th>
@@ -417,9 +417,9 @@
           </tr>
         </table>
 
-        <!-- éå® ä»ˆé‚å›©ç· -->
+        <!-- ¹ØÁªÎÄÕÂ -->
         <table width="90%" id="article-table" style="display:none" align="center">
-          <!-- é‚å›©ç·é¼æ»…å‚¨ -->
+          <!-- ÎÄÕÂËÑË÷ -->
           <tr>
             <td colspan="3">
               <img src="images/icon_search.svg" width="26" height="22" border="0" alt="SEARCH" />
@@ -427,7 +427,7 @@
               <input type="button" value="{$lang.button_search}" onclick="searchArticle()" class="button" />
             </td>
           </tr>
-          <!-- é‚å›©ç·é’æ¥„ã€ƒ -->
+          <!-- ÎÄÕÂÁĞ±í -->
           <tr>
             <th>{$lang.all_article}</th>
             <th>{$lang.handler}</th>
@@ -489,7 +489,7 @@
           handleAutoThumb(document.forms['theForm'].elements['auto_thumb'].checked);
       }
 
-      // å¦«â‚¬éŒãƒ¦æŸŠç’ãˆ å´Ÿ
+      // æ£¢ãæŸ¥æ–°è®¢å•
       startCheckOrder();
       {/literal}
       {foreach from=$user_rank_list item=item}
@@ -553,7 +553,7 @@
 }
 
   /**
-   * é’å›¨å´²éŸå——æ§ç»«è¯²ç€·
+   * ÇĞ»»ÉÌÆ·ÀàĞÍ
    */
   function getAttrList(goodsId)
   {
@@ -573,10 +573,10 @@
   }
 
   /**
-   * é¸å¤‹ç˜®æ¸šå¬­?ç» æ¤¾ç¯é
-   * @param   string  inputName   æˆæ’³å†å¦—å——æ‚•ç»‰
-   * @param   float   rate        å§£æ–¾ç·¥
-   * @param   string  priceName   æµ é”‹ç‰¸æˆæ’³å†å¦—å——æ‚•ç»‰å¸®ç´™æ¿¡å‚›ç‰å¨Œâ„ƒæ¹é”›å±½å½‡shop_priceé”›
+   * °´±ÈÀı??Ëã¼Û?
+   * @param   string  inputName   ÊäÈë¿òÃû?
+   * @param   float   rate        ±ÈÀı
+   * @param   string  priceName   ¼Û¸ñÊäÈë¿òÃû³Æ£¨Èç¹ûÃ»ÓĞ£¬È¡shop_price?
    */
   function computePrice(inputName, rate, priceName)
   {
@@ -605,7 +605,7 @@
   }
 
   /**
-   * ç’å‰§ç–†æµœå—•ç«´æ¶“?æ™¢éä½·ç¯éç¡·ç´é€ç‘°å½‰ç”¯å‚šæº€æµ é”‹ç‰¸éŠ†ä½ºĞé’å—•äº’é™å©ç´°é›æ¨¹ç¯é
+   * ÉèÖÃÁËÒ»????Æ·¼Û¸ñ£¬¸Ä±äÊĞ³¡¼Û¸ñ¡¢»ı·ÖÒÔ¼°»áÔ±¼Û?
    */
   function priceSetted()
   {
@@ -619,7 +619,7 @@
   }
 
   /**
-   * ç’å‰§ç–†æµ¼æ°¬æ†³æµ é”‹ç‰¸å¨‰ã„©å™´
+   * ÉèÖÃ»áÔ±¼Û¸ñ×¢ÊÍ
    */
   function set_price_note(rank_id)
   {
@@ -649,7 +649,7 @@
   }
 
   /**
-   * éè§„åµç”¯å‚šæº€æµ é”‹ç‰¸é”›å²ƒ?ç» æ¥€è‹Ÿé€ç‘°å½‰éŸå——ç°µæµ é”‹ç‰¸éŠ†ä½ºĞé’å—•äº’é™å©ç´°é›æ¨¹ç¯é
+   * ¸ù¾İÊĞ³¡¼Û¸ñ£¬??Ëã²¢¸Ä±äÉÌµê¼Û¸ñ¡¢»ı·ÖÒÔ¼°»áÔ±¼Û?
    */
   function marketPriceSetted()
   {
@@ -663,7 +663,7 @@
   }
 
   /**
-   * é‚æ¿?æ¶“â‚¬æ¶“??é
+   * ĞÂÔö¹æ¸ñ
    */
   function addSpec(obj)
   {
@@ -681,7 +681,7 @@
   }
 
   /**
-   * é’çŠ»æ«ç‘™å‹¬ç‰¸éŠ
+   * É¾³ı¹æ¸ñ
    */
   function removeSpec(obj)
   {
@@ -692,7 +692,7 @@
   }
 
   /**
-   * æ¾¶å‹­æ‚Šç‘™å‹¬ç‰¸
+   * ´¦Àí¹æ¸ñ
    */
   function handleSpec()
   {
@@ -710,7 +710,7 @@
               }
 
               var hiddenSpec = document.getElementById('hidden_' + element.id);
-              hiddenSpec.value = value.join(String.fromCharCode(13)); // é¢ã„¥æ´–æï¹‚æ•­é—…æ–¿ç´‘å§£å¿é‡œç‘™å‹¬ç‰¸
+              hiddenSpec.value = value.join(String.fromCharCode(13)); // ç”¨å›è½¦é”®éš”å¼€æ¯ä¸ªè§„æ ¼
           }
       }
       return true;
@@ -732,7 +732,7 @@
   }
 
   /**
-   * è¹‡?â‚¬ç†¸åŠé”çŠ²æ§é—
+   * Ìí¼ÓÆ·ÅÆ
    */
   function rapidBrandAdd(conObj)
   {
@@ -866,7 +866,7 @@
       opt.selected = true;
       opt.innerHTML = response.cat;
 
-      //é‘¾å³°å½‡ç€›æ„¬åç»«è¤æ®‘ç»Œçƒ˜ç‰¸é
+      //»ñÈ¡×Ó·ÖÀàµÄ¿Õ¸ñ
       var str = selCat.options[selCat.selectedIndex].text;
       var temp = str.replace(/^\s+/g, '');
       var lengOfSpace = str.length - temp.length;
@@ -921,7 +921,7 @@
 
 
   /**
-   * é’çŠ»æ«è¹‡?â‚¬ç†·åç»«
+   * É¾³ı·ÖÀà
    */
   function removeCat()
   {
@@ -938,7 +938,7 @@
   }
 
   /**
-   * é’çŠ»æ«è¹‡?â‚¬ç†·æ§é—
+   * É¾³ıÆ·ÅÆ
    */
   function removeBrand()
   {
@@ -952,7 +952,7 @@
   }
 
   /**
-   * å¨£è¯²å§éµâ•çé’å—™è¢«
+   * Ìí¼ÓÀ©Õ¹·ÖÀà
    */
   function addOtherCat(conObj)
   {
@@ -978,7 +978,7 @@
       sel.onChange = function() {checkIsLeaf(this);};
   }
 
-  /* éå® ä»ˆéŸå——æ§é‘èŠ¥æšŸ */
+  /* ¹ØÁªÉÌÆ·º¯Êı */
   function searchGoods(szObject, catId, brandId, keyword)
   {
       var filters = new Object;
@@ -992,7 +992,7 @@
   }
 
   /**
-   * éå® ä»ˆé‚å›©ç·é‘èŠ¥æšŸ
+   * ²éÑ¯ÎÄÕÂ
    */
   function searchArticle()
   {
@@ -1004,7 +1004,7 @@
   }
 
   /**
-   * é‚æ¿?æ¶“â‚¬æ¶“?æµ˜é—
+   * ĞÂÔöÍ¼Æ¬
    */
   function addImg(obj)
   {
@@ -1017,7 +1017,7 @@
   }
 
   /**
-   * é’çŠ»æ«é¥å‰§å¢–æ¶“å©ç´¶
+   * É¾³ıÍ¼Æ¬ÉÏ´«
    */
   function removeImg(obj)
   {
@@ -1028,7 +1028,7 @@
   }
 
   /**
-   * é’çŠ»æ«é¥å‰§å¢–
+   * É¾³ıÍ¼Æ¬
    */
   function dropImg(imgId)
   {
@@ -1044,7 +1044,7 @@
   }
 
   /**
-   * çå——ç«¶é¦è½°ç¯éç…å½‡é
+   * ½«ÊĞ³¡¼Û¸ñÈ¡Õû
    */
   function integral_market_price()
   {
@@ -1052,7 +1052,8 @@
   }
 
    /**
-   * çå—™Ğé’å—šå–˜æ¶”ä¼´?æ´ï¹€å½‡é
+   * *
+    * ½«»ı·Ö¹ºÂòÈ¡Õû
    */
   function parseint_integral()
   {
@@ -1061,7 +1062,7 @@
 
 
   /**
-  * å¦«â‚¬éŒãƒ¨æ£é™é”‹æ§¸éšï¹€ç“¨é¦
+  * ¼ì²é»õºÅÊÇ·ñ´æÔÚ
   */
   function checkGoodsSn(goods_sn, goods_id)
   {
@@ -1087,7 +1088,8 @@
   }
 
   /**
-   * é‚æ¿?æ¶“â‚¬æ¶“?ç´­é¯çŠ±ç¯é
+   *
+   * ĞÂÔöÓÅ»İ„»¼Û¸ñ
    */
   function addVolumePrice(obj)
   {
@@ -1113,7 +1115,7 @@
   }
 
   /**
-   * é’çŠ»æ«æµ¼æ¨»å„¬æµ é”‹ç‰¸
+   * É¾³ıÓÅ»İ¼Û¸ñ
    */
   function removeVolumePrice(obj)
   {
@@ -1124,7 +1126,7 @@
   }
 
   /**
-   * éï¿ ç™æµ¼æ¨»å„¬éç‰ˆåµé„?æƒå§ï½‡â€˜
+   * Ğ£ÑéÓÅ»İÊı¾İÊÇ·ñÕıÈ·
    */
   function checkVolumeData(isSubmit,validator)
   {
@@ -1162,9 +1164,9 @@
   }
   
 
-  //ä¸Šä¼ å›¾ç‰‡
+  //ÉÏ´«Í¼Æ¬
   $(function(){
-    // ä¸»å›¾ä¸Šä¼ 
+    // Ö÷Í¼ÉÏ´«
     $(".up-ipt").change(function(e) {
           var file = this.files[0];
               imgUrl = window.URL.createObjectURL(file),
@@ -1177,7 +1179,7 @@
           $(this).parent().find('.img-inner').html(imgNode);
     });
    
-    //ç›¸å†Œä¸Šä¼ 
+    //Ïà²áÉÏ´«
     var maxUpNum = 10,
         imgId = [];
     lab_thumb_url = '{$lang.lab_thumb_url}',
@@ -1220,30 +1222,30 @@
         type:"image/jpeg"
       },
       compress:null,
-      fileNumLimit:maxUpNum,//æœ€å¤§ä¸Šä¼ çš„æ–‡ä»¶æ•°é‡, 
-      fileSizeLimit:100000 * 1024,//æ€»æ–‡ä»¶å¤§å°
-      fileSingleSizeLimit:10000 * 1024 //å•ä¸ªæ–‡ä»¶å¤§å°(å•ä½å­—èŠ‚)
+      fileNumLimit:maxUpNum,//×î´óÉÏ´«µÄÎÄ¼şÊıÁ¿, 
+      fileSizeLimit:100000 * 1024,//×ÜÎÄ¼ş´óĞ¡
+      fileSingleSizeLimit:10000 * 1024 //µ¥¸öÎÄ¼ş´óĞ¡(µ¥Î»×Ö½Ú)
     });
-    //å·¦ç§»äº‹ä»¶;
+    //×óÒÆÊÂ¼ş;
     function leftLi ($leftli, $li) {
         $li.insertBefore($leftli);
     }
 
-    //å³ç§»äº‹ä»¶;
+    //ÓÒÒÆÊÂ¼ş;
     function rightLi ($rightli, $li) {
         $li.insertAfter($rightli);
     }
-    //ç»‘å®šå·¦ç§»äº‹ä»¶;
+    //°ó¶¨×óÒÆÊÂ¼ş;
     var uploadUl = $('.upload-ul');
       uploadUl.find('.diyLeft').on('click',function(){
           leftLi($(this).parents('.diyUploadHover').prev(), $(this).parents('.diyUploadHover'));
       });
 
-      //ç»‘å®šå³ç§»äº‹ä»¶;
+      //°ó¶¨ÓÒÒÆÊÂ¼ş;
       uploadUl.find('.diyRight').on('click',function(){
           rightLi($(this).parents('.diyUploadHover').next(), $(this).parents('.diyUploadHover') );
       });
-     //å›¾ç‰‡ç›¸å†Œå¤–é“¾å›¾ç‰‡åŠ å…¥é¢„è§ˆ
+     //Í¼Æ¬Ïà²áÍâÁ´Í¼Æ¬¼ÓÈëÔ¤ÀÀ
      $('.upload-ul .list').on('click','.fill-img',function(){
         var imgsrc = $.trim($(this).prev('input').val()),
             $parent = $(this).parent();

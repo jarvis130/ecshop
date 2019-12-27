@@ -198,6 +198,29 @@ class ECS
         return $s;
     }
 
+    /**
+     * 获得视频的目录路径
+     *
+     * @param int $sid
+     *
+     * @return string 路径
+     */
+    function video_dir($sid = 0)
+    {
+        if (empty($sid))
+        {
+            $s = 'videos';
+        }
+        else
+        {
+            $s = 'user_files/';
+            $s .= ceil($sid / 3000) . '/';
+            $s .= ($sid % 3000) . '/';
+            $s .= 'videos';
+        }
+        return $s;
+    }
+
 }
 
 ?>

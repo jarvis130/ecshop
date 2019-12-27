@@ -36,6 +36,7 @@ class cls_image
     var $data_dir    = DATA_DIR;
     var $bgcolor     = '';
     var $type_maping = array(1 => 'image/gif', 2 => 'image/jpeg', 3 => 'image/png');
+    var $video_dir  = VIDEO_DIR;
 
     function __construct($bgcolor='')
     {
@@ -757,6 +758,83 @@ class cls_image
         }
 
         return true;
+    }
+
+    /**
+     * 视频上传的处理函数
+     *
+     * @access      public
+     * @param       array       upload       包含上传的视频文件信息的数组
+     * @param       array       dir          文件要上传在$this->data_dir下的目录名。如果为空视频放在则在$this->images_dir下以当月命名的目录下
+     * @param       array       img_name     上传视频名称，为空则随机生成
+     * @return      mix         如果成功则返回文件名，否则返回false
+     */
+    function upload_video($upload, $dir = '', $img_name = '')
+    {
+        /* 没有指定目录默认为根目录images */
+        if (empty($dir))
+        {
+            /* 创建当月目录 */
+            $dir = date('Ym');
+            $dir = ROOT_PATH . $this->video_dir . '/' . $dir . '/';
+        }
+        else
+        {
+            /* 创建目录 */
+            $dir = ROOT_PATH . $this->data_dir . '/' . $dir . '/';
+            if ($img_name)
+            {
+                $img_name = $dir . $img_name; // 将图片定位到正确地址
+            }
+        }
+
+        /* 如果目标目录不存在，则创建它 */
+        if (!file_exists($dir))
+        {
+            if (!make_dir($dir))
+            {
+                /* 创建目录失败 */
+                $this->error_msg = sprintf($GLOBALS['_LANG']['directory_readonly'], $dir);
+                $this->error_no  = ERR_DIRECTORY_READONLY;
+
+                return false;
+            }
+        }
+
+        if (empty($img_name))
+        {
+            $img_name = $this->unique_name($dir);
+            $img_name = $dir . $img_name . $this->get_filetype($upload['name']);
+        }
+
+//        if (!$this->check_img_type($upload['type']))
+//        {
+//
+//            $this->error_msg = $GLOBALS['_LANG']['invalid_upload_image_type'];
+//            $this->error_no  =  ERR_INVALID_IMAGE_TYPE;
+//            return false;
+//        }
+
+        /* 允许上传的文件类型 */
+//        $allow_file_types = '|GIF|JPG|JEPG|PNG|BMP|SWF|png|jpg|jpeg|gif|';
+//        if (!check_file_type($upload['tmp_name'], $img_name, $allow_file_types))
+//        {
+//            $this->error_msg = $GLOBALS['_LANG']['invalid_upload_image_type'];
+//            $this->error_no  =  ERR_INVALID_IMAGE_TYPE;
+//            return false;
+//        }
+
+        if ($this->move_file($upload, $img_name))
+        {
+            return str_replace(ROOT_PATH, '', $img_name);
+        }
+        else
+        {
+            $this->error_msg = sprintf($GLOBALS['_LANG']['upload_failure'], $upload['name']);
+            $this->error_no  = ERR_UPLOAD_FAILURE;
+
+            return false;
+        }
     }
 }
 

@@ -148,6 +148,23 @@ elseif ($_REQUEST['act'] == 'add' || $_REQUEST['act'] == 'edit' || $_REQUEST['ac
         $smarty->assign('warning', $warning);
     }
 
+    /* 如果是安全模式，检查目录是否存在 */
+    if (ini_get('safe_mode') == 1 && (!file_exists('../' . VIDEO_DIR . '/'.date('Ym')) || !is_dir('../' . VIDEO_DIR . '/'.date('Ym'))))
+    {
+        if (@!mkdir('../' . VIDEO_DIR . '/'.date('Ym'), 0777))
+        {
+            $warning = sprintf($_LANG['safe_mode_warning'], '../' . VIDEO_DIR . '/'.date('Ym'));
+            $smarty->assign('warning', $warning);
+        }
+    }
+
+    /* 如果目录存在但不可写，提示用户 */
+    elseif (file_exists('../' . VIDEO_DIR . '/'.date('Ym')) && file_mode_info('../' . VIDEO_DIR . '/'.date('Ym')) < 2)
+    {
+        $warning = sprintf($_LANG['not_writable_warning'], '../' . VIDEO_DIR . '/'.date('Ym'));
+        $smarty->assign('warning', $warning);
+    }
+
     /* 取得商品信息 */
     if ($is_add)
     {
@@ -211,6 +228,9 @@ elseif ($_REQUEST['act'] == 'add' || $_REQUEST['act'] == 'edit' || $_REQUEST['ac
 
         /* 图片列表 */
         $img_list = array();
+
+        /* 视频列表 */
+        $video_list = array();
     }
     else
     {
@@ -638,7 +658,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
 
         if (empty($is_url_goods_img))
         {
-            $original_img   = $image->upload_image($_FILES['goods_img']); // 原始图片
+            $original_img   = $image->upload_video($_FILES['goods_img']); // 原始图片
         }
         elseif ($_POST['goods_img_url'])
         {
@@ -762,7 +782,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
     }
     else
     {
-        // 未上传，如果自动选择生成，且上传了商品图片，生成所略图
+         //未上传，如果自动选择生成，且上传了商品图片，生成所略图
         if ($proc_thumb && isset($_POST['auto_thumb']) && !empty($original_img))
         {
             // 如果设置缩略图大小不为0，生成缩略图
@@ -779,6 +799,29 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
                 $goods_thumb = $original_img;
             }
         }
+    }
+
+    $is_outer_video_url = empty($_POST['isOuterVideoUrl']) ? 0 : intval($_POST['isOuterVideoUrl']);
+    if($is_outer_video_url == 1){
+        $video_url = $_POST['video_url'];
+    }else if (($_FILES['video_path']['tmp_name'] != '' && $_FILES['video_path']['tmp_name'] != 'none'))
+    {   // 如果上传了视频，相应处理
+        if ($_REQUEST['goods_id'] > 0)
+        {
+            /* 删除原来的文件 */
+            $sql = "SELECT video_url, is_outer_video_url " .
+                " FROM " . $ecs->table('goods') .
+                " WHERE goods_id = '$_REQUEST[goods_id]'";
+
+            $row = $db->getRow($sql);
+            if ($row['video_url'] != '' && is_file('../' . $row['video_url']))
+            {
+                @unlink('../' . $row['video_url']);
+            }
+        }
+
+        $video_url = $image->upload_video($_FILES['video_path']);
+        
     }
 
 
@@ -855,19 +898,19 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
                     "cat_id, brand_id, shop_price, market_price, virtual_sales, is_promote, promote_price, " .
                     "promote_start_date, promote_end_date, goods_img, goods_thumb, original_img, keywords, goods_brief, " .
                     "seller_note, goods_weight, goods_number, warn_number, integral, give_integral, is_best, is_new, is_hot, is_real, " .
-                    "is_on_sale, is_alone_sale, is_shipping, goods_desc, add_time, last_update, goods_type, extension_code, rank_integral)" .
+                    "is_on_sale, is_alone_sale, is_shipping, goods_desc, add_time, last_update, goods_type, extension_code, rank_integral, video_url, is_outer_video_url)" .
                 "VALUES ('$_POST[goods_name]', '$goods_name_style', '$goods_sn', '$catgory_id', " .
                     "'$brand_id', '$shop_price', '$market_price', '$virtual_sales', '$is_promote','$promote_price', ".
                     "'$promote_start_date', '$promote_end_date', '$goods_img', '$goods_thumb', '$original_img', ".
                     "'$_POST[keywords]', '$_POST[goods_brief]', '$_POST[seller_note]', '$goods_weight', '$goods_number',".
                     " '$warn_number', '$_POST[integral]', '$give_integral', '$is_best', '$is_new', '$is_hot', 2, '$is_on_sale', '$is_alone_sale', $is_shipping, ".
-                    " '$_POST[goods_desc]', '" . gmtime() . "', '". gmtime() ."', '$goods_type', '$code', '$rank_integral')";
+                    " '$_POST[goods_desc]', '" . gmtime() . "', '". gmtime() ."', '$goods_type', '$code', '$rank_integral', '$video_url', '$is_outer_video_url')";
 //        }
     }
     else
     {
         /* 如果有上传图片，删除原来的商品图 */
-        $sql = "SELECT goods_thumb, goods_img, original_img " .
+        $sql = "SELECT goods_thumb, goods_img, original_img, video_url " .
                     " FROM " . $ecs->table('goods') .
                     " WHERE goods_id = '$_REQUEST[goods_id]'";
         $row = $db->getRow($sql);
@@ -880,6 +923,11 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
         if ($proc_thumb && $goods_thumb && $row['goods_thumb'] && !goods_parse_url($row['goods_thumb']))
         {
             @unlink(ROOT_PATH . $row['goods_thumb']);
+        }
+
+        if ($video_url && $row['video_url'])
+        {
+            @unlink(ROOT_PATH . $row['video_url']);
         }
 
         $sql = "UPDATE " . $ecs->table('goods') . " SET " .
@@ -905,6 +953,11 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
         if ($goods_thumb)
         {
             $sql .= "goods_thumb = '$goods_thumb', ";
+        }
+        if ($video_url)
+        {
+            $sql .= "video_url = '$video_url', ";
+            $sql .= "is_outer_video_url = '$is_outer_video_url', ";
         }
 //        if ($code != '')
 //        {
@@ -2692,6 +2745,64 @@ elseif ($_REQUEST['act'] == 'ajax_upload_image')
     $img_info = array();
 
     $dir = ROOT_PATH . IMAGE_DIR . '/'.date('Ym') ;
+    if ( !is_dir($dir) )
+    {
+        if (@!mkdir($dir, 0777))
+        {
+            exit($_LANG['safe_mode_warning']);
+        }
+
+        @!mkdir($dir.'/source_img', 0777);
+        @!mkdir($dir.'/goods_img', 0777);
+        @!mkdir($dir.'/thumb_img', 0777);
+    }
+
+    if(empty($_FILES) || empty($_FILES['file']['tmp_name'])){
+        $img_info = array('img_id'=>0,'goods_img'=>'','thumb_img'=>'','msg'=>$_LANG['img_upload_fail']);
+        make_json_result($img_info);
+    }
+
+    $source_img = $image->upload_image($_FILES['file']);
+
+    if(empty($source_img)){
+        $img_info = array('img_id'=>0,'goods_img'=>'','thumb_img'=>'','msg'=>$_LANG['img_upload_fail']);
+        make_json_result($img_info);
+    }
+
+    // 生成商品图片
+    $goods_img = $image->make_thumb('../'.$source_img, $_CFG['image_width'],  $_CFG['image_height'] , $dir . '/goods_img/' );
+
+    // 生成缩略图片
+    $thumb_img = $image->make_thumb('../'.$source_img, $_CFG['thumb_width'],  $_CFG['thumb_height'] , $dir . '/thumb_img/');
+
+    // 如果服务器支持GD 则添加水印
+    if ($proc_thumb && gd_version() > 0)
+    {
+        $image->add_watermark(ROOT_PATH . $goods_img, '', $_CFG['watermark'], $_CFG['watermark_place'], $_CFG['watermark_alpha']);
+    }
+
+    $sql = "INSERT INTO " . $ecs->table('goods_gallery') . " (goods_id, img_url, img_desc, thumb_url, img_original) " .
+        "VALUES ('$goods_id', '$goods_img', '', '$thumb_img', '$source_img')";
+    $db->query($sql);
+
+    $img_id = $db->insert_id();
+
+    $img_info = array('img_id'=>$img_id,'goods_img'=>$goods_img,'thumb_img'=>$thumb_img,'msg'=>'');
+
+    make_json_result($img_info);
+
+}/*------------------------------------------------------ */
+//-- 异步上传视频
+/*------------------------------------------------------ */
+elseif ($_REQUEST['act'] == 'ajax_upload_video')
+{
+    check_authz_json('video_manage');
+    $goods_id   = intval($_POST['id']);
+    $base64_data = isset($_POST['image']) ? $_POST['image'] : '';
+    $proc_thumb = (isset($GLOBALS['shop_id']) && $GLOBALS['shop_id'] > 0)? false : true;
+    $img_info = array();
+
+    $dir = ROOT_PATH . VIDEO_DIR . '/'.date('Ym') ;
     if ( !is_dir($dir) )
     {
         if (@!mkdir($dir, 0777))

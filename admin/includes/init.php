@@ -128,6 +128,7 @@ if (strpos(PHP_SELF, '.php/') !== false)
 $ecs = new ECS($db_name, $prefix);
 define('DATA_DIR', $ecs->data_dir());
 define('IMAGE_DIR', $ecs->image_dir());
+define('VIDEO_DIR', $ecs->video_dir());
 
 /* 初始化数据库类 */
 require(ROOT_PATH . 'includes/cls_mysql.php');

@@ -60,3 +60,7 @@ textarea{border:1px solid #ddd;box-shadow: 0 0 5px #ddd inset;}
 .upImg .img-inner img{max-width: 100%;}
 .upImg  {position: relative;width: 66px;height: 66px;}
 .upImg .up-ipt {position: absolute;opacity: 0;width: 66px;height: 66px;left: 0;top:0;z-index: 99;}
+
+.upVideo {margin-top: 10px;}
+.upVideo .video-inner {float: none;}
+.upVideo .video-inner img{max-width: 100%;}

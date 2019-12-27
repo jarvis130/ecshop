@@ -32,7 +32,7 @@
     <div id="tabbody-div">
       <form enctype="multipart/form-data" action="" method="post" name="theForm" id="test">
         <!-- 大文件 -->
-        <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+        <!--<input type="hidden" name="MAX_FILE_SIZE" value="2097152" />-->
         <!-- 通用信息 -->
         <table width="90%" id="general-table" align="center" class="gk-table">
           <tr>
@@ -199,19 +199,20 @@
               <br /><input type="text" size="40" value="{$lang.lab_picture_url}" style="color:#aaa;" onfocus="if (this.value == '{$lang.lab_picture_url}'){this.value='http://';this.style.color='#000';}" name="goods_img_url"/>
             </td>
           </tr>
+
           <tr id="auto_thumb_1">
             <td class="label"> {$lang.lab_thumb}</td>
             <td id="auto_thumb_3">
               <div class="upImg">
                 <div class="img-inner">
                   {if $goods.goods_img}
-                        <img src="../{$goods.goods_thumb}" alt="">
-                    {else}
-                    <span class="add">+</span>
-                    {/if}
-                 </div>
+                  <img src="../{$goods.goods_thumb}" alt="">
+                  {else}
+                  <span class="add">+</span>
+                  {/if}
+                </div>
                 <input type="file" size="35" name="goods_thumbs" class="up-ipt" accept="image/png,image/gif,image/jpg,image/jpeg,image/bmp"/>
-         
+
               </div>
               <br /><input type="text" size="40" value="{$lang.lab_thumb_url}" style="color:#aaa;" onfocus="if (this.value == '{$lang.lab_thumb_url}'){this.value='http://';this.style.color='#000';}" name="goods_thumb_url"/>
               {if $gd > 0}
@@ -219,6 +220,28 @@
 
             </td>
           </tr>
+
+          <!-- 上传视频 begin-->
+          <tr>
+            <td class="label">{$lang.lab_video}</td>
+            <td>
+                <div style="height: 5px;"></div>
+
+                <label><input type="checkbox" id="isOuterVideoUrl" name="isOuterVideoUrl" />{$lang.lab_isOuterVideoUrl}</label>
+
+              <div id="upVideo" class="upVideo">
+                <div id="video-inner" class="video-inner">
+                </div>
+                <input type="file" id="video_path" name="video_path" size="35" multiple="multiple" accept="video/*"/>
+              </div>
+
+              <input type="text" size="40" id="video_url" name="video_url" value="" style="color:#aaa;" onfocus="if (this.value == '{$lang.lab_video_url}'){this.value='http://';this.style.color='#000';}"/>
+
+              
+            </td>
+          </tr>
+          <!-- 上传视频 end-->
+
         </table>
 
         <!-- 详细描述 -->
@@ -478,6 +501,8 @@
   var sz3 = new SelectZone(1, elements['source_select3'], elements['target_select3']);
   var marketPriceRate = {$cfg.market_price_rate|default:1};
   var integralPercent = {$cfg.integral_percent|default:0};
+
+  var is_outer_video_url = '{$goods.is_outer_video_url}';
 
   {literal}
   onload = function()
@@ -1198,7 +1223,7 @@
     tip_param_error = '{$lang.tip_param_error}';
     delete(Object.prototype.toJSONString);
     $('#goodsUpload').diyUpload({
-      url:'video.php?act=ajax_upload_image',
+      url:'video.php?act=ajax_upload_video',
       success:function( data ) { 
         var sn = data.content.img_id;
         imgId.push(sn);
@@ -1256,6 +1281,71 @@
 
      })
   });
+
+    //上传视频
+    $(function(){
+      var videoUrl = '{$goods.video_url}';
+      if(is_outer_video_url == "0"){
+        $("#video_url").css('display','none');
+        $("#video_path").css('display','block');
+        $("#video_inner").css('display','block');
+        $("#isOuterVideoUrl").val("0");
+        var file = '<a target="_blank" href="/'+ videoUrl +'">'+ videoUrl + '</a>';
+        $("#video-inner").html(file);
+      }else{
+        $("#video_url").css('display','block');
+        $("#video_path").css('display','none');
+        $("#video_inner").css('display','none');
+        $("#isOuterVideoUrl").val("1");
+        $("#isOuterVideoUrl").attr("checked", '1');
+        $("#video_url").attr("value", videoUrl);
+      }
+
+      // 上传
+      $("#video_path").change(function(e) {
+          var file = this.files[0];
+          imgUrl = window.URL.createObjectURL(file),
+              imgNode = '<a target="_blank" href="'+ imgUrl +'">'+ file.name + '</a>',
+              tips = '{$lang.tip_imgSize}';
+          if(file.size > 10 * 1024 * 1024){
+              alert(tips)
+              return
+          }
+          $(this).parent().find('.video-inner').html(imgNode);
+      });
+
+      $("#isOuterVideoUrl").click(function(e){
+
+        var check = $("#isOuterVideoUrl").prop("checked");
+        if(check == false){
+          $("#video_url").css('display','none');
+          $("#video_path").css('display','inline');
+          $("#video_inner").css('display','inline');
+          $("#isOuterVideoUrl").val("0");
+        }else{
+          $("#video_url").css('display','inline');
+          $("#video_path").css('display','none');
+          $("#video_inner").css('display','none');
+          $("#isOuterVideoUrl").val("1");
+          $("#video-inner").html('');
+        }
+      });
+    });
+
+    function handleIsOuterVideoUrl(checked){
+        var check = $("#isOuterVideoUrl").prop("checked");
+        if(check == false){
+            $("#video_url").css('display','none');
+            $("#video_path").css('display','inline');
+            $("#video_inner").css('display','inline');
+            $("#isOuterVideoUrl").value(0);
+        }else{
+            $("#video_url").css('display','inline');
+            $("#video_path").css('display','none');
+            $("#video_inner").css('display','none');
+            $("#isOuterVideoUrl").value(1);
+        }
+    }
 
 
   {/literal}

@@ -77,7 +77,7 @@ var helpLang = "{$help_lang}";
 {insert_scripts files="../js/global.js,../js/utils.js,../js/transport.js"}
 {insert_scripts files="./js/menu.js"}
 <script language="JavaScript">
-window.setInterval(crontab,30000);
+// window.setInterval(crontab,30000);
 function crontab(){
   Ajax.call('cloud.php?is_ajax=1&act=load_crontab','','', 'GET', 'JSON');
 }

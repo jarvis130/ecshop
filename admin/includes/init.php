@@ -252,11 +252,11 @@ if(isset($_GET['ent_id']) && isset($_GET['ent_ac']) &&  isset($_GET['ent_sign'])
         $apiget = "act=ent_sign&ent_id= $ent_id & certificate_id=$certificate_id";
 
         // $t->request('https://cloud-ecshop.xyunqi.com/api.php', $apiget);
-        $t->request('https://cloud-ecshop.xyunqi.com/api.php', $apiget);
-        $db->query('UPDATE '.$ecs->table('shop_config') . ' SET value = "'. $ent_id .'" WHERE code = "ent_id"');
-        $db->query('UPDATE '.$ecs->table('shop_config') . ' SET value = "'. $ent_ac .'" WHERE code = "ent_ac"');
-        $db->query('UPDATE '.$ecs->table('shop_config') . ' SET value = "'. $ent_sign .'" WHERE code = "ent_sign"');
-        $db->query('UPDATE '.$ecs->table('shop_config') . ' SET value = "'. $ent_email .'" WHERE code = "ent_email"');
+//        $t->request('https://cloud-ecshop.xyunqi.com/api.php', $apiget);
+//        $db->query('UPDATE '.$ecs->table('shop_config') . ' SET value = "'. $ent_id .'" WHERE code = "ent_id"');
+//        $db->query('UPDATE '.$ecs->table('shop_config') . ' SET value = "'. $ent_ac .'" WHERE code = "ent_ac"');
+//        $db->query('UPDATE '.$ecs->table('shop_config') . ' SET value = "'. $ent_sign .'" WHERE code = "ent_sign"');
+//        $db->query('UPDATE '.$ecs->table('shop_config') . ' SET value = "'. $ent_email .'" WHERE code = "ent_email"');
         clear_cache_files();
         ecs_header("Location: ./index.php\n");
     }

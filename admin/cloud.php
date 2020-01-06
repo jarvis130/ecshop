@@ -57,7 +57,6 @@ if($act =='menu_api')
     {
         $t = new transport;
        $apiget = "ver= $data[version] &ecs_lang= $data[ecs_lang] &charset= $data[charset]&ent_id=$data[ent_id]& certificate_id=$data[certificate_id]";
-        // $api_comment = $t->request('https://cloud-ecshop.xyunqi.com/menu_api.php', $apiget);
         $api_comment = $t->request('https://cloud-ecshop.xyunqi.com/menu_api.php', $apiget);
         $api_str = $api_comment["body"];
         if (!empty($api_str))

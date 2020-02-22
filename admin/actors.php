@@ -81,7 +81,7 @@ elseif ($_REQUEST['act'] == 'insert')
     $img_name = basename($image->upload_image($_FILES['actor_avatar'],'actoravatar'));
 
      /*处理国家*/
-    $country = sanitize_url( $_POST['country'] );
+    $country = $_POST['country'];
 
     /*插入数据*/
 
@@ -144,7 +144,7 @@ elseif ($_REQUEST['act'] == 'updata')
 
     $is_show = isset($_REQUEST['is_show']) ? intval($_REQUEST['is_show']) : 0;
      /*处理国家*/
-    $country = sanitize_url( $_POST['country'] );
+    $country = $_POST['country'];
 
     /* 处理图片 */
     $img_name = basename($image->upload_image($_FILES['actor_avatar'],'actoravatar'));

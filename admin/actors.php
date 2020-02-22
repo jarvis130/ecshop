@@ -78,7 +78,7 @@ elseif ($_REQUEST['act'] == 'insert')
     }
 
      /*处理图片*/
-    $img_name = basename($image->upload_image($_FILES['actor_avatar'],'actoravatar'));
+    $img_name = $image->upload_image($_FILES['actor_avatar'],'actoravatar');
 
      /*处理国家*/
     $country = $_POST['country'];
@@ -147,7 +147,7 @@ elseif ($_REQUEST['act'] == 'updata')
     $country = $_POST['country'];
 
     /* 处理图片 */
-    $img_name = basename($image->upload_image($_FILES['actor_avatar'],'actoravatar'));
+    $img_name = $image->upload_image($_FILES['actor_avatar'],'actoravatar');
     $param = "actor_name = '$_POST[actor_name]',  country='$country', actor_desc='$_POST[actor_desc]', is_show='$is_show', sort_order='$_POST[sort_order]' ";
     if (!empty($img_name))
     {
@@ -272,10 +272,10 @@ elseif ($_REQUEST['act'] == 'remove')
 
     /* 删除该演员的图标 */
     $sql = "SELECT actor_avatar FROM " .$ecs->table('actors'). " WHERE actor_id = '$id'";
-    $avatar_name = $db->getOne($sql);
-    if (!empty($avatar_name))
+    $avatar = $db->getOne($sql);
+    if (!empty($avatar))
     {
-        @unlink(ROOT_PATH . DATA_DIR . '/actoravatar/' .$avatar_name);
+        @unlink(ROOT_PATH . $avatar);
     }
 
     $exc->drop($id);
@@ -297,11 +297,11 @@ elseif ($_REQUEST['act'] == 'drop_avatar')
 
     /* 取得avatar名称 */
     $sql = "SELECT actor_avatar FROM " .$ecs->table('actors'). " WHERE actor_id = '$actor_id'";
-    $avatar_name = $db->getOne($sql);
+    $avatar = $db->getOne($sql);
 
-    if (!empty($avatar_name))
+    if (!empty($avatar))
     {
-        @unlink(ROOT_PATH . DATA_DIR . '/actoravatar/' .$avatar_name);
+        @unlink(ROOT_PATH . $avatar);
         $sql = "UPDATE " .$ecs->table('actors'). " SET actor_avatar = '' WHERE actor_id = '$actor_id'";
         $db->query($sql);
     }
@@ -383,7 +383,7 @@ function get_actorlist()
     while ($rows = $GLOBALS['db']->fetchRow($res))
     {
         $actor_avatar = empty($rows['actor_avatar']) ? '' :
-            '<a href="../' . DATA_DIR . '/actoravatar/'.$rows['actor_avatar'].'" target="_brank"><img src="images/image.svg" width="16" height="16" border="0" alt='.$GLOBALS['_LANG']['actor_avatar'].' /></a>';
+            '<a href="../' . $rows['actor_avatar'].'" target="_brank"><img src="images/image.svg" width="16" height="16" border="0" alt='.$GLOBALS['_LANG']['actor_avatar'].' /></a>';
 
         $rows['actor_avatar'] = $actor_avatar;
 

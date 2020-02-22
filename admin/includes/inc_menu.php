@@ -26,6 +26,7 @@ if (!defined('IN_ECS'))
 $modules['01_video_manage']['01_video_list']       = 'video.php?act=list';
 $modules['01_video_manage']['02_video_add']        = 'video.php?act=add';          // 添加视频
 $modules['01_video_manage']['03_video_trash']      = 'video.php?act=trash';        // 视频回收站
+$modules['01_video_manage']['04_actors_list']       = 'actors.php?act=list';        // 演员管理
 
 $modules['02_cat_and_goods']['01_goods_list']       = 'goods.php?act=list';         // 商品列表
 $modules['02_cat_and_goods']['02_goods_add']        = 'goods.php?act=add';          // 添加商品

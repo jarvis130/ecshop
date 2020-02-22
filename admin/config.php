@@ -1,20 +1,20 @@
 <?php
 // database host
-$db_host   = "localhost:3306";
+$db_host   = "127.0.0.1:3306";
 
 // database name
-$db_name   = "maggish_pay";
+$db_name   = "shop";
 
 // database username
-$db_user   = "maggish_pay";
+$db_user   = "admin";
 
 // database password
-$db_pass   = "sDz(^qJ6PHlW";
+$db_pass   = "qazxsw@123";
 
 // table prefix
-$prefix    = "ecs_";
+$prefix    = "st_";
 
-$timezone    = "Asia/Shanghai";
+$timezone    = "PRC";
 
 $cookie_path    = "/";
 

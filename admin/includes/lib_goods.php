@@ -286,6 +286,19 @@ function handle_goods_article($goods_id)
 }
 
 /**
+ * 保存某商品的关联文章
+ * @param   int     $goods_id
+ * @return  void
+ */
+function handle_goods_actor($goods_id)
+{
+    $sql = "UPDATE " . $GLOBALS['ecs']->table('goods_actor') . " SET " .
+        " goods_id = '$goods_id' " .
+        " WHERE goods_id = '0'";
+    $GLOBALS['db']->query($sql);
+}
+
+/**
  * 保存某商品的相册图片
  * @param   int     $goods_id
  * @param   array   $image_files
@@ -507,6 +520,8 @@ function delete_goods($goods_id)
     $sql = "DELETE FROM " . $GLOBALS['ecs']->table('collect_goods') . " WHERE goods_id " . db_create_in($goods_id);
     $GLOBALS['db']->query($sql);
     $sql = "DELETE FROM " . $GLOBALS['ecs']->table('goods_article') . " WHERE goods_id " . db_create_in($goods_id);
+    $GLOBALS['db']->query($sql);
+    $sql = "DELETE FROM " . $GLOBALS['ecs']->table('goods_actor') . " WHERE goods_id " . db_create_in($goods_id);
     $GLOBALS['db']->query($sql);
     $sql = "DELETE FROM " . $GLOBALS['ecs']->table('goods_attr') . " WHERE goods_id " . db_create_in($goods_id);
     $GLOBALS['db']->query($sql);
@@ -795,6 +810,25 @@ function get_goods_articles($goods_id)
     {
         $sql .= " AND g.admin_id = '$_SESSION[admin_id]'";
     }
+    $row = $GLOBALS['db']->getAll($sql);
+
+    return $row;
+}
+
+/**
+ * 获得商品的关联文章
+ *
+ * @access  public
+ * @param   integer $goods_id
+ * @return  array
+ */
+function get_goods_actors($goods_id)
+{
+    $sql = "SELECT g.actor_id, a.actor_name " .
+        "FROM " .$GLOBALS['ecs']->table('goods_actor') . " AS g, " .
+        $GLOBALS['ecs']->table('actors') . " AS a " .
+        "WHERE g.goods_id = '$goods_id' " .
+        "AND g.actor_id = a.actor_id ";
     $row = $GLOBALS['db']->getAll($sql);
 
     return $row;

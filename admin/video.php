@@ -1141,7 +1141,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
             $sql = "INSERT INTO " .$ecs->table('goods_video_attr'). " (goods_id, attr_value1, attr_value2)".
                 "VALUES ('$goods_id', '$areaAttribution', '$typeAttribution')";
         }else{
-            $sql = "UPDATE " .$ecs->table('goods_video_attr'). " SET attr_value1 = '$areaAttribution', attr_value2 = '$typeAttribution' WHERE goods_id = '$good_id' LIMIT 1";
+            $sql = "UPDATE " .$ecs->table('goods_video_attr'). " SET attr_value1 = '$areaAttribution', attr_value2 = '$typeAttribution' WHERE goods_id = '$goods_id' LIMIT 1";
         }
         $db->query($sql);
 

@@ -24,7 +24,8 @@
         class="tab-back" id="gallery-tab">{$lang.tab_gallery}</span><span
         class="tab-back" id="linkgoods-tab">{$lang.tab_linkgoods}</span>{if $code eq ''}<span
         class="tab-back" id="groupgoods-tab">{$lang.tab_groupgoods}</span>{/if}<span
-        class="tab-back" id="article-tab">{$lang.tab_article}</span>
+        class="tab-back" id="article-tab">{$lang.tab_article}</span><span
+        class="tab-back" id="actor-tab">{$lang.tab_actor}</span>
       </p>
     </div>
 
@@ -481,6 +482,43 @@
           </tr>
         </table>
 
+        <!-- 关联演员 -->
+        <table width="90%" id="actor-table" style="display:none" align="center">
+          <!-- 演员搜索 -->
+          <tr>
+            <td colspan="3">
+              <img src="images/icon_search.svg" width="26" height="22" border="0" alt="SEARCH" />
+              {$lang.actor_name} <input type="text" name="actor_name" />
+              <input type="button" value="{$lang.button_search}" onclick="searchActor()" class="button" />
+            </td>
+          </tr>
+          <!-- 演员列表 -->
+          <tr>
+            <th>{$lang.all_actor}</th>
+            <th>{$lang.handler}</th>
+            <th>{$lang.goods_actor}</th>
+          </tr>
+          <tr>
+            <td width="45%">
+              <select name="source_select4" size="20" style="width:100%" multiple ondblclick="sz4.addItem(false, 'add_goods_actor', goodsId, this.form.elements['price2'].value)">
+              </select>
+            </td>
+            <td align="center">
+              <p><input type="button" value=">>" onclick="sz4.addItem(true, 'add_goods_actor', goodsId, this.form.elements['price2'].value)" class="button" /></p>
+              <p><input type="button" value=">" onclick="sz4.addItem(false, 'add_goods_actor', goodsId, this.form.elements['price2'].value)" class="button" /></p>
+              <p><input type="button" value="<" onclick="sz4.dropItem(false, 'drop_goods_actor', goodsId, elements['is_single'][0].checked)" class="button" /></p>
+              <p><input type="button" value="<<" onclick="sz4.dropItem(true, 'drop_goods_actor', goodsId, elements['is_single'][0].checked)" class="button" /></p>
+            </td>
+            <td width="45%">
+              <select name="target_select4" size="20" style="width:100%" multiple ondblclick="sz4.dropItem(false, 'drop_goods_actor', goodsId, elements['is_single'][0].checked)">
+                {foreach from=$goods_actor_list item=goods_actor}
+                <option value="{$goods_actor.actor_id}">{$goods_actor.actor_name}</option>
+                {/foreach}
+              </select>
+            </td>
+          </tr>
+        </table>
+
         <div class="button-div">
           <input type="hidden" name="goods_id" value="{$goods.goods_id}" />
           {if $code neq ''}
@@ -503,6 +541,7 @@
   var sz1 = new SelectZone(1, elements['source_select1'], elements['target_select1']);
   var sz2 = new SelectZone(2, elements['source_select2'], elements['target_select2'], elements['price2']);
   var sz3 = new SelectZone(1, elements['source_select3'], elements['target_select3']);
+  var sz4 = new SelectZone(1, elements['source_select4'], elements['target_select4']);
   var marketPriceRate = {$cfg.market_price_rate|default:1};
   var integralPercent = {$cfg.integral_percent|default:0};
 
@@ -1030,6 +1069,18 @@
     filters.title = Utils.trim(elements['article_title'].value);
 
     sz3.loadOptions('get_article_list', filters);
+  }
+
+  /**
+   * 查询演员
+   */
+  function searchActor()
+  {
+    var filters = new Object;
+
+    filters.actor_name = Utils.trim(elements['actor_name'].value);
+
+    sz4.loadOptions('get_actor_list', filters);
   }
 
   /**

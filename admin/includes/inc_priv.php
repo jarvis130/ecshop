@@ -173,4 +173,6 @@ if (!defined('IN_ECS'))
     $purview['01_video_list']        = array('video_manage', 'remove_back');
     $purview['02_video_add']         = 'video_manage';
     $purview['03_video_trash']       = array('video_manage', 'remove_back');
+    $purview['04_actors_list']       = array('actors_manage', 'remove_back');
+    $purview['05_actors_add']       = 'actors_manage';
 ?>

@@ -222,6 +222,12 @@ elseif ($_REQUEST['act'] == 'add' || $_REQUEST['act'] == 'edit' || $_REQUEST['ac
                 " WHERE goods_id = 0 AND admin_id = '$_SESSION[admin_id]'";
         $db->query($sql);
 
+        /* 关联演员 */
+        $goods_actor_list = array();
+        $sql = "DELETE FROM " . $ecs->table('goods_actor') .
+            " WHERE goods_id = 0 ";
+        $db->query($sql);
+
         /* 属性 */
         $sql = "DELETE FROM " . $ecs->table('goods_attr') . " WHERE goods_id = 0";
         $db->query($sql);
@@ -371,6 +377,20 @@ elseif ($_REQUEST['act'] == 'add' || $_REQUEST['act'] == 'edit' || $_REQUEST['ac
                 $db->autoExecute($ecs->table('goods_article'), $row, 'INSERT');
             }
 
+            // 关联演员
+            $sql = "DELETE FROM " . $ecs->table('goods_actor') .
+                " WHERE goods_id = 0 ";
+            $db->query($sql);
+
+            $sql = "SELECT 0 AS goods_id, actor_id " .
+                "FROM " . $ecs->table('goods_actor') .
+                " WHERE goods_id = '$_REQUEST[goods_id]' ";
+            $res = $db->query($sql);
+            while ($row = $db->fetchRow($res))
+            {
+                $db->autoExecute($ecs->table('goods_actor'), $row, 'INSERT');
+            }
+
             // 图片不变
 
             // 商品属性
@@ -400,6 +420,7 @@ elseif ($_REQUEST['act'] == 'add' || $_REQUEST['act'] == 'edit' || $_REQUEST['ac
         $link_goods_list    = get_linked_goods($goods['goods_id']); // 关联商品
         $group_goods_list   = get_group_goods($goods['goods_id']); // 配件
         $goods_article_list = get_goods_articles($goods['goods_id']);   // 关联文章
+        $goods_actor_list = get_goods_actors($goods['goods_id']);   // 关联演员
 
         /* 商品图片路径 */
         if (isset($GLOBALS['shop_id']) && ($GLOBALS['shop_id'] > 10) && !empty($goods['original_img']))
@@ -461,6 +482,7 @@ elseif ($_REQUEST['act'] == 'add' || $_REQUEST['act'] == 'edit' || $_REQUEST['ac
     $smarty->assign('link_goods_list', $link_goods_list);
     $smarty->assign('group_goods_list', $group_goods_list);
     $smarty->assign('goods_article_list', $goods_article_list);
+    $smarty->assign('goods_actor_list', $goods_actor_list);
     $smarty->assign('img_list', $img_list);
     $smarty->assign('goods_type_list', goods_type_list($goods['goods_type']));
     $smarty->assign('gd', gd_version());
@@ -1119,7 +1141,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
             $sql = "INSERT INTO " .$ecs->table('goods_video_attr'). " (goods_id, attr_value1, attr_value2)".
                 "VALUES ('$goods_id', '$areaAttribution', '$typeAttribution')";
         }else{
-            $sql = "UPDATE " .$ecs->table('goods_video_attr'). " SET attr_value1 = '$areaAttribution', attr_value2 = '$typeAttribution' WHERE goods_id = '$good_id' LIMIT 1";
+            $sql = "UPDATE " .$ecs->table('goods_video_attr'). " SET attr_value1 = '$areaAttribution', attr_value2 = '$typeAttribution' WHERE goods_id = '$goods_id' LIMIT 1";
         }
         $db->query($sql);
 
@@ -1162,6 +1184,9 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
 
         /* 处理关联文章 */
         handle_goods_article($goods_id);
+
+        /* 处理关联演员 */
+        handle_goods_actor($goods_id);
     }
 
     /* 重新格式化图片名称 */
@@ -1883,6 +1908,8 @@ elseif ($_REQUEST['act'] == 'drop_goods')
     $db->query($sql);
     $sql = "DELETE FROM " . $ecs->table('goods_article') . " WHERE goods_id = '$goods_id'";
     $db->query($sql);
+    $sql = "DELETE FROM " . $ecs->table('goods_actor') . " WHERE goods_id = '$goods_id'";
+    $db->query($sql);
     $sql = "DELETE FROM " . $ecs->table('goods_attr') . " WHERE goods_id = '$goods_id'";
     $db->query($sql);
     $sql = "DELETE FROM " . $ecs->table('goods_cat') . " WHERE goods_id = '$goods_id'";
@@ -2266,6 +2293,104 @@ elseif ($_REQUEST['act'] == 'drop_goods_article')
         $opt[] = array('value'      => $val['article_id'],
                         'text'      => $val['title'],
                         'data'      => '');
+    }
+
+    clear_cache_files();
+    make_json_result($opt);
+}
+
+/*------------------------------------------------------ */
+//-- 搜索演员
+/*------------------------------------------------------ */
+
+elseif ($_REQUEST['act'] == 'get_actor_list')
+{
+    include_once(ROOT_PATH . 'includes/cls_json.php');
+    $json = new JSON;
+
+    $filters =(array) $json->decode(json_str_iconv($_GET['JSON']));
+
+    $where = " WHERE 1 = 1 ";
+    if (!empty($filters['actor_name']))
+    {
+        $keyword  = trim($filters['actor_name']);
+        $where   .=  " AND actor_name LIKE '%" . mysql_like_quote($keyword) . "%' ";
+    }
+
+    $sql        = 'SELECT actor_id, actor_name FROM ' .$ecs->table('actors'). $where.
+        'ORDER BY actor_id DESC LIMIT 50';
+    $res        = $db->query($sql);
+    $arr        = array();
+
+    while ($row = $db->fetchRow($res))
+    {
+        $arr[]  = array('value' => $row['actor_id'], 'text' => $row['actor_name'], 'data'=>'');
+    }
+
+    make_json_result($arr);
+}
+
+/*------------------------------------------------------ */
+//-- 添加关联演员
+/*------------------------------------------------------ */
+
+elseif ($_REQUEST['act'] == 'add_goods_actor')
+{
+    include_once(ROOT_PATH . 'includes/cls_json.php');
+    $json = new JSON;
+
+    check_authz_json('goods_manage');
+
+    $actors   = $json->decode($_GET['add_ids']);
+    $arguments  = $json->decode($_GET['JSON']);
+    $goods_id   = $arguments[0];
+
+    foreach ($actors AS $val)
+    {
+        $sql = "INSERT INTO " . $ecs->table('goods_actor') . " (goods_id, actor_id) " .
+            "VALUES ('$goods_id', '$val')";
+        $db->query($sql);
+    }
+
+    $arr = get_goods_actors($goods_id);
+    $opt = array();
+
+    foreach ($arr AS $val)
+    {
+        $opt[] = array('value'      => $val['actor_id'],
+            'text'      => $val['actor_name'],
+            'data'      => '');
+    }
+
+    clear_cache_files();
+    make_json_result($opt);
+}
+
+/*------------------------------------------------------ */
+//-- 删除关联演员
+/*------------------------------------------------------ */
+elseif ($_REQUEST['act'] == 'drop_goods_actor')
+{
+    include_once(ROOT_PATH . 'includes/cls_json.php');
+    $json = new JSON;
+
+    check_authz_json('goods_manage');
+
+    $actors   = $json->decode($_GET['drop_ids']);
+    $arguments  = $json->decode($_GET['JSON']);
+    $goods_id   = $arguments[0];
+
+    $sql = "DELETE FROM " .$ecs->table('goods_actor') . " WHERE " . db_create_in($actors, "actor_id") . " AND goods_id = '$goods_id'";
+    $db->query($sql);
+
+    $arr = get_goods_actors($goods_id);
+    $opt = array();
+
+    foreach ($arr AS $val)
+    {
+        $opt[] = array('value'      => $val['actor_id'],
+            'text'      => $val['actor_name'],
+            'data'      => '');
     }
 
     clear_cache_files();

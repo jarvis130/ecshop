@@ -104,6 +104,7 @@ $_LANG['tab_gallery'] = '视频相册';
 $_LANG['tab_linkgoods'] = '关联视频';
 $_LANG['tab_groupgoods'] = '配件';
 $_LANG['tab_article'] = '关联文章';
+$_LANG['tab_actor'] = '关联演员';
 
 $_LANG['lab_goods_name'] = '视频名称：';
 $_LANG['lab_goods_sn'] = '视频货号：';
@@ -238,6 +239,13 @@ $_LANG['img_file'] = '或者输入外部图片链接地址';
 //-- 关联文章
 /*------------------------------------------------------ */
 $_LANG['article_title'] = '文章标题';
+
+/*------------------------------------------------------ */
+//-- 关联演员
+/*------------------------------------------------------ */
+$_LANG['actor_name'] = '演员姓名';
+$_LANG['all_actor'] = '可选演员';
+$_LANG['goods_actor'] = '跟该视频关联的演员';
 
 $_LANG['goods_not_exist'] = '该视频不存在';
 $_LANG['goods_not_in_recycle_bin'] = '该视频尚未放入回收站，不能删除';

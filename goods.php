@@ -250,6 +250,7 @@ if (!$smarty->is_cached('goods.dwt', $cache_id))
         $smarty->assign('attribute_linked',    get_same_attribute_goods($properties));           // 相同属性的关联商品
         $smarty->assign('related_goods',       $linked_goods);                                   // 关联商品
         $smarty->assign('goods_article_list',  get_linked_articles($goods_id));                  // 关联文章
+        $smarty->assign('goods_actor_list',  get_linked_actors($goods_id));                  // 关联演员
         $smarty->assign('fittings',            get_goods_fittings(array($goods_id)));                   // 配件
         $smarty->assign('rank_prices',         get_user_rank_prices($goods_id, $shop_price));    // 会员等级价格
         $smarty->assign('pictures',            get_goods_gallery($goods_id));                    // 商品相册
@@ -373,6 +374,31 @@ function get_linked_articles($goods_id)
         $row['short_title'] = $GLOBALS['_CFG']['article_title_length'] > 0 ?
             sub_str($row['title'], $GLOBALS['_CFG']['article_title_length']) : $row['title'];
 
+        $arr[] = $row;
+    }
+
+    return $arr;
+}
+
+/**
+ * 获得指定商品的关联演员
+ *
+ * @access  public
+ * @param   integer     $goods_id
+ * @return  void
+ */
+function get_linked_actors($goods_id)
+{
+    $sql = 'SELECT a.actor_id, a.actor_name, a.country, a.actor_desc, a.actor_avatar ' .
+        'FROM ' . $GLOBALS['ecs']->table('goods_actor') . ' AS g, ' .
+        $GLOBALS['ecs']->table('actors') . ' AS a ' .
+        "WHERE g.actor_id = a.actor_id AND g.goods_id = '$goods_id' AND a.is_show = 1 " .
+        'ORDER BY a.sort_order';
+    $res = $GLOBALS['db']->query($sql);
+
+    $arr = array();
+    while ($row = $GLOBALS['db']->fetchRow($res))
+    {
         $arr[] = $row;
     }
 

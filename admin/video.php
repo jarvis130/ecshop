@@ -982,7 +982,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
                 "is_shipping = '$is_shipping', " .
                 "goods_desc = '$_POST[goods_desc]', " .
                 "last_update = '". gmtime() ."', ".
-                "goods_type = '$goods_type' " .
+                "goods_type = '$goods_type', " .
                 "pub_id = '$pub_id' " .
                 "WHERE goods_id = '$_REQUEST[goods_id]' LIMIT 1";
     }

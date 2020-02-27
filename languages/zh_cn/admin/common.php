@@ -363,6 +363,7 @@ $_LANG['logistic_tracking'] = '云起物流';
 
 /* 移动版全民分销开通引导页 */
 $_LANG['banner_mobile'] = '移动端广告配置';
+$_LANG['banner_ad_mobile'] = 'APP广告配置';
 $_LANG['lead'] = 'H5店铺二维码';
 $_LANG['mobile_setting'] = 'APP应用配置';
 $_LANG['h5_setting'] = 'H5应用配置';

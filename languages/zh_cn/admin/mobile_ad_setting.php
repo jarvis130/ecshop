@@ -13,15 +13,15 @@
  * $Id: flashplay.php 17217 2011-01-19 06:29:08Z liubo $
  */
 
-$_LANG['schp_imgsrc'] = '轮播图片地址';
-$_LANG['schp_imgurl'] = '轮播图片链接';
+$_LANG['schp_imgsrc'] = '广告图片地址';
+$_LANG['schp_imgurl'] = '广告图片链接';
 $_LANG['schp_imgdesc'] = '图片说明';
 $_LANG['schp_sort'] = '排序';
 $_LANG['schp_type'] = '类型';
-$_LANG['trash_img_confirm'] = '您要删除这张轮播图片么？';
+$_LANG['trash_img_confirm'] = '您要删除这张广告图片么？';
 $_LANG['custom_del_confirm'] = '您确定删除此广告吗？';
 $_LANG['tab_change_alert'] = '请先将自定义广告全部“关闭”,\n\n然后才可以点击系统默认。';
-$_LANG['trash_img'] = '删除这张轮播图片';
+$_LANG['trash_img'] = '删除这张广告图片';
 $_LANG['custom_drop_img'] = '删除此广告';
 $_LANG['custom_change_img'] = '修改状态';
 $_LANG['add_new'] = '添加图片';
@@ -44,15 +44,15 @@ $_LANG['src_empty'] = '地址错误。';
 $_LANG['back_custom_set'] = '返回自定义设置页';
 $_LANG['edit_ok'] = '操作成功';
 $_LANG['edit_no'] = '操作失败';
-$_LANG['id_error'] = '没有指定的轮播图片！';
-$_LANG['src_empty'] = '请填写轮播图片地址';
+$_LANG['id_error'] = '没有指定的广告图片！';
+$_LANG['src_empty'] = '请填写广告图片地址';
 $_LANG['link_empty'] = '请填写链接地址';
-$_LANG['go_url'] = '轮播图片列表';
-$_LANG['ad_play_url'] = '广告轮播列表';
+$_LANG['go_url'] = '广告图片列表';
+$_LANG['ad_play_url'] = '广告广告列表';
 $_LANG['return_edit'] = '返回编辑页';
 $_LANG['width_height'] = '此模板的图片标准宽度为：%s 标准高度为：%s';
 $_LANG['invalid_type'] = '您上传的图片格式不正确！';
-$_LANG['flash_template'] = '可用Flash轮播图片样式';
+$_LANG['flash_template'] = '可用Flash广告图片样式';
 $_LANG['current_theme'] = '当前样式';
 $_LANG['install_success'] = '启用Flash样式成功。';
 $_LANG['ad_img'] = '图片';

@@ -163,6 +163,7 @@ if (!defined('IN_ECS'))
 // 移动端管理
     $purview['18_lead_manage']       = 'lead_manage';
     $purview['banner_mobile']        = 'banner_mobile';
+    $purview['banner_ad_mobile']     = 'banner_ad_mobile';
     $purview['lead']                 = 'lead';
     $purview['mobile_setting']       = 'mobile_setting';
     $purview['h5_setting']           = 'h5_setting';

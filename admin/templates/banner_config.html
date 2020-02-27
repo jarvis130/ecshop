@@ -33,10 +33,11 @@
                     <form action={$items.submit} method="post" enctype="multipart/form-data">
                         <table cellspacing="0px" width="100%"  style ="border-collapse:collapse">
                             <tr style="background-color: #f4f4f4" height="35px">
-                                <th align="center" class="td_b_r"><font size="2">轮播图片地址</font></th>
-                                <th align="center" class="td_b_r"><font size="2">轮播图片链接</font></th>
-                                <th align="center" class="td_b_r"><font size="2">图片说明</font></th>
-                                <th align="center" class="td_b_r"><font size="2">排序</font></th>
+                                <th align="center" class="td_b_r"><font size="2">{$lang.schp_imgsrc}</font></th>
+                                <th align="center" class="td_b_r"><font size="2">{$lang.schp_imgurl}</font></th>
+                                <th align="center" class="td_b_r"><font size="2">{$lang.schp_imgdesc}</font></th>
+                                <th align="center" class="td_b_r"><font size="2">{$lang.schp_sort}</font></th>
+                                <th align="center" class="td_b_r"><font size="2">{$lang.schp_type}</font></th>
                                 <th align="center" class="td_b"><font size="2">操作</font></th>
                             <tr>
                                 <!--{foreach from=$playerdb item=param name="group_items"}-->
@@ -45,6 +46,7 @@
                                 <td align="center"  class="td_b_r"><a href="{$param.url}" target="_blank">{$param.url}</a></td>
                                 <td align="center"  class="td_b_r">{$param.text}</td>
                                 <td align="center"  class="td_b_r">{$param.sort}</td>
+                                <td align="center"  class="td_b_r">{$param.type_name}</td>
                                 <td align="center"  class="td_b_r"><a href="?act=edit&id={$param.id}">编辑</a> <a href="?act=del&id={$param.id}">删除</a></td>
                             </tr>
                             <!--{/foreach}-->

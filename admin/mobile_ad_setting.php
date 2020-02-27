@@ -27,7 +27,7 @@ if ($_REQUEST['act']== 'list')
 {
     /* 检查权限 */
     admin_priv('mobile_setting');
-    $smarty->assign('ur_here', $_LANG['banner_mobile']);
+    $smarty->assign('ur_here', $_LANG['banner_ad_mobile']);
     $cert = new certificate;
     $isOpenWap = $cert->is_open_sn('fy');
     if($isOpenWap==false && $_SESSION['yunqi_login'] && $_SESSION['TOKEN'] ){
@@ -54,7 +54,7 @@ if ($_REQUEST['act']== 'list')
     }
 
     assign_query_info();
-    $flash_dir = ROOT_PATH . 'data/flashdata/';
+    $flash_dir = ROOT_PATH . 'data/flashaddata/';
 
     $smarty->assign('playerdb', $playerdb);
     $smarty->assign('group_list',$grouplist);
@@ -70,7 +70,7 @@ if ($_REQUEST['act']== 'list')
     }
     else
     {
-        $links[] = array('text' => '移动端轮播图配置', 'href' => 'mobile_setting.php?act=list');
+        $links[] = array('text' => '移动端轮播图配置', 'href' => 'mobile_ad_setting.php?act=list');
         sys_msg($_LANG['id_error'], 0, $links);
     }
 
@@ -89,7 +89,7 @@ if ($_REQUEST['act']== 'list')
     put_flash_xml($temp);
     $error_msg = '';
     set_flash_data($_CFG['flash_theme'], $error_msg);
-    ecs_header("Location: mobile_setting.php?act=list\n");
+    ecs_header("Location: mobile_ad_setting.php?act=list\n");
     exit;
 }
 elseif ($_REQUEST['act'] == 'add')
@@ -110,11 +110,11 @@ elseif ($_REQUEST['act'] == 'add')
             $smarty->assign('width_height', sprintf($_LANG['width_height'], $width_height['width'], $width_height['height']));
         }
 
-        $smarty->assign('action_link', array('text' => $_LANG['go_url'], 'href' => 'mobile_setting.php?act=list'));
+        $smarty->assign('action_link', array('text' => $_LANG['go_url'], 'href' => 'mobile_ad_setting.php?act=list'));
         $smarty->assign('rt', $rt);
         $smarty->assign('type_list', get_type_list());
         $smarty->assign('ur_here', $_LANG['add_picad']);
-        $smarty->display('flashplay_add.htm');
+        $smarty->display('flashplay_ad_add.htm');
     }
     elseif ($_POST['step'] == 2)
     {
@@ -151,13 +151,13 @@ elseif ($_REQUEST['act'] == 'add')
         }
         else
         {
-            $links[] = array('text' => $_LANG['add_new'], 'href' => 'mobile_setting.php?act=add');
+            $links[] = array('text' => $_LANG['add_new'], 'href' => 'mobile_ad_setting.php?act=add');
             sys_msg($_LANG['src_empty'], 0, $links);
         }
 
         if (empty($_POST['img_url']))
         {
-            $links[] = array('text' => $_LANG['add_new'], 'href' => 'mobile_setting.php?act=add');
+            $links[] = array('text' => $_LANG['add_new'], 'href' => 'mobile_ad_setting.php?act=add');
             sys_msg($_LANG['link_empty'], 0, $links);
         }
 
@@ -184,7 +184,7 @@ elseif ($_REQUEST['act'] == 'add')
         put_flash_xml($_flashdb);
         $error_msg = '';
         set_flash_data($_CFG['flash_theme'], $error_msg);
-        $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_setting.php?act=list');
+        $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_ad_setting.php?act=list');
         sys_msg($_LANG['edit_ok'], 0, $links);
     }
 }
@@ -200,7 +200,7 @@ elseif ($_REQUEST['act'] == 'edit')
     }
     else
     {
-        $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_setting.php?act=list');
+        $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_ad_setting.php?act=list');
         sys_msg($_LANG['id_error'], 0, $links);
     }
     if (empty($_POST['step']))
@@ -213,18 +213,18 @@ elseif ($_REQUEST['act'] == 'edit')
         $rt['img_type'] = $rt['type'];
 
         $rt['id'] = $id;
-        $smarty->assign('action_link', array('text' => $_LANG['go_url'], 'href' => 'mobile_setting.php?act=list'));
+        $smarty->assign('action_link', array('text' => $_LANG['go_url'], 'href' => 'mobile_ad_setting.php?act=list'));
         $smarty->assign('rt', $rt);
         $smarty->assign('type_list', get_type_list());
         $smarty->assign('ur_here', $_LANG['edit_picad']);
-        $smarty->display('flashplay_add.htm');
+        $smarty->display('flashplay_ad_add.htm');
     }
     elseif ($_POST['step'] == 2)
     {
         // if (empty($_POST['img_url']))
         // {
         //     //若链接地址为空
-        //     $links[] = array('text' => $_LANG['return_edit'], 'href' => 'mobile_setting.php?act=edit&id=' . $id);
+        //     $links[] = array('text' => $_LANG['return_edit'], 'href' => 'mobile_ad_setting.php?act=edit&id=' . $id);
         //     sys_msg($_LANG['link_empty'], 0, $links);
         // }
 
@@ -263,7 +263,7 @@ elseif ($_REQUEST['act'] == 'edit')
         }
         else
         {
-            $links[] = array('text' => $_LANG['return_edit'], 'href' => 'mobile_setting.php?act=edit&id=' . $id);
+            $links[] = array('text' => $_LANG['return_edit'], 'href' => 'mobile_ad_setting.php?act=edit&id=' . $id);
             sys_msg($_LANG['src_empty'], 0, $links);
         }
 
@@ -290,7 +290,7 @@ elseif ($_REQUEST['act'] == 'edit')
         put_flash_xml($_flashdb);
         $error_msg = '';
         set_flash_data($_CFG['flash_theme'], $error_msg);
-        $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_setting.php?act=list');
+        $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_ad_setting.php?act=list');
         sys_msg($_LANG['edit_ok'], 0, $links);
     }
 }
@@ -298,13 +298,13 @@ elseif ($_REQUEST['act'] == 'edit')
 function get_flash_xml()
 {
     $flashdb = array();
-    if (file_exists(ROOT_PATH . DATA_DIR . '/flash_data.xml'))
+    if (file_exists(ROOT_PATH . DATA_DIR . '/flash_ad_data.xml'))
     {
 
         // 兼容v2.7.0及以前版本
-        if (!preg_match_all('/item_url="([^"]+)"\slink="([^"]*)"\stext="([^"]*)"\ssort="([^"]*)"\stype="([^"]*)"/', file_get_contents(ROOT_PATH . DATA_DIR . '/flash_data.xml'), $t, PREG_SET_ORDER))
+        if (!preg_match_all('/item_url="([^"]+)"\slink="([^"]*)"\stext="([^"]*)"\ssort="([^"]*)"\stype="([^"]*)"/', file_get_contents(ROOT_PATH . DATA_DIR . '/flash_ad_data.xml'), $t, PREG_SET_ORDER))
         {
-            preg_match_all('/item_url="([^"]+)"\slink="([^"]*)"\stext="([^"]*)"\stype="([^"]*)"/', file_get_contents(ROOT_PATH . DATA_DIR . '/flash_data.xml'), $t, PREG_SET_ORDER);
+            preg_match_all('/item_url="([^"]+)"\slink="([^"]*)"\stext="([^"]*)"\stype="([^"]*)"/', file_get_contents(ROOT_PATH . DATA_DIR . '/flash_ad_data.xml'), $t, PREG_SET_ORDER);
         }
 
         if (!empty($t))
@@ -329,11 +329,11 @@ function put_flash_xml($flashdb)
             $xml .= '<item item_url="' . $val['src'] . '" link="' . $val['url'] . '" text="' . $val['text'] . '" sort="' . $val['sort'] . '" type="' . $val['type'] . '"/>';
         }
         $xml .= '</bcaster>';
-        file_put_contents(ROOT_PATH . DATA_DIR . '/flash_data.xml', $xml);
+        file_put_contents(ROOT_PATH . DATA_DIR . '/flash_ad_data.xml', $xml);
     }
     else
     {
-        @unlink(ROOT_PATH . DATA_DIR . '/flash_data.xml');
+        @unlink(ROOT_PATH . DATA_DIR . '/flash_ad_data.xml');
     }
 }
 
@@ -418,7 +418,7 @@ function get_flash_tpl_info($dir, $file)
     if (is_file($dir . $file . '/preview.jpg'))
     {
         $info['code'] = $file;
-        $info['screenshot'] = '../data/flashdata/' . $file . '/preview.jpg';
+        $info['screenshot'] = '../data/flashaddata/' . $file . '/preview.jpg';
         $arr = array_slice(file($dir . $file . '/cycle_image.js'), 1, 2);
         $info_name = explode(':', $arr[0]);
         $info_desc = explode(':', $arr[1]);
@@ -473,7 +473,7 @@ function set_flash_data($tplname, &$msg)
 
 function set_flash_uproll($tplname, $flashdata)
 {
-    $data_file = ROOT_PATH . DATA_DIR . '/flashdata/' . $tplname . '/data.xml';
+    $data_file = ROOT_PATH . DATA_DIR . '/flashaddata/' . $tplname . '/data.xml';
     $xmldata = '<?xml version="1.0" encoding="' . EC_CHARSET . '"?><myMenu>';
     foreach ($flashdata as $data)
     {
@@ -486,7 +486,7 @@ function set_flash_uproll($tplname, $flashdata)
 
 function set_flash_focus($tplname, $flashdata)
 {
-    $data_file = ROOT_PATH . DATA_DIR . '/flashdata/' . $tplname . '/data.js';
+    $data_file = ROOT_PATH . DATA_DIR . '/flashaddata/' . $tplname . '/data.js';
     $jsdata = '';
     $jsdata2 = array('url' => 'var pics=', 'txt' => 'var texts=', 'link' => 'var links=');
     $count = 1;
@@ -513,7 +513,7 @@ function set_flash_focus($tplname, $flashdata)
 
 function set_flash_default($tplname, $flashdata)
 {
-    $data_file = ROOT_PATH . DATA_DIR . '/flashdata/' . $tplname . '/data.xml';
+    $data_file = ROOT_PATH . DATA_DIR . '/flashaddata/' . $tplname . '/data.xml';
     $xmldata = '<?xml version="1.0" encoding="' . EC_CHARSET . '"?><bcaster>';
     foreach ($flashdata as $data)
     {

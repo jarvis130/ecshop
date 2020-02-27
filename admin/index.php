@@ -340,27 +340,28 @@ elseif ($_REQUEST['act'] == 'main')
 
 
     //版本检查
-    $release_url = VERSION_UTF8;
-    $_content = file_get_contents($release_url);
-    $version_all = array_filter(explode("\n",$_content));
-    $app_version = get_appserver_verison();
-    $h5_version = get_h5_version();
-    foreach($version_all as $v){
-        $item = json_decode($v,1);
-        if($item['date']>intval(RELEASE)){
-            $message = "您现在不是最新版本，最新版本(".$item['version']."-".$item['date'].")下载地址：<a style='color:white' href='".$item['url']."' target='_blank'>".$item['url']."</a>";
-            break;
-        }
-        if( $h5_version && ( $h5_version < intval(str_replace(array('.','v'),'',$item['h5_version'])))){
-            $message = "您的H5现在不是最新版本，新版本(".$item['version']."-".$item['date'].")下载地址：<a href='".$item['url']."' target='_blank'>".$item['url']."</a>";
-            break;
-        }
-        if( $app_version && ( $app_version < intval(str_replace(array('.','v'),'',$item['app_version'])))){
-            $message = "您的APPSERVER现在不是最新版本，新版本(".$item['version']."-".$item['date'].")下载地址：<a href='".$item['url']."' target='_blank'>".$item['url']."</a>";
-            break;
-        }
-    }
-    if($message)$smarty->assign('update_message', $message);
+    $message = '';
+//    $release_url = VERSION_UTF8;
+//    $_content = file_get_contents($release_url);
+//    $version_all = array_filter(explode("\n",$_content));
+//    $app_version = get_appserver_verison();
+//    $h5_version = get_h5_version();
+//    foreach($version_all as $v){
+//        $item = json_decode($v,1);
+//        if($item['date']>intval(RELEASE)){
+//            $message = "您现在不是最新版本，最新版本(".$item['version']."-".$item['date'].")下载地址：<a style='color:white' href='".$item['url']."' target='_blank'>".$item['url']."</a>";
+//            break;
+//        }
+//        if( $h5_version && ( $h5_version < intval(str_replace(array('.','v'),'',$item['h5_version'])))){
+//            $message = "您的H5现在不是最新版本，新版本(".$item['version']."-".$item['date'].")下载地址：<a href='".$item['url']."' target='_blank'>".$item['url']."</a>";
+//            break;
+//        }
+//        if( $app_version && ( $app_version < intval(str_replace(array('.','v'),'',$item['app_version'])))){
+//            $message = "您的APPSERVER现在不是最新版本，新版本(".$item['version']."-".$item['date'].")下载地址：<a href='".$item['url']."' target='_blank'>".$item['url']."</a>";
+//            break;
+//        }
+//    }
+//    if($message)$smarty->assign('update_message', $message);
 
     $smarty->assign('warning_arr', $warning);
     

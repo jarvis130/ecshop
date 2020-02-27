@@ -37,28 +37,28 @@ if ($_REQUEST['act']== 'list_edit')
         $smarty->assign('iframe_url',$iframe_url);
     }
     //版本检查
-    $release_url = VERSION_UTF8;
-//    if(strtoupper(EC_CHARSET) == 'GBK') $release_url = VERSION_GBK;
-    $_content = file_get_contents($release_url);
-    $version_all = array_filter(explode("\n",$_content));
-    $message = "您现在已经是最新版本了,当前版本:ECSHOP ".EC_CHARSET." ".VERSION;
-    $app_version = get_appserver_verison();
-    $h5_version = get_h5_version();
-    foreach($version_all as $v){
-        $item = json_decode($v,1);
-        if(intval($item['date']) > intval(RELEASE)){
-            $message = "您现在不是最新版本，新版本(".$item['version']."-".$item['date'].")下载地址：<a href='".$item['url']."' target='_blank'>".$item['url']."</a>";
-            break;
-        }
-        if( $h5_version && ( $h5_version < intval(str_replace(array('.','v'),'',$item['h5_version'])))){
-            $message = "您的H5现在不是最新版本，新版本(".$item['version']."-".$item['date'].")下载地址：<a href='".$item['url']."' target='_blank'>".$item['url']."</a>";
-            break;
-        }
-        if( $app_version && ( $app_version < intval(str_replace(array('.','v'),'',$item['app_version'])))){
-            $message = "您的APPSERVER现在不是最新版本，新版本(".$item['version']."-".$item['date'].")下载地址：<a href='".$item['url']."' target='_blank'>".$item['url']."</a>";
-            break;
-        }
-    }
+//    $release_url = VERSION_UTF8;
+////    if(strtoupper(EC_CHARSET) == 'GBK') $release_url = VERSION_GBK;
+//    $_content = file_get_contents($release_url);
+//    $version_all = array_filter(explode("\n",$_content));
+//    $message = "您现在已经是最新版本了,当前版本:ECSHOP ".EC_CHARSET." ".VERSION;
+//    $app_version = get_appserver_verison();
+//    $h5_version = get_h5_version();
+//    foreach($version_all as $v){
+//        $item = json_decode($v,1);
+//        if(intval($item['date']) > intval(RELEASE)){
+//            $message = "您现在不是最新版本，新版本(".$item['version']."-".$item['date'].")下载地址：<a href='".$item['url']."' target='_blank'>".$item['url']."</a>";
+//            break;
+//        }
+//        if( $h5_version && ( $h5_version < intval(str_replace(array('.','v'),'',$item['h5_version'])))){
+//            $message = "您的H5现在不是最新版本，新版本(".$item['version']."-".$item['date'].")下载地址：<a href='".$item['url']."' target='_blank'>".$item['url']."</a>";
+//            break;
+//        }
+//        if( $app_version && ( $app_version < intval(str_replace(array('.','v'),'',$item['app_version'])))){
+//            $message = "您的APPSERVER现在不是最新版本，新版本(".$item['version']."-".$item['date'].")下载地址：<a href='".$item['url']."' target='_blank'>".$item['url']."</a>";
+//            break;
+//        }
+//    }
 
     //crm历史同步数据
     $bind_crm_member_push = $cert->get_push_count('bind_crm_member_push');
@@ -76,7 +76,7 @@ if ($_REQUEST['act']== 'list_edit')
     $smarty->assign('bind_crm_order_push',$bind_crm_order_push);
     $smarty->assign('bind_crm_member_push_no',$bind_crm_member_push_no);
     $smarty->assign('bind_crm_order_push_no',$bind_crm_order_push_no);
-    $smarty->assign('message',$message);
+//    $smarty->assign('message',$message);
     $smarty->display('certificate.htm');
 }
 

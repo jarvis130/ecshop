@@ -13,6 +13,7 @@
  * $Id: actors.php 17217 2011-01-19 06:29:08Z liubo $
 */
 
+$_LANG['actor_id'] = 'ID';
 $_LANG['actor_name'] = '姓名';
 $_LANG['actor_desc'] = '简介';
 $_LANG['actor_avatar'] = '头像';

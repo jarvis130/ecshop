@@ -12,6 +12,7 @@
 
   <table cellpadding="3" cellspacing="1">
     <tr>
+      <th>{$lang.actor_id}</th>
       <th>{$lang.actor_name}</th>
       <th>{$lang.country}</th>
       <th>{$lang.actor_desc}</th>
@@ -21,6 +22,7 @@
     </tr>
     {foreach from=$actor_list item=actor}
     <tr>
+      <td>{$actor.actor_id}</td>
       <td class="first-cell">
         <span style="float:right">{$actor.actor_avatar}</span>
         <span onclick="javascript:listTable.edit(this, 'edit_actor_name', {$actor.actor_id})">{$actor.actor_name|escape:html}</span>

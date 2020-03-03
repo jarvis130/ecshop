@@ -3,16 +3,16 @@
 $db_host   = "127.0.0.1:3306";
 
 // database name
-$db_name   = "shop";
+$db_name   = "videodb";
 
 // database username
-$db_user   = "admin";
+$db_user   = "videodb";
 
 // database password
 $db_pass   = "qazxsw@123";
 
 // table prefix
-$prefix    = "st_";
+$prefix    = "ecs_";
 
 $timezone    = "PRC";
 

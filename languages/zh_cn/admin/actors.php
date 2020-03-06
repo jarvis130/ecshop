@@ -15,6 +15,7 @@
 
 $_LANG['actor_id'] = 'ID';
 $_LANG['actor_name'] = '姓名';
+$_LANG['name_initial'] = '姓名首字母';
 $_LANG['actor_desc'] = '简介';
 $_LANG['actor_avatar'] = '头像';
 $_LANG['country'] = '国家';

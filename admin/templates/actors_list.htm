@@ -14,6 +14,7 @@
     <tr>
       <th>{$lang.actor_id}</th>
       <th>{$lang.actor_name}</th>
+      <th>{$lang.name_initial}</th>
       <th>{$lang.country}</th>
       <th>{$lang.actor_desc}</th>
       <th>{$lang.sort_order}</th>
@@ -27,6 +28,7 @@
         <span style="float:right">{$actor.actor_avatar}</span>
         <span onclick="javascript:listTable.edit(this, 'edit_actor_name', {$actor.actor_id})">{$actor.actor_name|escape:html}</span>
       </td>
+      <td>{$actor.name_initial}</td>
       <td>{$actor.country}</td>
       <td align="left">{$actor.actor_desc|truncate:36}</td>
       <td align="right"><span onclick="javascript:listTable.edit(this, 'edit_sort_order', {$actor.actor_id})">{$actor.sort_order}</span></td>

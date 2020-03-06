@@ -17,7 +17,9 @@ define('IN_ECS', true);
 
 require(dirname(__FILE__) . '/includes/init.php');
 include_once(ROOT_PATH . 'includes/cls_image.php');
+include_once(ROOT_PATH . 'includes/cls_utils.php');
 $image = new cls_image($_CFG['bgcolor']);
+$utils = new Utils();
 
 $exc = new exchange($ecs->table("actors"), $db, 'actor_id', 'actor_name');
 
@@ -83,10 +85,13 @@ elseif ($_REQUEST['act'] == 'insert')
      /*处理国家*/
     $country = $_POST['country'];
 
-    /*插入数据*/
+    /*处理姓名首字母*/
+    $actor_name = $_POST['actor_name'];
+    $name_initial = $utils->get_first_charter($actor_name);
 
-    $sql = "INSERT INTO ".$ecs->table('actors')."(actor_name, country, actor_desc, actor_avatar, is_show, sort_order) ".
-           "VALUES ('$_POST[actor_name]', '$country', '$_POST[actor_desc]', '$img_name', '$is_show', '$_POST[sort_order]')";
+    /*插入数据*/
+    $sql = "INSERT INTO ".$ecs->table('actors')."(actor_name, name_initial, country, actor_desc, actor_avatar, is_show, sort_order) ".
+           "VALUES ('$actor_name', '$name_initial', '$country', '$_POST[actor_desc]', '$img_name', '$is_show', '$_POST[sort_order]')";
     $db->query($sql);
 
     admin_log($_POST['actor_name'],'add','actors');
@@ -146,9 +151,13 @@ elseif ($_REQUEST['act'] == 'updata')
      /*处理国家*/
     $country = $_POST['country'];
 
+    /*处理姓名首字母*/
+    $actor_name = $_POST['actor_name'];
+    $name_initial = $utils->get_first_charter($actor_name);
+
     /* 处理图片 */
     $img_name = $image->upload_image($_FILES['actor_avatar'],'actoravatar');
-    $param = "actor_name = '$_POST[actor_name]',  country='$country', actor_desc='$_POST[actor_desc]', is_show='$is_show', sort_order='$_POST[sort_order]' ";
+    $param = "actor_name = '$actor_name', name_initial='$name_initial', country='$country', actor_desc='$_POST[actor_desc]', is_show='$is_show', sort_order='$_POST[sort_order]' ";
     if (!empty($img_name))
     {
         //有图片上传

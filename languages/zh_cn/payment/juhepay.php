@@ -25,7 +25,4 @@ $_LANG['pay_button'] = '立即支付';
 
 $_LANG['juhepay_pay_method'] = '支持接口类型';
 $_LANG['juhepay_pay_method_desc'] = '控制支付接口类型：1-支付宝 2-微信 3-快捷 注：支持多选，格式如下：1,2,3';
-
-$_LANG['juhepay_bank'] = '支持银行';
-$_LANG['juhepay_bank_desc'] = '支持银行：多个银行之间用","分隔，例如：建设银行,工商银行,农业银行,招商银行';
 ?>

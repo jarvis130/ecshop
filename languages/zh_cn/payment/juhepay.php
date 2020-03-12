@@ -17,9 +17,8 @@ global $_LANG;
 
 $_LANG['juhepay'] = '聚合支付';
 $_LANG['juhepay_desc'] = '聚合支付平台（第三方支付）';
-$_LANG['juhepay_account'] = '聚合支付帐户';
-$_LANG['juhepay_key'] = '聚合支付签名KEY';
 $_LANG['juhepay_partner'] = '商户号';
+$_LANG['juhepay_key'] = '聚合支付签名KEY';
 $_LANG['pay_button'] = '立即支付';
 
 

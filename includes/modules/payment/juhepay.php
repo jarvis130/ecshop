@@ -56,9 +56,8 @@ if (isset($set_modules) && $set_modules == TRUE)
 
     /* 配置信息 */
     $modules[$i]['config']  = array(
-        array('name' => 'juhepay_account',           'type' => 'text',   'value' => ''),
-        array('name' => 'juhepay_key',               'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_partner',           'type' => 'text',   'value' => ''),
+        array('name' => 'juhepay_key',               'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_pay_method',        'type' => 'text',   'value' => '')
     );
 

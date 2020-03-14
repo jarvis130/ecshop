@@ -58,7 +58,10 @@ if (isset($set_modules) && $set_modules == TRUE)
     $modules[$i]['config']  = array(
         array('name' => 'juhepay_partner',           'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_key',               'type' => 'text',   'value' => ''),
-        array('name' => 'juhepay_pay_method',        'type' => 'text',   'value' => '')
+        array('name' => 'juhepay_pay_method',        'type' => 'text',   'value' => ''),
+        array('name' => 'juhepay_alipay_quota',      'type' => 'text',   'value' => ''),
+        array('name' => 'juhepay_wxpay_quota',       'type' => 'text',   'value' => ''),
+        array('name' => 'juhepay_kjpay_quota',       'type' => 'text',   'value' => '')
     );
 
     return;
@@ -93,65 +96,65 @@ class juhepay
      */
     function get_code($order, $payment)
     {
-        if (!defined('EC_CHARSET'))
-        {
-            $charset = 'utf-8';
-        }
-        else
-        {
-            $charset = EC_CHARSET;
-        }
-
-        $real_method = $payment['juhepay_pay_method'];
-
-        switch ($real_method){
-            case '0':
-                $service = 'pay.alipay.wappay';
-                break;
-            case '1':
-                $service = 'pay.wxpay.sm';
-                break;
-            case '2':
-                $service = 'pay.kj.web';
-                break;
-        }
-
-        $pay_url = 'http://47.90.50.227/smartpayment/pay/gateway';
-        $utils = new Utils();
-
-        $parameter = array(
-            'service'           => $service,
-            'version'           => '1.0',
-            'charset'           => 'UTF-8',
-            'sign_type'         => 'MD5',
-            'merchant_id'       => $payment['juhepay_partner'],
-            'nonce_str'         => $utils->rand_str(32),
-            'notify_url'        => return_url(basename(__FILE__, '.php')),
-            'client_ip'         => $_SERVER['REMOTE_ADDR'], // 终端ip
-            /* 业务参数 */
-            'goods_desc'        => $order['order_sn'],
-            'out_trade_no'      => $order['order_sn'] . '_' . $order['log_id'],
-            'total_amount'      => $order['order_amount'],
-        );
-
-        ksort($parameter);
-        reset($parameter);
-
-        $param = '';
-        $sign  = '';
-
-        foreach ($parameter AS $key => $val)
-        {
-            $param .= "$key=" .urlencode($val). "&";
-            $sign  .= "$key=$val&";
-        }
-
-        $param = substr($param, 0, -1);
-        $sign  = substr($sign, 0, -1). $payment['juhepay_key'];
-
-        $button = "<input type='submit' value='" . $GLOBALS['_LANG']['pay_button'] . "' />";
-        $html = $this->create_html($param,$pay_url,$button);
-        return $html;
+//        if (!defined('EC_CHARSET'))
+//        {
+//            $charset = 'utf-8';
+//        }
+//        else
+//        {
+//            $charset = EC_CHARSET;
+//        }
+//
+//        $real_method = $payment['juhepay_pay_method'];
+//
+//        switch ($real_method){
+//            case '0':
+//                $service = 'pay.alipay.wappay';
+//                break;
+//            case '1':
+//                $service = 'pay.wxpay.sm';
+//                break;
+//            case '2':
+//                $service = 'pay.kj.web';
+//                break;
+//        }
+//
+//        $pay_url = 'http://47.90.50.227/smartpayment/pay/gateway';
+//        $utils = new Utils();
+//
+//        $parameter = array(
+//            'service'           => $service,
+//            'version'           => '1.0',
+//            'charset'           => 'UTF-8',
+//            'sign_type'         => 'MD5',
+//            'merchant_id'       => $payment['juhepay_partner'],
+//            'nonce_str'         => $utils->rand_str(32),
+//            'notify_url'        => return_url(basename(__FILE__, '.php')),
+//            'client_ip'         => $_SERVER['REMOTE_ADDR'], // 终端ip
+//            /* 业务参数 */
+//            'goods_desc'        => $order['order_sn'],
+//            'out_trade_no'      => $order['order_sn'] . '_' . $order['log_id'],
+//            'total_amount'      => $order['order_amount'],
+//        );
+//
+//        ksort($parameter);
+//        reset($parameter);
+//
+//        $param = '';
+//        $sign  = '';
+//
+//        foreach ($parameter AS $key => $val)
+//        {
+//            $param .= "$key=" .urlencode($val). "&";
+//            $sign  .= "$key=$val&";
+//        }
+//
+//        $param = substr($param, 0, -1);
+//        $sign  = substr($sign, 0, -1). $payment['juhepay_key'];
+//
+//        $button = "<input type='submit' value='" . $GLOBALS['_LANG']['pay_button'] . "' />";
+//        $html = $this->create_html($param,$pay_url,$button);
+//        return $html;
     }
 
     function create_html($params,$pay_url,$button){

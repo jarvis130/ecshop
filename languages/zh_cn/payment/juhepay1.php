@@ -19,7 +19,7 @@ $_LANG['juhepay1'] = '聚合支付-黄金叶支付';
 $_LANG['juhepay1_desc'] = '聚合支付平台-黄金叶（第三方支付平台）';
 
 $_LANG['juhepay_partner'] = '商户号';
-$_LANG['juhepay_key'] = '聚合支付签名KEY';
+$_LANG['juhepay_key'] = '签名KEY';
 $_LANG['pay_button'] = '立即支付';
 
 

@@ -19,8 +19,9 @@ $_LANG['juhepay2'] = '聚合支付-鑫发支付';
 $_LANG['juhepay2_desc'] = '聚合支付平台-鑫发（第三方支付平台）';
 
 $_LANG['juhepay_partner'] = '商户号';
-$_LANG['juhepay_sign_key'] = '聚合支付签名KEY';
-$_LANG['juhepay_pay_public_key'] = '聚合支付公钥';
+$_LANG['juhepay_sign_key'] = '签名KEY';
+$_LANG['juhepay_pay_public_key'] = '支付公钥';
+$_LANG['juhepay_private_key'] = '私钥';
 $_LANG['pay_button'] = '立即支付';
 
 

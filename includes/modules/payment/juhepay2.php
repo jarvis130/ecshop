@@ -37,7 +37,7 @@ if (isset($set_modules) && $set_modules == TRUE)
     $modules[$i]['code']    = basename(__FILE__, '.php');
 
     /* 描述对应的语言项 */
-    $modules[$i]['desc']    = 'juhepay_desc';
+    $modules[$i]['desc']    = 'juhepay2_desc';
 
     /* 是否支持货到付款 */
     $modules[$i]['is_cod']  = '0';
@@ -58,10 +58,13 @@ if (isset($set_modules) && $set_modules == TRUE)
     $modules[$i]['config']  = array(
         array('name' => 'juhepay_partner',           'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_sign_key',          'type' => 'text',   'value' => ''),
-        array('name' => 'juhepay_crypt_key',           'type' => 'text',   'value' => ''),
+        array('name' => 'juhepay_pay_public_key',    'type' => 'textarea',   'value' => ''),
         array('name' => 'juhepay_pay_method',        'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_alipay_quota',      'type' => 'text',   'value' => ''),
+        array('name' => 'juhepay_alipay_hb_quota',   'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_wxpay_quota',       'type' => 'text',   'value' => ''),
+        array('name' => 'juhepay_qqpay_quota',       'type' => 'text',   'value' => ''),
+        array('name' => 'juhepay_jdpay_quota',       'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_kjpay_quota',       'type' => 'text',   'value' => '')
     );
 

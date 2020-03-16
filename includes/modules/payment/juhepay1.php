@@ -37,7 +37,7 @@ if (isset($set_modules) && $set_modules == TRUE)
     $modules[$i]['code']    = basename(__FILE__, '.php');
 
     /* 描述对应的语言项 */
-    $modules[$i]['desc']    = 'juhepay_desc';
+    $modules[$i]['desc']    = 'juhepay1_desc';
 
     /* 是否支持货到付款 */
     $modules[$i]['is_cod']  = '0';

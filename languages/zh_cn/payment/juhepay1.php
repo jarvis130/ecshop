@@ -24,7 +24,7 @@ $_LANG['pay_button'] = '立即支付';
 
 
 $_LANG['juhepay_pay_method'] = '支持接口类型';
-$_LANG['juhepay_pay_method_desc'] = '控制支付接口类型：1-支付宝 3-微信 6-快捷 注：支持多选，格式如下：1,3,6';
+$_LANG['juhepay_pay_method_desc'] = '控制支付接口类型：1-支付宝 2-微信 5-快捷 注：支持多选，格式如下：1,2,5';
 
 $_LANG['juhepay_alipay_quota'] = '支付宝限额';
 $_LANG['juhepay_alipay_quota_desc'] = '支付宝限额：1）若是范围限制，格式如下：100-1000  2）如果是多个数值限定，格式如下：10,100,1000';

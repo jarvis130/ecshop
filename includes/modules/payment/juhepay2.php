@@ -62,11 +62,11 @@ if (isset($set_modules) && $set_modules == TRUE)
         array('name' => 'juhepay_private_key',       'type' => 'textarea',   'value' => ''),
         array('name' => 'juhepay_pay_method',        'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_alipay_quota',      'type' => 'text',   'value' => ''),
-        array('name' => 'juhepay_alipay_hb_quota',   'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_wxpay_quota',       'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_qqpay_quota',       'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_jdpay_quota',       'type' => 'text',   'value' => ''),
-        array('name' => 'juhepay_kjpay_quota',       'type' => 'text',   'value' => '')
+        array('name' => 'juhepay_kjpay_quota',       'type' => 'text',   'value' => ''),
+        array('name' => 'juhepay_alipay_hb_quota',   'type' => 'text',   'value' => '')
     );
 
     return;

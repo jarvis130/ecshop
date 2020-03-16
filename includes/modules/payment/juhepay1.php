@@ -57,7 +57,7 @@ if (isset($set_modules) && $set_modules == TRUE)
     /* 配置信息 */
     $modules[$i]['config']  = array(
         array('name' => 'juhepay_partner',           'type' => 'text',   'value' => ''),
-        array('name' => 'juhepay_key',               'type' => 'text',   'value' => ''),
+        array('name' => 'juhepay_sign_key',          'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_pay_method',        'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_alipay_quota',      'type' => 'text',   'value' => ''),
         array('name' => 'juhepay_wxpay_quota',       'type' => 'text',   'value' => ''),

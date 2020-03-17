@@ -297,43 +297,29 @@ elseif ($_REQUEST['act'] == 'edit')
 
 function get_flash_xml()
 {
-    $flashdb = array();
-    if (file_exists(ROOT_PATH . DATA_DIR . '/flash_ad_data.xml'))
-    {
+    $banner_scene = 2;  // 广告位
 
-        // 兼容v2.7.0及以前版本
-        if (!preg_match_all('/item_url="([^"]+)"\slink="([^"]*)"\stext="([^"]*)"\ssort="([^"]*)"\stype="([^"]*)"/', file_get_contents(ROOT_PATH . DATA_DIR . '/flash_ad_data.xml'), $t, PREG_SET_ORDER))
-        {
-            preg_match_all('/item_url="([^"]+)"\slink="([^"]*)"\stext="([^"]*)"\stype="([^"]*)"/', file_get_contents(ROOT_PATH . DATA_DIR . '/flash_ad_data.xml'), $t, PREG_SET_ORDER);
-        }
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('banners') . " WHERE `scene` = " . $banner_scene . " ORDER BY `sort`";
+    $flashdb = $GLOBALS['db']->getAll($sql);
 
-        if (!empty($t))
-        {
-            foreach ($t as $key => $val)
-            {
-                $val[4] = isset($val[4]) ? $val[4] : 0;
-                $flashdb[] = array('src'=>$val[1],'url'=>$val[2],'text'=>$val[3],'sort'=>$val[4],'type'=>$val[5]);
-            }
-        }
-    }
     return $flashdb;
 }
 
 function put_flash_xml($flashdb)
 {
+    $banner_scene = 2;  // 广告位
+
+    $sql = "DELETE FROM " . $GLOBALS['ecs']->table('banners') . " WHERE scene = " . $banner_scene;
+    $GLOBALS['db']->query($sql);
+
     if (!empty($flashdb))
     {
-        $xml = '<?xml version="1.0" encoding="' . EC_CHARSET . '"?><bcaster>';
+        $sql = "INSERT INTO " . $GLOBALS['ecs']->table('banners') . " (`scene`, `src`, `url`, `text`, `sort`, `type`) VALUES ";
         foreach ($flashdb as $key => $val)
         {
-            $xml .= '<item item_url="' . $val['src'] . '" link="' . $val['url'] . '" text="' . $val['text'] . '" sort="' . $val['sort'] . '" type="' . $val['type'] . '"/>';
+            $sql .= "(" . $banner_scene . ", " . $val['src'] . ", " . $val['url'] . ", " . $val['text'] . ", " . $val['sort'] . ", " . $val['type'] . ") ";
         }
-        $xml .= '</bcaster>';
-        file_put_contents(ROOT_PATH . DATA_DIR . '/flash_ad_data.xml', $xml);
-    }
-    else
-    {
-        @unlink(ROOT_PATH . DATA_DIR . '/flash_ad_data.xml');
+        $GLOBALS['db']->query($sql);
     }
 }
 

@@ -21,7 +21,7 @@ $_LANG['refresh'] = '刷新';
 
 /*提示信息*/
 $_LANG['refresh_confirm'] = '你确认要刷新选定的缓存吗？';
-$_LANG['refresh_succeed'] = '已刷新删除！';
+$_LANG['refresh_succeed'] = '刷新成功！';
 $_LANG['refresh_fail'] = '刷新失败！';
 
 ?>

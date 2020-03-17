@@ -62,15 +62,14 @@ if ($_REQUEST['act'] == 'refresh')
 {
     $url = APP_SERVER_URL . '/ecapi.cache.refresh';
     $data = array(
-        'code' => $_POST['id']
+        'code' => $_GET['code']
     );
     $result = $utils->posturl($url, $data);
-    if($result['error_code'] == 0){
-        make_json_response($_LANG['refresh_succeed']);
+    if($result && $result['error_code'] == 0){
+        make_json_response('', 0, $_LANG['refresh_succeed']);
     }else{
         make_json_error($_LANG['refresh_fail']);
     }
-    exit;
 }
 
 /**

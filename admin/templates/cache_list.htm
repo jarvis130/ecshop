@@ -23,7 +23,7 @@
       <td>{$cache.code}</td>
       <td>{$cache.name}</td>
       <td align="center">
-        <a onclick="{if(confirm('{$lang.refresh_confirm}')){return true;}return false;}" href="cache_manage.php?act=refresh">{$lang.refresh}</a>
+        <a href="javascript:;" onclick="refresh('{$cache.code}', '{$lang.refresh_confirm}')" title="{$lang.refresh}">{$lang.refresh}</a>
       </td>
     </tr>
     {foreachelse}
@@ -58,6 +58,30 @@
   }
   {/literal}
   //-->
+
+  /**
+   * 刷新
+   */
+  function refresh(code, cfm)
+  {
+    var opt = "refresh";
+    var url = "cache_manage.php";
+
+    if (confirm(cfm))
+    {
+      var args = "act=" + opt + "&code=" + code;
+
+      Ajax.call(url, args, refreshCallback, "GET", "JSON");
+    }
+  }
+
+  /**
+   * 刷新通知
+   */
+  function refreshCallback(result)
+  {
+    alert(result.message);
+  }
 </script>
 {include file="pagefooter.htm"}
 {/if}

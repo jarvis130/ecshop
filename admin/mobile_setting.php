@@ -44,7 +44,7 @@ if ($_REQUEST['act']== 'list')
     $num = 0;
     foreach ($playerdb as $key => $val)
     {
-        $playerdb[$key]['id'] = $num;
+        $playerdb[$key]['id'] = $val['id'];
         $num++;
         if (strpos($val['src'], 'http') === false)
         {

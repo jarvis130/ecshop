@@ -23,7 +23,7 @@
       <td>{$cache.code}</td>
       <td>{$cache.name}</td>
       <td align="center">
-        <a href="javascript:;" onclick="listTable.remove({$cache.code}, '{$lang.refresh_confirm}', 'refresh')" title="{$lang.refresh}">{$lang.refresh}</a>
+        <a onclick="{if(confirm('{$lang.refresh_confirm}')){return true;}return false;}" href="cache_manage.php?act=refresh">{$lang.refresh}</a>
       </td>
     </tr>
     {foreachelse}

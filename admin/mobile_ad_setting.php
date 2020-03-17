@@ -78,14 +78,7 @@ if ($_REQUEST['act']== 'list')
     {
         @unlink(ROOT_PATH . $rt['src']);
     }
-    $temp = array();
-    foreach ($flashdb as $key => $val)
-    {
-        if ($key != $id)
-        {
-            $temp[] = $val;
-        }
-    }
+
     delete_banner($id);
     $error_msg = '';
     set_flash_data($_CFG['flash_theme'], $error_msg);

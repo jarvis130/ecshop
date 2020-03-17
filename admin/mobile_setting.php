@@ -317,7 +317,7 @@ function put_flash_xml($flashdb)
         $sql = "INSERT INTO " . $GLOBALS['ecs']->table('banners') . " (`scene`, `src`, `url`, `text`, `sort`, `type`) VALUES ";
         foreach ($flashdb as $key => $val)
         {
-            $sql .= "(" . $banner_scene . ", " . $val['src'] . ", " . $val['url'] . ", " . $val['text'] . ", " . $val['sort'] . ", " . $val['type'] . ") ";
+            $sql .= "(" . $banner_scene . ", '" . $val['src'] . "', '" . $val['url'] . "', '" . $val['text'] . "', " . $val['sort'] . ", " . $val['type'] . ") ";
         }
         $GLOBALS['db']->query($sql);
     }

@@ -66,11 +66,11 @@ if ($_REQUEST['act'] == 'refresh')
     );
     $result = $utils->posturl($url, $data);
     if($result['error_code'] == 0){
-        sys_msg('刷新成功');
+        make_json_response($_LANG['refresh_succeed']);
     }else{
-        sys_msg('刷新失败', 1);
+        make_json_error($_LANG['refresh_fail']);
     }
-
+    exit;
 }
 
 /**

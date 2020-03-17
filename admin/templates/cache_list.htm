@@ -23,7 +23,7 @@
       <td>{$cache.code}</td>
       <td>{$cache.name}</td>
       <td align="center">
-        <a href="javascript:;" onclick="listTable.retry({$cache.code}, '{$lang.fresh_confirm}', 'refresh')" title="{$lang.edit}">{$lang.refresh}</a>
+        <a href="javascript:;" onclick="listTable.remove({$cache.code}, '{$lang.fresh_confirm}', 'refresh')" title="{$lang.edit}">{$lang.refresh}</a>
       </td>
     </tr>
     {foreachelse}

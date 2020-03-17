@@ -1,41 +1,29 @@
-<!-- $Id: actors_list.htm 15898 2009-05-04 07:25:41Z liuhui $ -->
+<!-- $Id: caches_list.htm 15898 2009-05-04 07:25:41Z liuhui $ -->
 
 {if $full_page}
 {include file="pageheader.htm"}
 {insert_scripts files="../js/utils.js,listtable.js"}
-<!-- 演员搜索 -->
-{include file="actors_search.htm"}
+<!-- 缓存搜索 -->
+{include file="caches_search.htm"}
 <form method="post" action="" name="listForm">
-<!-- start actor list -->
+<!-- start cache list -->
 <div class="list-div" id="listDiv">
 {/if}
 
   <table cellpadding="3" cellspacing="1">
     <tr>
-      <th>{$lang.actor_id}</th>
-      <th>{$lang.actor_name}</th>
-      <th>{$lang.name_initial}</th>
-      <th>{$lang.country}</th>
-      <th>{$lang.actor_desc}</th>
-      <th>{$lang.sort_order}</th>
-      <th>{$lang.is_show}</th>
+      <th>{$lang.id}</th>
+      <th>{$lang.code}</th>
+      <th>{$lang.name}</th>
       <th>{$lang.handler}</th>
     </tr>
-    {foreach from=$actor_list item=actor}
+    {foreach from=$cache_list item=cache}
     <tr>
-      <td>{$actor.actor_id}</td>
-      <td class="first-cell">
-        <span style="float:right">{$actor.actor_avatar}</span>
-        <span onclick="javascript:listTable.edit(this, 'edit_actor_name', {$actor.actor_id})">{$actor.actor_name|escape:html}</span>
-      </td>
-      <td>{$actor.name_initial}</td>
-      <td>{$actor.country}</td>
-      <td align="left">{$actor.actor_desc|truncate:36}</td>
-      <td align="right"><span onclick="javascript:listTable.edit(this, 'edit_sort_order', {$actor.actor_id})">{$actor.sort_order}</span></td>
-      <td align="center"><img src="images/{if $actor.is_show}yes{else}no{/if}.svg" width="20" onclick="listTable.toggle(this, 'toggle_show', {$actor.actor_id})" /></td>
+      <td>{$cache.id}</td>
+      <td>{$cache.code}</td>
+      <td>{$cache.name}</td>
       <td align="center">
-        <a href="actors.php?act=edit&id={$actor.actor_id}" title="{$lang.edit}">{$lang.edit}</a> |
-        <a href="javascript:;" onclick="listTable.remove({$actor.actor_id}, '{$lang.drop_confirm}')" title="{$lang.edit}">{$lang.remove}</a>
+        <a href="javascript:;" onclick="listTable.retry({$cache.code}, '{$lang.fresh_confirm}', 'refresh')" title="{$lang.edit}">{$lang.refresh}</a>
       </td>
     </tr>
     {foreachelse}
@@ -49,7 +37,7 @@
   </table>
 
 {if $full_page}
-<!-- end actor list -->
+<!-- end cache list -->
 </div>
 </form>
 

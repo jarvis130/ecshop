@@ -62,7 +62,7 @@ if ($_REQUEST['act'] == 'refresh')
 {
     $url = APP_SERVER_URL . '/ecapi.cache.refresh';
     $data = array(
-        'code' => $_POST['code']
+        'code' => $_POST['id']
     );
     $result = $utils->posturl($url, $data);
     if($result['error_code'] == 0){

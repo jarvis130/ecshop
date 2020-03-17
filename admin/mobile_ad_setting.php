@@ -64,9 +64,9 @@ if ($_REQUEST['act']== 'list')
 
     $id = (int)$_GET['id'];
     $flashdb = get_banners();
-    if (isset($flashdb[$id]))
+    if (!empty($flashdb))
     {
-        $rt = $flashdb[$id];
+        $rt = $flashdb;
     }
     else
     {
@@ -170,9 +170,9 @@ elseif ($_REQUEST['act'] == 'edit')
 
     $id = (int)$_REQUEST['id']; //取得id
     $flashdb = get_banners(); //取得数据
-    if (isset($flashdb[$id]))
+    if (!empty($flashdb))
     {
-        $rt = $flashdb[$id];
+        $rt = $flashdb;
     }
     else
     {

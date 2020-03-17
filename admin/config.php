@@ -32,4 +32,6 @@ define('OLD_AUTH_KEY', '');
 
 define('API_TIME', '2016-03-03 11:36:24');
 
+define('APP_SERVER_URL', 'http://localhost');
+
 ?>

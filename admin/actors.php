@@ -350,7 +350,7 @@ function get_actorlist()
         /* 记录总数以及页数 */
         if (isset($_POST['actor_name']))
         {
-            $sql = "SELECT COUNT(*) FROM ".$GLOBALS['ecs']->table('actors') .' WHERE actor_name = \''.$_POST['actor_name'].'\'';
+            $sql = "SELECT COUNT(*) FROM ".$GLOBALS['ecs']->table('actors') .' WHERE actor_name like \'%'.$_POST['actor_name'].'%\'';
         }
         else
         {

@@ -63,7 +63,7 @@ if ($_REQUEST['act']== 'list')
     admin_priv('flash_manage');
 
     $id = (int)$_GET['id'];
-    $flashdb = get_banners();
+    $flashdb = get_banner($id);
     if (!empty($flashdb))
     {
         $rt = $flashdb;
@@ -169,7 +169,7 @@ elseif ($_REQUEST['act'] == 'edit')
     admin_priv('flash_manage');
 
     $id = (int)$_REQUEST['id']; //取得id
-    $flashdb = get_banners(); //取得数据
+    $flashdb = get_banner($id); //取得数据
     if (!empty($flashdb))
     {
         $rt = $flashdb;
@@ -255,6 +255,13 @@ elseif ($_REQUEST['act'] == 'edit')
         $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_ad_setting.php?act=list');
         sys_msg($_LANG['edit_ok'], 0, $links);
     }
+}
+
+function get_banner($id){
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('banners') . " WHERE `id` = " . $id;
+    $banner = $GLOBALS['db']->getOne($sql);
+
+    return $banner;
 }
 
 function get_banners()

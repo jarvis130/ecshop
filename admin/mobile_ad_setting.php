@@ -259,7 +259,7 @@ elseif ($_REQUEST['act'] == 'edit')
 
 function get_banner($id){
     $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('banners') . " WHERE `id` = " . $id;
-    $banner = $GLOBALS['db']->getOne($sql);
+    $banner = $GLOBALS['db']->getRow($sql);
 
     return $banner;
 }

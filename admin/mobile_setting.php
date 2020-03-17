@@ -309,7 +309,7 @@ function put_flash_xml($flashdb)
 {
     $banner_scene = 1;  // 轮播图
 
-    $sql = "DELETE FROM " . $GLOBALS['ecs']->table('banners') . " WHERE scene = " . $banner_scene;
+    $sql = "DELETE FROM " . $GLOBALS['ecs']->table('banners') . " WHERE `scene` = " . $banner_scene;
     $GLOBALS['db']->query($sql);
 
     if (!empty($flashdb))

@@ -40,11 +40,11 @@ if ($_REQUEST['act']== 'list')
     $tab = !$isOpenWap ? 'open' : 'enter';
     $charset = EC_CHARSET == 'utf-8' ? "utf8" : 'gbk';
 
-    $playerdb = get_flash_xml();
+    $playerdb = get_banners();
     $num = 0;
     foreach ($playerdb as $key => $val)
     {
-        $playerdb[$key]['id'] = $num;
+        $playerdb[$key]['id'] = $val['id'];
         $num++;
         if (strpos($val['src'], 'http') === false)
         {
@@ -63,10 +63,10 @@ if ($_REQUEST['act']== 'list')
     admin_priv('flash_manage');
 
     $id = (int)$_GET['id'];
-    $flashdb = get_flash_xml();
-    if (isset($flashdb[$id]))
+    $flashdb = get_banner($id);
+    if (!empty($flashdb))
     {
-        $rt = $flashdb[$id];
+        $rt = $flashdb;
     }
     else
     {
@@ -78,15 +78,8 @@ if ($_REQUEST['act']== 'list')
     {
         @unlink(ROOT_PATH . $rt['src']);
     }
-    $temp = array();
-    foreach ($flashdb as $key => $val)
-    {
-        if ($key != $id)
-        {
-            $temp[] = $val;
-        }
-    }
-    put_flash_xml($temp);
+
+    delete_banner($id);
     $error_msg = '';
     set_flash_data($_CFG['flash_theme'], $error_msg);
     ecs_header("Location: mobile_setting.php?act=list\n");
@@ -161,27 +154,10 @@ elseif ($_REQUEST['act'] == 'add')
             sys_msg($_LANG['link_empty'], 0, $links);
         }
 
-        // 获取flash播放器数据
-        $flashdb = get_flash_xml();
-
         // 插入新数据
-        array_unshift($flashdb, array('src'=>$src, 'url'=>$_POST['img_url'], 'text'=>$_POST['img_text'] ,'sort'=>$_POST['img_sort'],'type'=>$_POST['img_type']));
+        $banner = array('src'=>$src, 'url'=>$_POST['img_url'], 'text'=>$_POST['img_text'] ,'sort'=>$_POST['img_sort'],'type'=>$_POST['img_type']);
+        update_banner($banner);
 
-        // 实现排序
-        $flashdb_sort   = array();
-        $_flashdb       = array();
-        foreach ($flashdb as $key => $value)
-        {
-            $flashdb_sort[$key] = $value['sort'];
-        }
-        asort($flashdb_sort, SORT_NUMERIC);
-        foreach ($flashdb_sort as $key => $value)
-        {
-            $_flashdb[] = $flashdb[$key];
-        }
-        unset($flashdb, $flashdb_sort);
-
-        put_flash_xml($_flashdb);
         $error_msg = '';
         set_flash_data($_CFG['flash_theme'], $error_msg);
         $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_setting.php?act=list');
@@ -193,10 +169,10 @@ elseif ($_REQUEST['act'] == 'edit')
     admin_priv('flash_manage');
 
     $id = (int)$_REQUEST['id']; //取得id
-    $flashdb = get_flash_xml(); //取得数据
-    if (isset($flashdb[$id]))
+    $flashdb = get_banner($id); //取得数据
+    if (!empty($flashdb))
     {
-        $rt = $flashdb[$id];
+        $rt = $flashdb;
     }
     else
     {
@@ -271,23 +247,9 @@ elseif ($_REQUEST['act'] == 'edit')
         {
             @unlink(ROOT_PATH . $rt['src']);
         }
-        $flashdb[$id] = array('src'=>$src,'url'=>$_POST['img_url'],'text'=>$_POST['img_text'],'sort'=>$_POST['img_sort'],'type'=>$_POST['img_type']);
 
-        // 实现排序
-        $flashdb_sort   = array();
-        $_flashdb       = array();
-        foreach ($flashdb as $key => $value)
-        {
-            $flashdb_sort[$key] = $value['sort'];
-        }
-        asort($flashdb_sort, SORT_NUMERIC);
-        foreach ($flashdb_sort as $key => $value)
-        {
-            $_flashdb[] = $flashdb[$key];
-        }
-        unset($flashdb, $flashdb_sort);
-
-        put_flash_xml($_flashdb);
+        $banner = array('id'=>$id,'src'=>$src,'url'=>$_POST['img_url'],'text'=>$_POST['img_text'],'sort'=>$_POST['img_sort'],'type'=>$_POST['img_type']);
+        update_banner($banner);
         $error_msg = '';
         set_flash_data($_CFG['flash_theme'], $error_msg);
         $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_setting.php?act=list');
@@ -295,46 +257,51 @@ elseif ($_REQUEST['act'] == 'edit')
     }
 }
 
-function get_flash_xml()
-{
-    $flashdb = array();
-    if (file_exists(ROOT_PATH . DATA_DIR . '/flash_data.xml'))
-    {
+function get_banner($id){
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('banners') . " WHERE `id` = " . $id;
+    $banner = $GLOBALS['db']->getRow($sql);
 
-        // 兼容v2.7.0及以前版本
-        if (!preg_match_all('/item_url="([^"]+)"\slink="([^"]*)"\stext="([^"]*)"\ssort="([^"]*)"\stype="([^"]*)"/', file_get_contents(ROOT_PATH . DATA_DIR . '/flash_data.xml'), $t, PREG_SET_ORDER))
-        {
-            preg_match_all('/item_url="([^"]+)"\slink="([^"]*)"\stext="([^"]*)"\stype="([^"]*)"/', file_get_contents(ROOT_PATH . DATA_DIR . '/flash_data.xml'), $t, PREG_SET_ORDER);
-        }
-
-        if (!empty($t))
-        {
-            foreach ($t as $key => $val)
-            {
-                $val[4] = isset($val[4]) ? $val[4] : 0;
-                $flashdb[] = array('src'=>$val[1],'url'=>$val[2],'text'=>$val[3],'sort'=>$val[4],'type'=>$val[5]);
-            }
-        }
-    }
-    return $flashdb;
+    return $banner;
 }
 
-function put_flash_xml($flashdb)
+function get_banners()
 {
-    if (!empty($flashdb))
+    $banner_scene = 1;  // 轮播图
+
+    $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('banners') . " WHERE `scene` = " . $banner_scene . " ORDER BY `sort`";
+    $banners = $GLOBALS['db']->getAll($sql);
+
+    return $banners;
+}
+
+function update_banner($banner)
+{
+    $banner_scene = 1;  // 轮播图
+
+    if (!empty($banner))
     {
-        $xml = '<?xml version="1.0" encoding="' . EC_CHARSET . '"?><bcaster>';
-        foreach ($flashdb as $key => $val)
-        {
-            $xml .= '<item item_url="' . $val['src'] . '" link="' . $val['url'] . '" text="' . $val['text'] . '" sort="' . $val['sort'] . '" type="' . $val['type'] . '"/>';
+        if(!empty($banner['id'])){
+            $sql = "UPDATE " . $GLOBALS['ecs']->table('banners')
+                . " SET `scene` = " . $banner_scene . ", "
+                . " `src` = '" . $banner['src'] . "', "
+                . " `url` = '" . $banner['url'] . "', "
+                . " `text` = '" . $banner['text'] . "', "
+                . " `sort` = " . $banner['sort'] . ", "
+                . " `type` = " . $banner['type']
+                . " WHERE `id` = " . $banner['id'];
+        }else{
+            $sql = "INSERT INTO " . $GLOBALS['ecs']->table('banners')
+                . " (`scene`, `src`, `url`, `text`, `sort`, `type`) VALUES "
+                . "(" . $banner_scene . ", '" . $banner['src'] . "', '" . $banner['url'] . "', '" . $banner['text'] . "', " . $banner['sort'] . ", " . $banner['type'] . ") ";
         }
-        $xml .= '</bcaster>';
-        file_put_contents(ROOT_PATH . DATA_DIR . '/flash_data.xml', $xml);
+        $GLOBALS['db']->query($sql);
     }
-    else
-    {
-        @unlink(ROOT_PATH . DATA_DIR . '/flash_data.xml');
-    }
+}
+
+function delete_banner($id)
+{
+    $sql = "DELETE FROM " . $GLOBALS['ecs']->table('banners') . " WHERE `id` = " . $id;
+    $GLOBALS['db']->query($sql);
 }
 
 function get_url_image($url)
@@ -430,7 +397,7 @@ function get_flash_tpl_info($dir, $file)
 
 function set_flash_data($tplname, &$msg)
 {
-    $flashdata = get_flash_xml();
+    $flashdata = get_banners();
     if (empty($flashdata))
     {
         $flashdata[] = array(

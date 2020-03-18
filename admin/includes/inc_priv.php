@@ -91,6 +91,7 @@ if (!defined('IN_ECS'))
     $purview['flashplay']            = 'flash_manage';
     $purview['ucenter_setup']        = 'integrate_users';
     $purview['021_reg_fields']       = 'reg_fields';
+    $purview['022_cache_manage']     = 'cache_manage';
 
 //广告管理
     $purview['z_clicks_stats']       = 'ad_manage';

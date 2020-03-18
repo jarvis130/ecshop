@@ -1,0 +1,87 @@
+<!-- $Id: caches_list.htm 15898 2009-05-04 07:25:41Z liuhui $ -->
+
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<!-- 缓存搜索 -->
+{include file="caches_search.htm"}
+<form method="post" action="" name="listForm">
+<!-- start cache list -->
+<div class="list-div" id="listDiv">
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th>{$lang.id}</th>
+      <th>{$lang.code}</th>
+      <th>{$lang.name}</th>
+      <th>{$lang.handler}</th>
+    </tr>
+    {foreach from=$cache_list item=cache}
+    <tr>
+      <td>{$cache.id}</td>
+      <td>{$cache.code}</td>
+      <td>{$cache.name}</td>
+      <td align="center">
+        <a href="javascript:;" onclick="refresh('{$cache.code}', '{$lang.refresh_confirm}')" title="{$lang.refresh}">{$lang.refresh}</a>
+      </td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+    {/foreach}
+    <tr>
+      <td align="right" nowrap="true" colspan="6">
+      {include file="page.htm"}
+      </td>
+    </tr>
+  </table>
+
+{if $full_page}
+<!-- end cache list -->
+</div>
+</form>
+
+<script type="text/javascript" language="javascript">
+  <!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+      // 开始检查订单
+      startCheckOrder();
+  }
+  {/literal}
+  //-->
+
+  /**
+   * 刷新
+   */
+  function refresh(code, cfm)
+  {
+    var opt = "refresh";
+    var url = "cache_manage.php";
+
+    if (confirm(cfm))
+    {
+      var args = "act=" + opt + "&code=" + code;
+
+      Ajax.call(url, args, refreshCallback, "GET", "JSON");
+    }
+  }
+
+  /**
+   * 刷新通知
+   */
+  function refreshCallback(result)
+  {
+    alert(result.message);
+  }
+</script>
+{include file="pagefooter.htm"}
+{/if}

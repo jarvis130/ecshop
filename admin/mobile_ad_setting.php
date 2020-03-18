@@ -294,7 +294,7 @@ function update_banner($banner)
                 . " WHERE `id` = " . $banner['id'];
         }else{
             $sql = "INSERT INTO " . $GLOBALS['ecs']->table('banners')
-                . " (`scene`, `src`, `url`, `text`, `sort`, `type`) VALUES "
+                . " (`scene`, `src`, `url`, `text`, `sort`, `type`, `group`) VALUES "
                 . "(" . $banner_scene . ", '" . $banner['src'] . "', '" . $banner['url'] . "', '" . $banner['text'] . "', " . $banner['sort'] . ", " . $banner['type'] . ", " . $banner['group'] . ") ";
         }
         $GLOBALS['db']->query($sql);

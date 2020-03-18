@@ -26,6 +26,10 @@
     <td class="label">{$lang.schp_type}</td>
     <td><select name="img_type">{html_options options=$type_list selected=$rt.img_type}</select><br /></td>
   </tr>
+  <tr>
+    <td class="label">{$lang.schp_group}</td>
+    <td><input name="img_group" type="text" value="{$rt.img_group}" size="4" maxlength="3"/></td>
+  </tr>
   <tr align="center">
     <td colspan="2">
       <input type="hidden"  name="id"       value="{$rt.id}" />

@@ -95,7 +95,8 @@ elseif ($_REQUEST['act'] == 'add')
         $src = isset($_GET['src']) ? $_GET['src'] : '';
         $sort = 0;
         $img_type = 1;
-        $rt = array('act'=>'add','img_url'=>$url,'img_src'=>$src, 'img_sort'=>$sort, 'img_type'=>$img_type);
+        $group = 0;
+        $rt = array('act'=>'add','img_url'=>$url,'img_src'=>$src, 'img_sort'=>$sort, 'img_type'=>$img_type, 'img_group'=>$group);
         $width_height = get_width_height();
         assign_query_info();
         if(isset($width_height['width'])|| isset($width_height['height']))
@@ -155,7 +156,7 @@ elseif ($_REQUEST['act'] == 'add')
         }
 
         // 插入新数据
-        $banner = array('src'=>$src, 'url'=>$_POST['img_url'], 'text'=>$_POST['img_text'] ,'sort'=>$_POST['img_sort'],'type'=>$_POST['img_type']);
+        $banner = array('src'=>$src, 'url'=>$_POST['img_url'], 'text'=>$_POST['img_text'] ,'sort'=>$_POST['img_sort'],'type'=>$_POST['img_type'],'group'=>$_POST['img_group']);
         update_banner($banner);
 
         $error_msg = '';
@@ -187,6 +188,7 @@ elseif ($_REQUEST['act'] == 'edit')
         $rt['img_txt'] = $rt['text'];
         $rt['img_sort'] = empty($rt['sort']) ? 0 : $rt['sort'];
         $rt['img_type'] = $rt['type'];
+        $rt['img_group'] = $rt['group'];
 
         $rt['id'] = $id;
         $smarty->assign('action_link', array('text' => $_LANG['go_url'], 'href' => 'mobile_ad_setting.php?act=list'));
@@ -248,7 +250,7 @@ elseif ($_REQUEST['act'] == 'edit')
             @unlink(ROOT_PATH . $rt['src']);
         }
 
-        $banner = array('id'=>$id,'src'=>$src,'url'=>$_POST['img_url'],'text'=>$_POST['img_text'],'sort'=>$_POST['img_sort'],'type'=>$_POST['img_type']);
+        $banner = array('id'=>$id,'src'=>$src,'url'=>$_POST['img_url'],'text'=>$_POST['img_text'],'sort'=>$_POST['img_sort'],'type'=>$_POST['img_type'],'group'=>$_POST['img_group']);
         update_banner($banner);
         $error_msg = '';
         set_flash_data($_CFG['flash_theme'], $error_msg);
@@ -287,12 +289,13 @@ function update_banner($banner)
                 . " `url` = '" . $banner['url'] . "', "
                 . " `text` = '" . $banner['text'] . "', "
                 . " `sort` = " . $banner['sort'] . ", "
-                . " `type` = " . $banner['type']
+                . " `type` = " . $banner['type'] . ", "
+                . " `group` = " . $banner['group']
                 . " WHERE `id` = " . $banner['id'];
         }else{
             $sql = "INSERT INTO " . $GLOBALS['ecs']->table('banners')
                 . " (`scene`, `src`, `url`, `text`, `sort`, `type`) VALUES "
-                . "(" . $banner_scene . ", '" . $banner['src'] . "', '" . $banner['url'] . "', '" . $banner['text'] . "', " . $banner['sort'] . ", " . $banner['type'] . ") ";
+                . "(" . $banner_scene . ", '" . $banner['src'] . "', '" . $banner['url'] . "', '" . $banner['text'] . "', " . $banner['sort'] . ", " . $banner['type'] . ", " . $banner['group'] . ") ";
         }
         $GLOBALS['db']->query($sql);
     }

@@ -18,6 +18,7 @@ $_LANG['schp_imgurl'] = '轮播图片链接';
 $_LANG['schp_imgdesc'] = '图片说明';
 $_LANG['schp_sort'] = '排序';
 $_LANG['schp_type'] = '类型';
+$_LANG['schp_group'] = '分组';
 $_LANG['trash_img_confirm'] = '您要删除这张轮播图片么？';
 $_LANG['custom_del_confirm'] = '您确定删除此广告吗？';
 $_LANG['tab_change_alert'] = '请先将自定义广告全部“关闭”,\n\n然后才可以点击系统默认。';

@@ -58,7 +58,7 @@ if ($_REQUEST['act']== 'list')
 
     $smarty->assign('playerdb', $playerdb);
     $smarty->assign('group_list',$grouplist);
-    $smarty->display('banner_config.html');
+    $smarty->display('banner_ad_config.html');
 } elseif($_REQUEST['act']== 'del') {
     admin_priv('flash_manage');
 

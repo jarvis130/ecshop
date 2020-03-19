@@ -38,7 +38,6 @@
                                 <th align="center" class="td_b_r"><font size="2">{$lang.schp_imgdesc}</font></th>
                                 <th align="center" class="td_b_r"><font size="2">{$lang.schp_sort}</font></th>
                                 <th align="center" class="td_b_r"><font size="2">{$lang.schp_type}</font></th>
-                                <th align="center" class="td_b_r"><font size="2">{$lang.schp_group}</font></th>
                                 <th align="center" class="td_b"><font size="2">操作</font></th>
                             <tr>
                                 <!--{foreach from=$playerdb item=param name="group_items"}-->
@@ -48,12 +47,11 @@
                                 <td align="center"  class="td_b_r">{$param.text}</td>
                                 <td align="center"  class="td_b_r">{$param.sort}</td>
                                 <td align="center"  class="td_b_r">{$param.type_name}</td>
-                                <td align="center"  class="td_b_r">{$param.group}</td>
                                 <td align="center"  class="td_b_r"><a href="?act=edit&id={$param.id}">编辑</a> <a href="?act=del&id={$param.id}">删除</a></td>
                             </tr>
                             <!--{/foreach}-->
                             <tr>
-                                <td colspan="7" align="center" class="td_add"><a href="?act=add">添加</a></td>
+                                <td colspan="6" align="center" class="td_add"><a href="?act=add">添加</a></td>
                             </tr>
                             <!--<tr>-->
                             <!--<th height="15px"></th>-->

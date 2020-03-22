@@ -505,6 +505,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $wa
                 }
                 /* 重新格式化图片名称 */
 //                $thumb_url = reformat_image_name('gallery_thumb', $row['goods_id'], $thumb_url, 'thumb');
+                $thumb_url = ltrim($thumb_url, '/');
                 if ($change || empty($row['thumb_url']))
                 {
                     if ($thumb_url != $row['thumb_url'])

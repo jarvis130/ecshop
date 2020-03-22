@@ -510,7 +510,8 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $wa
                 {
                     if ($thumb_url != $row['thumb_url'])
                     {
-                        $sql = "UPDATE " .$GLOBALS['ecs']->table('goods_gallery'). " SET thumb_url='$thumb_url' WHERE img_id='$row[img_id]'";
+//                        $sql = "UPDATE " .$GLOBALS['ecs']->table('goods_gallery'). " SET thumb_url='$thumb_url' WHERE img_id='$row[img_id]'";
+                        $sql = "UPDATE " .$GLOBALS['ecs']->table('goods_gallery'). " SET img_url='$thumb_url', thumb_url='$thumb_url' WHERE img_id='$row[img_id]'";
                         $GLOBALS['db']->query($sql);
                         @unlink(ROOT_PATH . $row['thumb_url']);
                     }

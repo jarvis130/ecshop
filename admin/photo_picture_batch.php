@@ -100,7 +100,7 @@ else
         $album_where = " WHERE album.img_original > ''";
     }
 
-    $album_where .= " WHERE album.thumb_url = ''";
+    $album_where .= " AND album.thumb_url = ''";
 
 
     /* 设置最长执行时间为5分钟 */

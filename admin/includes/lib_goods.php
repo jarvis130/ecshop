@@ -839,7 +839,7 @@ function get_goods_actors($goods_id)
  *
  * @access  public
  * @params  integer $isdelete
- * @params  integer $real_goods
+ * @params  integer $real_goods  0:虚拟 1：实物 2：视频 3：图片库
  * @params  integer $conditions
  * @return  array
  */

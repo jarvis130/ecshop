@@ -23,6 +23,11 @@ if (!defined('IN_ECS'))
 //$modules['01_certificate_manage']['sms_resource']     = 'sms_resource.php';//短信平台
 //$modules['01_certificate_manage']['logistic_tracking']  = 'logistic_tracking.php';//云起物流
 
+$modules['01_photo_manage']['01_photo_list']       = 'photo.php?act=list';
+$modules['01_photo_manage']['02_photo_add']        = 'photo.php?act=add';          // 添加图片库
+$modules['01_photo_manage']['03_photo_trash']      = 'photo.php?act=trash';        // 图片库回收站
+$modules['01_photo_manage']['04_photo_batch']      = 'photo_picture_batch.php';        // 批量处理图片
+
 $modules['01_video_manage']['01_video_list']       = 'video.php?act=list';
 $modules['01_video_manage']['02_video_add']        = 'video.php?act=add';          // 添加视频
 $modules['01_video_manage']['03_video_trash']      = 'video.php?act=trash';        // 视频回收站

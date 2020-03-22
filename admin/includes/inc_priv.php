@@ -177,4 +177,10 @@ if (!defined('IN_ECS'))
     $purview['03_video_trash']       = array('video_manage', 'remove_back');
     $purview['04_actors_list']       = array('actors_manage', 'remove_back');
     $purview['05_actors_add']       = 'actors_manage';
+
+// 图片管理
+    $purview['01_photo_list']        = array('photo_manage', 'remove_back');
+    $purview['02_photo_add']         = 'photo_manage';
+    $purview['03_photo_trash']       = array('photo_manage', 'remove_back');
+    $purview['04_photo_batch']       = 'picture_batch';
 ?>

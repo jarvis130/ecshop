@@ -21,6 +21,9 @@ if (!defined('IN_ECS'))
     //云服务中心
     $icon['01_certificate_manage'] = 'certificate';
 
+    //图片库管理
+    $icon['01_photo_manage']       = 'video';
+
     //视频管理
     $icon['01_video_manage']       = 'video';
 

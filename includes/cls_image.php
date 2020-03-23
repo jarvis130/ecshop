@@ -840,13 +840,16 @@ class cls_image
     /**
      * 下载远程图片
      * @param $url
-     * @param string $path
+     * @param string $dir
      * @return string
      */
-    public function download_image($url, $path = '')
+    public function download_image($url, $dir = '')
     {
-        if (!make_dir($path))
+        if (!make_dir($dir))
         {
+            /* 创建目录失败 */
+            $this->error_msg  = sprintf($GLOBALS['_LANG']['directory_readonly'], $dir);
+            $this->error_no   = ERR_DIRECTORY_READONLY;
             return false;
         }
 
@@ -858,9 +861,22 @@ class cls_image
         curl_close($ch);
 
         $filename = pathinfo($url, PATHINFO_BASENAME);
-        $resource = fopen($path . $filename, 'a');
+        $resource = fopen($dir . $filename, 'a');
         fwrite($resource, $file);
         fclose($resource);
+
+        //确认文件是否生成
+        if (file_exists($dir . $filename))
+        {
+            return str_replace(ROOT_PATH, '', $dir) . $filename;
+        }
+        else
+        {
+            $this->error_msg = $GLOBALS['_LANG']['writting_failure'];
+            $this->error_no   = ERR_DIRECTORY_READONLY;
+
+            return false;
+        }
 
         return $path . $filename;
     }

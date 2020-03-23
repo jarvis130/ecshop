@@ -877,8 +877,6 @@ class cls_image
 
             return false;
         }
-
-        return $path . $filename;
     }
 }
 

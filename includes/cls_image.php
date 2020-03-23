@@ -836,6 +836,28 @@ class cls_image
             return false;
         }
     }
+
+    /**
+     * 下载远程图片
+     * @param $url
+     * @param string $path
+     * @return string
+     */
+    public function download_image($url, $path = '')
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+        $file = curl_exec($ch);
+        curl_close($ch);
+        $filename = pathinfo($url, PATHINFO_BASENAME);
+        $resource = fopen($path . $filename, 'a');
+        fwrite($resource, $file);
+        fclose($resource);
+
+        return $path . $filename;
+    }
 }
 
 ?>

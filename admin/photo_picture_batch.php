@@ -100,7 +100,15 @@ else
         $album_where = " WHERE album.img_original > ''";
     }
 
-    $album_where .= " AND album.thumb_url = ''";
+    $thumb = empty($_GET['thumb']) ? 0 : 1;
+    $original = empty($_GET['original']) ? 0 : 1;
+    if($thumb == 1 && $original == 1){
+        $album_where .= " AND (album.thumb_url = '' OR album.download_img_original = '') ";
+    }elseif ($thumb == 0 && $original == 1){
+        $album_where .= " AND album.download_img_original = '' ";
+    }else{
+        $album_where .= " AND album.thumb_url = '' ";
+    }
 
 
     /* 设置最长执行时间为5分钟 */
@@ -110,6 +118,7 @@ else
     {
         $page_size = 50; // 默认50张/页
         $thumb = empty($_GET['thumb']) ? 0 : 1;
+        $original = empty($_GET['original']) ? 0 : 1;
         $watermark = empty($_GET['watermark']) ? 0 : 1;
         $change = empty($_GET['change']) ? 0 : 1;
         $silent = empty($_GET['silent']) ? 0 : 1;
@@ -140,7 +149,7 @@ else
             $module_no = 1;
         }
         $result = array('error' => 0, 'message' => '', 'content' => '', 'module_no' => $module_no, 'done' => 1, 'title' => $title, 'page_size' => $page_size,
-            'page' => 1, 'thumb'=> $thumb, 'watermark' => $watermark, 'total' => 1, 'change' => $change, 'silent' => $silent,
+            'page' => 1, 'thumb'=> $thumb, 'original'=> $original, 'watermark' => $watermark, 'total' => 1, 'change' => $change, 'silent' => $silent,
             'do_album' => $do_album, 'do_icon'=> $do_icon, 'goods_id'=> $goods_id, 'brand_id'=> $brand_id, 'cat_id'=> $cat_id,
             'row' => array('new_page'  => sprintf($_LANG['page_format'], 1),
                            'new_total' => sprintf($_LANG['total_format'], ceil($count/$page_size)),
@@ -154,6 +163,7 @@ else
     {
         $result = array('error' => 0, 'message' => '', 'content' => '', 'done' => 2, 'do_album' => $do_album, 'do_icon'=> $do_icon, 'goods_id'=> $goods_id, 'brand_id'=> $brand_id, 'cat_id'=> $cat_id);
         $result['thumb']     = empty($_GET['thumb'])     ? 0 : 1;
+        $result['original']  = empty($_GET['original'])  ? 0 : 1;
         $result['watermark'] = empty($_GET['watermark']) ? 0 : 1;
         $result['change']    = empty($_GET['change'])    ? 0 : 1;
         $result['page_size'] = empty($_GET['page_size']) ? 100 : intval($_GET['page_size']);
@@ -185,7 +195,7 @@ else
                 }
                 else
                 {
-                    process_image($result['page'], $result['page_size'], $result['module_no'], $result['thumb'], $result['watermark'], $result['change'], $result['silent']);
+                    process_image($result['page'], $result['page_size'], $result['module_no'], $result['thumb'], $result['original'], $result['watermark'], $result['change'], $result['silent']);
                 }
                 $end_time = gmtime();
                 $result['row']['pre_id'] = 'time_' . $result['total'];
@@ -224,7 +234,7 @@ else
                 }
                 else
                 {
-                    process_image($result['page'], $result['page_size'], $result['module_no'], $result['thumb'], $result['watermark'], $result['change'], $result['silent']);
+                    process_image($result['page'], $result['page_size'], $result['module_no'], $result['thumb'], $result['original'], $result['watermark'], $result['change'], $result['silent']);
                 }
                 $end_time = gmtime();
 
@@ -272,13 +282,14 @@ else
  * @param   integer $page_size
  * @param   integer $type
  * @param   boolen  $thumb      是否生成缩略图
+ * @param   boolen  $original   是否下载原图
  * @param   boolen  $watermark  是否生成水印图
  * @param   boolen  $change     true 生成新图，删除旧图 false 用新图覆盖旧图
  * @param   boolen  $silent     是否执行能忽略错误
  *
  * @return void
  */
-function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $watermark = true, $change = false, $silent = true)
+function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $original = true, $watermark = true, $change = false, $silent = true)
 {
     if ($type == 0)
     {
@@ -484,7 +495,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $wa
 //                    $dir = dirname(ROOT_PATH . $row['thumb_url']) . '/';
 //                }
 
-                $dir = ROOT_PATH . '/data/photo/' . date('Ym') . '/' . $row['goods_id'] . '/';
+                $dir = ROOT_PATH . '/data/photo/temp/' . date('Ym') . '/thumb/' . $row['goods_id'] . '/';
 
 //                $thumb_url = $GLOBALS['image']->make_thumb(ROOT_PATH . $row['img_original'], $GLOBALS['_CFG']['thumb_width'], $GLOBALS['_CFG']['thumb_height'], $dir);
 
@@ -505,7 +516,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $wa
                 }
                 /* 重新格式化图片名称 */
 //                $thumb_url = reformat_image_name('gallery_thumb', $row['goods_id'], $thumb_url, 'thumb');
-                $thumb_url = ltrim($thumb_url, '/');
+                $thumb_url = reformat_photo_name('gallery_thumb', $row['goods_id'], $thumb_url, 'thumb');
                 if ($change || empty($row['thumb_url']))
                 {
                     if ($thumb_url != $row['thumb_url'])
@@ -519,6 +530,43 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $wa
                 else
                 {
                     replace_image($thumb_url, $row['thumb_url'], $row['goods_id'],$silent);
+                }
+            }
+
+            /* 下载原始图 */
+            if ($original)
+            {
+                $dir = ROOT_PATH . '/data/photo/temp/' . date('Ym') . '/source/' . $row['goods_id'] . '/';
+
+                $original_url = $GLOBALS['image']->download_image($row['img_original'], $dir);
+
+                if (!$original_url)
+                {
+                    $msg = sprintf($GLOBALS['_LANG']['error_pos'], $row['goods_id']) . "\n" . $GLOBALS['image']->error_msg();
+                    if ($silent)
+                    {
+                        $GLOBALS['err_msg'][] = $msg;
+                        continue;
+                    }
+                    else
+                    {
+                        make_json_error($msg);
+                    }
+                }
+                /* 重新格式化图片名称 */
+                $original_url = reformat_photo_name('gallery', $row['goods_id'], $original_url, 'source');
+                if ($change || empty($row['thumb_url']))
+                {
+                    if ($original_url != $row['thumb_url'])
+                    {
+                        $sql = "UPDATE " .$GLOBALS['ecs']->table('goods_gallery'). " SET download_img_original='$original_url' WHERE img_id='$row[img_id]'";
+                        $GLOBALS['db']->query($sql);
+                        @unlink(ROOT_PATH . $row['thumb_url']);
+                    }
+                }
+                else
+                {
+                    replace_image($original_url, $row['thumb_url'], $row['goods_id'],$silent);
                 }
             }
         }

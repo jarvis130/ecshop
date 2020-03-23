@@ -1367,6 +1367,71 @@ function reformat_image_name($type, $goods_id, $source_img, $position='')
     return false;
 }
 
+/**
+ * 格式化图片库图片名称（按目录存储）
+ *
+ */
+function reformat_photo_name($type, $goods_id, $source_img, $position='')
+{
+    $rand_name = gmtime() . sprintf("%03d", mt_rand(1,999));
+    $img_ext = substr($source_img, strrpos($source_img, '.'));
+    $dir = '/data/photo';
+    $sub_dir = date('Ym', gmtime());
+    if (!make_dir(ROOT_PATH.$dir.'/'.$sub_dir))
+    {
+        return false;
+    }
+    if (!make_dir(ROOT_PATH.$dir.'/'.$sub_dir.'/source_img'))
+    {
+        return false;
+    }
+    if (!make_dir(ROOT_PATH.$dir.'/'.$sub_dir.'/goods_img'))
+    {
+        return false;
+    }
+    if (!make_dir(ROOT_PATH.$dir.'/'.$sub_dir.'/thumb_img'))
+    {
+        return false;
+    }
+    switch($type)
+    {
+        case 'goods':
+            $img_name = $goods_id . '_G_' . $rand_name;
+            break;
+        case 'goods_thumb':
+            $img_name = $goods_id . '_thumb_G_' . $rand_name;
+            break;
+        case 'gallery':
+            $img_name = $goods_id . '_P_' . $rand_name;
+            break;
+        case 'gallery_thumb':
+            $img_name = $goods_id . '_thumb_P_' . $rand_name;
+            break;
+    }
+    if ($position == 'source')
+    {
+        if (move_image_file(ROOT_PATH.$source_img, ROOT_PATH.$dir.'/'.$sub_dir.'/source_img/'.$img_name.$img_ext))
+        {
+            return $dir.'/'.$sub_dir.'/source_img/'.$img_name.$img_ext;
+        }
+    }
+    elseif ($position == 'thumb')
+    {
+        if (move_image_file(ROOT_PATH.$source_img, ROOT_PATH.$dir.'/'.$sub_dir.'/thumb_img/'.$img_name.$img_ext))
+        {
+            return $dir.'/'.$sub_dir.'/thumb_img/'.$img_name.$img_ext;
+        }
+    }
+    else
+    {
+        if (move_image_file(ROOT_PATH.$source_img, ROOT_PATH.$dir.'/'.$sub_dir.'/goods_img/'.$img_name.$img_ext))
+        {
+            return $dir.'/'.$sub_dir.'/goods_img/'.$img_name.$img_ext;
+        }
+    }
+    return false;
+}
+
 function move_image_file($source, $dest)
 {
     if (@copy($source, $dest))

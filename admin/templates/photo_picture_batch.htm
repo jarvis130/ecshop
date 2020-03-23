@@ -269,7 +269,7 @@ function start_response(result)
         cell.innerHTML = result.row.new_time ;
 
         //提交任务
-        Ajax.call('photo_picture_batch.php?is_ajax=1', 'thumb=' + result.thumb + '&watermark=' + result.watermark + '&change=' + result.change + '&module_no=' + result.module_no + '&page=' + result.page + '&page_size=' + result.page_size + '&total=' + result.total + '&silent=' + result.silent + '&do_icon=' + result.do_icon + '&do_album=' + result.do_album + '&goods_id=' + result.goods_id + '&brand_id=' + result.brand_id + '&cat_id=' + result.cat_id  , start_response, 'GET', 'JSON');
+        Ajax.call('photo_picture_batch.php?is_ajax=1', 'thumb=' + result.thumb + '&original=' + result.original + '&watermark=' + result.watermark + '&change=' + result.change + '&module_no=' + result.module_no + '&page=' + result.page + '&page_size=' + result.page_size + '&total=' + result.total + '&silent=' + result.silent + '&do_icon=' + result.do_icon + '&do_album=' + result.do_album + '&goods_id=' + result.goods_id + '&brand_id=' + result.brand_id + '&cat_id=' + result.cat_id  , start_response, 'GET', 'JSON');
       }
 
       if (result.silent && result.content.length > 0)

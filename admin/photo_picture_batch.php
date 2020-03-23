@@ -527,10 +527,10 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
                         @unlink(ROOT_PATH . $row['thumb_url']);
                     }
                 }
-                else
-                {
-                    replace_image($thumb_url, $row['thumb_url'], $row['goods_id'],$silent);
-                }
+//                else
+//                {
+//                    replace_image($thumb_url, $row['thumb_url'], $row['goods_id'],$silent);
+//                }
             }
 
             /* 下载原始图 */
@@ -564,10 +564,10 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
                         @unlink(ROOT_PATH . $row['download_img_original']);
                     }
                 }
-                else
-                {
-                    replace_image($original_url, $row['download_img_original'], $row['goods_id'],$silent);
-                }
+//                else
+//                {
+//                    replace_image($original_url, $row['download_img_original'], $row['goods_id'],$silent);
+//                }
             }
         }
     }

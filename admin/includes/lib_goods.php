@@ -1371,21 +1371,17 @@ function reformat_image_name($type, $goods_id, $source_img, $position='')
  * 格式化图片库图片名称（按目录存储）
  *
  */
-function reformat_photo_name($type, $goods_id, $source_img, $position='')
+function reformat_photo_name($type, $goods_id, $source_img, $position='source')
 {
     $rand_name = gmtime() . sprintf("%03d", mt_rand(1,999));
     $img_ext = substr($source_img, strrpos($source_img, '.'));
     $dir = '/data/photo';
-    $sub_dir = date('Ym', gmtime());
+    $sub_dir = date('Ym', gmtime()) . '/' . $goods_id;
     if (!make_dir(ROOT_PATH.$dir.'/'.$sub_dir))
     {
         return false;
     }
     if (!make_dir(ROOT_PATH.$dir.'/'.$sub_dir.'/source_img'))
-    {
-        return false;
-    }
-    if (!make_dir(ROOT_PATH.$dir.'/'.$sub_dir.'/goods_img'))
     {
         return false;
     }
@@ -1420,13 +1416,6 @@ function reformat_photo_name($type, $goods_id, $source_img, $position='')
         if (move_image_file(ROOT_PATH.$source_img, ROOT_PATH.$dir.'/'.$sub_dir.'/thumb_img/'.$img_name.$img_ext))
         {
             return $dir.'/'.$sub_dir.'/thumb_img/'.$img_name.$img_ext;
-        }
-    }
-    else
-    {
-        if (move_image_file(ROOT_PATH.$source_img, ROOT_PATH.$dir.'/'.$sub_dir.'/goods_img/'.$img_name.$img_ext))
-        {
-            return $dir.'/'.$sub_dir.'/goods_img/'.$img_name.$img_ext;
         }
     }
     return false;

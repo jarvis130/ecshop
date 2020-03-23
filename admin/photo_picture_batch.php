@@ -495,7 +495,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
 //                    $dir = dirname(ROOT_PATH . $row['thumb_url']) . '/';
 //                }
 
-                $dir = ROOT_PATH . '/data/photo/temp/' . date('Ym') . '/thumb/' . $row['goods_id'] . '/';
+                $dir = ROOT_PATH . '/data/photo/temp/' . date('Ym') . '/' . $row['goods_id'] . '/thumb/';
 
 //                $thumb_url = $GLOBALS['image']->make_thumb(ROOT_PATH . $row['img_original'], $GLOBALS['_CFG']['thumb_width'], $GLOBALS['_CFG']['thumb_height'], $dir);
 
@@ -536,7 +536,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
             /* 下载原始图 */
             if ($original)
             {
-                $dir = ROOT_PATH . '/data/photo/temp/' . date('Ym') . '/source/' . $row['goods_id'] . '/';
+                $dir = ROOT_PATH . '/data/photo/temp/' . date('Ym') . '/' . $row['goods_id'] . '/source/';
 
                 $original_url = $GLOBALS['image']->download_image($row['img_original'], $dir);
 
@@ -555,19 +555,21 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
                 }
                 /* 重新格式化图片名称 */
                 $original_url = reformat_photo_name('gallery', $row['goods_id'], $original_url, 'source');
-                if ($change || empty($row['download_img_original']))
-                {
-                    if ($original_url != $row['download_img_original'])
+                if($original_url){
+                    if ($change || empty($row['download_img_original']))
                     {
-                        $sql = "UPDATE " .$GLOBALS['ecs']->table('goods_gallery'). " SET download_img_original='$original_url' WHERE img_id='$row[img_id]'";
-                        $GLOBALS['db']->query($sql);
-                        @unlink(ROOT_PATH . $row['download_img_original']);
+                        if ($original_url != $row['download_img_original'])
+                        {
+                            $sql = "UPDATE " .$GLOBALS['ecs']->table('goods_gallery'). " SET download_img_original='$original_url' WHERE img_id='$row[img_id]'";
+                            $GLOBALS['db']->query($sql);
+                            @unlink(ROOT_PATH . $row['download_img_original']);
+                        }
                     }
+//                    else
+//                    {
+//                        replace_image($original_url, $row['download_img_original'], $row['goods_id'],$silent);
+//                    }
                 }
-//                else
-//                {
-//                    replace_image($original_url, $row['download_img_original'], $row['goods_id'],$silent);
-//                }
             }
         }
     }

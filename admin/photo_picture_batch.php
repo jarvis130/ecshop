@@ -555,18 +555,18 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
                 }
                 /* 重新格式化图片名称 */
                 $original_url = reformat_photo_name('gallery', $row['goods_id'], $original_url, 'source');
-                if ($change || empty($row['thumb_url']))
+                if ($change || empty($row['download_img_original']))
                 {
-                    if ($original_url != $row['thumb_url'])
+                    if ($original_url != $row['download_img_original'])
                     {
                         $sql = "UPDATE " .$GLOBALS['ecs']->table('goods_gallery'). " SET download_img_original='$original_url' WHERE img_id='$row[img_id]'";
                         $GLOBALS['db']->query($sql);
-                        @unlink(ROOT_PATH . $row['thumb_url']);
+                        @unlink(ROOT_PATH . $row['download_img_original']);
                     }
                 }
                 else
                 {
-                    replace_image($original_url, $row['thumb_url'], $row['goods_id'],$silent);
+                    replace_image($original_url, $row['download_img_original'], $row['goods_id'],$silent);
                 }
             }
         }

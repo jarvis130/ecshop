@@ -484,7 +484,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $wa
 //                    $dir = dirname(ROOT_PATH . $row['thumb_url']) . '/';
 //                }
 
-                $dir = ROOT_PATH . '/data/photo/' . $row['goods_id'] . '/';
+                $dir = ROOT_PATH . '/data/photo/' . date('Ym') . '/' . $row['goods_id'] . '/';
 
 //                $thumb_url = $GLOBALS['image']->make_thumb(ROOT_PATH . $row['img_original'], $GLOBALS['_CFG']['thumb_width'], $GLOBALS['_CFG']['thumb_height'], $dir);
 

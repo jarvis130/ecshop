@@ -495,7 +495,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
 //                    $dir = dirname(ROOT_PATH . $row['thumb_url']) . '/';
 //                }
 
-                $dir = ROOT_PATH . '/data/photo/temp/' . date('Ym') . '/' . $row['goods_id'] . '/thumb/';
+                $dir = ROOT_PATH . '/data/photo/temp/' . date('Ymd') . '/' . $row['goods_id'] . '/thumb/';
 
 //                $thumb_url = $GLOBALS['image']->make_thumb(ROOT_PATH . $row['img_original'], $GLOBALS['_CFG']['thumb_width'], $GLOBALS['_CFG']['thumb_height'], $dir);
 
@@ -536,7 +536,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
             /* 下载原始图 */
             if ($original)
             {
-                $dir = ROOT_PATH . '/data/photo/temp/' . date('Ym') . '/' . $row['goods_id'] . '/source/';
+                $dir = ROOT_PATH . '/data/photo/temp/' . date('Ymd') . '/' . $row['goods_id'] . '/source/';
 
                 $original_url = $GLOBALS['image']->download_image($row['img_original'], $dir);
 

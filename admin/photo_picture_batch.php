@@ -424,13 +424,17 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
     else
     {
         /* 遍历商品相册 */
-        $sql = "SELECT album.goods_id, album.img_id, album.img_url, album.thumb_url, album.img_original FROM ".$GLOBALS['ecs']->table('goods_gallery'). " AS album " . $GLOBALS['album_where'];
+//        $sql = "SELECT album.goods_id, album.img_id, album.img_url, album.thumb_url, album.img_original FROM ".$GLOBALS['ecs']->table('goods_gallery'). " AS album " . $GLOBALS['album_where'];
+        $sql = "SELECT album.goods_id, album.img_id, album.img_url, album.thumb_url, album.img_original, g.add_time FROM ".$GLOBALS['ecs']->table('goods_gallery'). " AS album, "
+            . $GLOBALS['ecs']->table('goods'). " AS g, ON g.goods_id = album.goods_id " . $GLOBALS['album_where'];
         $res = $GLOBALS['db']->SelectLimit($sql, $page_size, ($page - 1) * $page_size);
 
         while ($row = $GLOBALS['db']->fetchRow($res))
         {
             $thumb_url = '';
             $image     = '';
+
+            $date = date('Ymd', $row['add_time']);
 
             /* 水印 */
             if ($watermark && file_exists(ROOT_PATH . $row['img_original']))
@@ -495,7 +499,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
 //                    $dir = dirname(ROOT_PATH . $row['thumb_url']) . '/';
 //                }
 
-                $dir = ROOT_PATH . '/data/photo/temp/' . date('Ymd') . '/' . $row['goods_id'] . '/thumb/';
+                $dir = ROOT_PATH . '/data/photo/temp/' . $date . '/' . $row['goods_id'] . '/thumb/';
 
 //                $thumb_url = $GLOBALS['image']->make_thumb(ROOT_PATH . $row['img_original'], $GLOBALS['_CFG']['thumb_width'], $GLOBALS['_CFG']['thumb_height'], $dir);
 
@@ -516,7 +520,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
                 }
                 /* 重新格式化图片名称 */
 //                $thumb_url = reformat_image_name('gallery_thumb', $row['goods_id'], $thumb_url, 'thumb');
-                $thumb_url = reformat_photo_name('gallery_thumb', $row['goods_id'], $thumb_url, 'thumb');
+                $thumb_url = reformat_photo_name('gallery_thumb', $row['goods_id'], $thumb_url, 'thumb', $date);
                 if ($change || empty($row['thumb_url']))
                 {
                     if ($thumb_url != $row['thumb_url'])
@@ -536,7 +540,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
             /* 下载原始图 */
             if ($original)
             {
-                $dir = ROOT_PATH . '/data/photo/temp/' . date('Ymd') . '/' . $row['goods_id'] . '/source/';
+                $dir = ROOT_PATH . '/data/photo/temp/' . $date . '/' . $row['goods_id'] . '/source/';
 
                 $original_url = $GLOBALS['image']->download_image($row['img_original'], $dir);
 
@@ -554,7 +558,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
                     }
                 }
                 /* 重新格式化图片名称 */
-                $original_url = reformat_photo_name('gallery', $row['goods_id'], $original_url, 'source');
+                $original_url = reformat_photo_name('gallery', $row['goods_id'], $original_url, 'source', $date);
                 if ($change || empty($row['download_img_original']))
                 {
                     if ($original_url != $row['download_img_original'])

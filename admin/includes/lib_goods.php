@@ -1371,12 +1371,16 @@ function reformat_image_name($type, $goods_id, $source_img, $position='')
  * 格式化图片库图片名称（按目录存储）
  *
  */
-function reformat_photo_name($type, $goods_id, $source_img, $position='source')
+function reformat_photo_name($type, $goods_id, $source_img, $position='source', $date = null)
 {
     $rand_name = gmtime() . sprintf("%03d", mt_rand(1,999));
     $img_ext = substr($source_img, strrpos($source_img, '.'));
     $dir = 'data/photo';
-    $sub_dir = date('Ymd', gmtime()) . '/' . $goods_id;
+
+    if(empty($date)){
+        $date = date('Ymd', gmtime());
+    }
+    $sub_dir = $date . '/' . $goods_id;
     if (!make_dir(ROOT_PATH.$dir.'/'.$sub_dir))
     {
         return false;

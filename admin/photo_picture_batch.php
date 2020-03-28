@@ -503,7 +503,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
 
 //                $thumb_url = $GLOBALS['image']->make_thumb(ROOT_PATH . $row['img_original'], $GLOBALS['_CFG']['thumb_width'], $GLOBALS['_CFG']['thumb_height'], $dir);
 
-                $thumb_url = $GLOBALS['image']->make_thumb($row['img_original'], $GLOBALS['_CFG']['thumb_width'], $GLOBALS['_CFG']['thumb_height'], $dir);
+                $thumb_url = $GLOBALS['image']->make_thumb($row['img_original'], 0, 0, $dir, 0.8);
 
                 if (!$thumb_url)
                 {

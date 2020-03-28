@@ -140,9 +140,10 @@ class cls_image
      * @param   int         $thumb_width  缩略图宽度
      * @param   int         $thumb_height 缩略图高度
      * @param   strint      $path         指定生成图片的目录名
+     * @param   float       $ratio  缩略图压缩比例
      * @return  mix         如果成功返回缩略图的路径，失败则返回false
      */
-    function make_thumb($img, $thumb_width = 0, $thumb_height = 0, $path = '', $bgcolor='')
+    function make_thumb($img, $thumb_width = 0, $thumb_height = 0, $path = '', $bgcolor='', $ratio = 0.0)
     {
          $gd = $this->gd_version(); //获取 GD 版本。0 表示没有 GD 库，1 表示 GD 1.x，2 表示 GD 2.x
          if ($gd == 0)
@@ -152,7 +153,7 @@ class cls_image
          }
 
         /* 检查缩略图宽度和高度是否合法 */
-        if ($thumb_width == 0 && $thumb_height == 0)
+        if ($thumb_width == 0 && $thumb_height == 0 && $ratio == 0)
         {
             return str_replace(ROOT_PATH, '', str_replace('\\', '/', realpath($img)));
         }
@@ -165,6 +166,13 @@ class cls_image
             $this->error_no  = ERR_IMAGE_NOT_EXISTS;
 
             return false;
+        }
+
+        if($thumb_width == 0 && $thumb_height == 0 && $ratio > 0)
+        {
+            /* 初始化缩略图宽度和高度 */
+            $thumb_width = $org_info[0] * $ratio;
+            $thumb_height = $org_info[1] * $ratio;
         }
 
         if (!$this->check_img_function($org_info[2]))

@@ -503,7 +503,7 @@ function process_image($page = 1, $page_size = 100, $type = 0, $thumb= true, $or
 
 //                $thumb_url = $GLOBALS['image']->make_thumb(ROOT_PATH . $row['img_original'], $GLOBALS['_CFG']['thumb_width'], $GLOBALS['_CFG']['thumb_height'], $dir);
 
-                $thumb_url = $GLOBALS['image']->make_thumb($row['img_original'], 0, 0, $dir, 0.8);
+                $thumb_url = make_thumb($row['img_original'], $dir);
 
                 if (!$thumb_url)
                 {
@@ -682,6 +682,62 @@ function replace_image($new_image, $old_image, $goods_id, $silent)
         }
         return;
     }
+}
+
+/**
+ * 压缩
+ * @param $img string 图片
+ * @param $dir string 缩略图存放路径
+ * @return string
+ */
+function make_thumb($img, $dir)
+{
+    // 判断是否本地图片
+    if (!preg_match('/^http/', $img)  && !preg_match('/^https/', $img)) {
+        $is_local_img = true;
+    } else {
+        $is_local_img = false;
+    }
+
+    // 网络图片需要先下载
+    if(!$is_local_img){
+        $thumb_filename = $GLOBALS['image']->download_image($img, $dir);
+        $img = ROOT_PATH . $thumb_filename;
+    }
+
+    // 获取图片大小
+    $size = filesize($img);
+
+    // 计算压缩比例
+    if($size <= 100 * 1024) {  // 如果小于等于100K则不压缩
+        $percent = 1;
+    }elseif($size > 100 * 1024 && $size <= 500 * 1024) {  // 如果大于100K、小于等于500K则压缩至80%
+        $percent = 0.8;
+    }elseif($size > 500 * 1024 && $size <= 1000 * 1024) {  // 如果大于500K、小于等于1M则压缩至60%
+        $percent = 0.6;
+    }elseif($size > 1000 * 1024 && $size <= 2000 * 1024) {  // 如果大于1M、小于等于2M则压缩至40%
+        $percent = 0.4;
+    }elseif($size > 2000 * 1024 && $size <= 3000 * 1024) {  // 如果大于1M、小于等于3M则压缩至20%
+        $percent = 0.2;
+    }else{  // 如果大于3M则压缩至10%
+        $percent = 0.1;
+    }
+
+    if($percent == 1){
+        $thumb = $img;
+    }else{
+        $thumb_filename = $GLOBALS['image']->make_thumb($img, 0, 0, $dir, $percent);
+        $img = ROOT_PATH . $thumb_filename;
+        $thumb_filename = make_thumb($img, $dir);
+        $thumb = ROOT_PATH . $thumb_filename;
+
+        // 删除原图
+        if($thumb != $img){
+            @unlink($img);
+        }
+    }
+
+    return str_replace(ROOT_PATH, '', $thumb);
 }
 
 ?>

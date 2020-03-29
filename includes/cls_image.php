@@ -876,7 +876,18 @@ class cls_image
         //确认文件是否生成
         if (file_exists($dir . $filename))
         {
-            return str_replace(ROOT_PATH, '', $dir) . $filename;
+            // 获取图片大小
+            $size = filesize($dir . $filename);
+            // 确认文件大小是否正常
+            if($size > 0){
+                return str_replace(ROOT_PATH, '', $dir) . $filename;
+            }else{  // 如果文件大小小于等于0，则删除文件，并返回false
+                @unlink($dir . $filename);
+
+                $this->error_msg = $GLOBALS['_LANG']['writting_failure'];
+                $this->error_no   = ERR_DIRECTORY_READONLY;
+                return false;
+            }
         }
         else
         {

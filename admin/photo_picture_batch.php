@@ -702,6 +702,9 @@ function make_thumb($img, $dir)
     // 网络图片需要先下载
     if(!$is_local_img){
         $thumb_filename = $GLOBALS['image']->download_image($img, $dir);
+        if(!$thumb_filename){
+            return false;
+        }
         $img = ROOT_PATH . $thumb_filename;
     }
 

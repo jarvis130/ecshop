@@ -727,20 +727,21 @@ function make_thumb($img, $dir)
     }
 
     if($percent == 1){
-        $thumb = $img;
+        $thumb_filename = str_replace(ROOT_PATH, '', $img);
     }else{
         $thumb_filename = $GLOBALS['image']->make_thumb($img, 0, 0, $dir, $percent);
-        $img = ROOT_PATH . $thumb_filename;
-        $thumb_filename = make_thumb($img, $dir);
-        $thumb = ROOT_PATH . $thumb_filename;
 
         // 删除原图
-        if($thumb != $img){
-            @unlink($img);
+        @unlink($img);
+        if(!$thumb_filename){
+            return false;
         }
+
+        $img = ROOT_PATH . $thumb_filename;
+        $thumb_filename = make_thumb($img, $dir);
     }
 
-    return str_replace(ROOT_PATH, '', $thumb);
+    return $thumb_filename;
 }
 
 ?>

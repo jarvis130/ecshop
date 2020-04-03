@@ -76,7 +76,7 @@ if ($_REQUEST['act'] == 'list' || $_REQUEST['act'] == 'trash')
     $suppliers_list_count = count($suppliers_list);
     $smarty->assign('suppliers_list', ($suppliers_list_count == 0 ? 0 : $suppliers_list)); // 取供货商列表
 
-    $goods_list = goods_list($_REQUEST['act'] == 'list' ? 0 : 1, 3);
+    $goods_list = goods_list($_REQUEST['act'] == 'list' ? 0 : 1, 4);
     $smarty->assign('goods_list',   $goods_list['goods']);
     $smarty->assign('filter',       $goods_list['filter']);
     $smarty->assign('record_count', $goods_list['record_count']);

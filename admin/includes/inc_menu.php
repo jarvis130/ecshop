@@ -33,6 +33,11 @@ $modules['01_video_manage']['02_video_add']        = 'video.php?act=add';       
 $modules['01_video_manage']['03_video_trash']      = 'video.php?act=trash';        // 视频回收站
 $modules['01_video_manage']['04_actors_list']       = 'actors.php?act=list';        // 演员管理
 
+// 方案
+$modules['01_scheme_manage']['01_scheme_list']       = 'scheme.php?act=list';
+$modules['01_scheme_manage']['02_scheme_add']        = 'scheme.php?act=add';          // 添加方案
+$modules['01_scheme_manage']['03_scheme_trash']      = 'scheme.php?act=trash';        // 方案回收站
+
 $modules['02_cat_and_goods']['01_goods_list']       = 'goods.php?act=list';         // 商品列表
 $modules['02_cat_and_goods']['02_goods_add']        = 'goods.php?act=add';          // 添加商品
 $modules['02_cat_and_goods']['03_category_list']    = 'category.php?act=list';

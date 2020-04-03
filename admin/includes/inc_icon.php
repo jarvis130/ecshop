@@ -27,6 +27,9 @@ if (!defined('IN_ECS'))
     //视频管理
     $icon['01_video_manage']       = 'video';
 
+    //方案管理
+    $icon['01_scheme_manage']      = 'content';
+
     //商品管理
     $icon['02_cat_and_goods']      = 'goods';
 

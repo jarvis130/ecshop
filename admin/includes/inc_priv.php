@@ -183,4 +183,9 @@ if (!defined('IN_ECS'))
     $purview['02_photo_add']         = 'photo_manage';
     $purview['03_photo_trash']       = array('photo_manage', 'remove_back');
     $purview['04_photo_batch']       = 'picture_batch';
+
+// 方案管理
+    $purview['01_scheme_list']        = array('scheme_manage', 'remove_back');
+    $purview['02_scheme_add']         = 'scheme_manage';
+    $purview['03_scheme_trash']       = array('scheme_manage', 'remove_back');
 ?>

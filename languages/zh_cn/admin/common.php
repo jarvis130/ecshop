@@ -385,4 +385,10 @@ $_LANG['01_photo_list'] = '图片库列表';
 $_LANG['02_photo_add'] = '添加新图片库';
 $_LANG['03_photo_trash'] = '图片库回收站';
 $_LANG['04_photo_batch'] = '批量处理图片';
+
+/*方案*/
+$_LANG['01_scheme_manage'] = '方案管理';
+$_LANG['01_scheme_list'] = '方案列表';
+$_LANG['02_scheme_add'] = '添加新方案';
+$_LANG['03_scheme_trash'] = '方案回收站';
 ?>

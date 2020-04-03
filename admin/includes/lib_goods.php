@@ -839,7 +839,7 @@ function get_goods_actors($goods_id)
  *
  * @access  public
  * @params  integer $isdelete
- * @params  integer $real_goods  0:虚拟 1：实物 2：视频 3：图片库
+ * @params  integer $real_goods  0:虚拟 1：实物 2：视频 3：图库
  * @params  integer $conditions
  * @return  array
  */
@@ -1368,7 +1368,7 @@ function reformat_image_name($type, $goods_id, $source_img, $position='')
 }
 
 /**
- * 格式化图片库图片名称（按目录存储）
+ * 格式化图库图片名称（按目录存储）
  *
  */
 function reformat_photo_name($type, $goods_id, $source_img, $position='source', $date = null)

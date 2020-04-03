@@ -379,11 +379,11 @@ $_LANG['03_video_trash'] = '视频回收站';
 $_LANG['04_actors_list'] = '演员管理';
 $_LANG['05_actors_add'] = '添加演员';
 
-/*图片库*/
-$_LANG['01_photo_manage'] = '图片库管理';
-$_LANG['01_photo_list'] = '图片库列表';
-$_LANG['02_photo_add'] = '添加新图片库';
-$_LANG['03_photo_trash'] = '图片库回收站';
+/*图库*/
+$_LANG['01_photo_manage'] = '图库管理';
+$_LANG['01_photo_list'] = '图库列表';
+$_LANG['02_photo_add'] = '添加新图库';
+$_LANG['03_photo_trash'] = '图库回收站';
 $_LANG['04_photo_batch'] = '批量处理图片';
 
 /*方案*/

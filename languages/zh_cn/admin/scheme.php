@@ -13,33 +13,33 @@
  * $Id: goods.php 17217 2011-01-19 06:29:08Z liubo $
 */
 
-$_LANG['edit_goods'] = '编辑文案信息';
-$_LANG['copy_goods'] = '复制文案信息';
-$_LANG['continue_add_goods'] = '继续添加新文案';
-$_LANG['back_goods_list'] = '返回文案列表';
-$_LANG['add_goods_ok'] = '添加文案成功。';
-$_LANG['edit_goods_ok'] = '编辑文案成功。';
-$_LANG['trash_goods_ok'] = '把文案放入回收站成功。';
-$_LANG['restore_goods_ok'] = '还原文案成功。';
-$_LANG['drop_goods_ok'] = '删除文案成功。';
+$_LANG['edit_goods'] = '编辑方案信息';
+$_LANG['copy_goods'] = '复制方案信息';
+$_LANG['continue_add_goods'] = '继续添加新方案';
+$_LANG['back_goods_list'] = '返回方案列表';
+$_LANG['add_goods_ok'] = '添加方案成功。';
+$_LANG['edit_goods_ok'] = '编辑方案成功。';
+$_LANG['trash_goods_ok'] = '把方案放入回收站成功。';
+$_LANG['restore_goods_ok'] = '还原方案成功。';
+$_LANG['drop_goods_ok'] = '删除方案成功。';
 $_LANG['batch_handle_ok'] = '批量操作成功。';
-$_LANG['drop_goods_confirm'] = '您确实要删除该文案吗？';
-$_LANG['batch_drop_confirm'] = '彻底删除文案将删除与该文案有关的所有信息。\n您确实要删除选中的文案吗？';
-$_LANG['trash_goods_confirm'] = '您确实要把该文案放入回收站吗？';
+$_LANG['drop_goods_confirm'] = '您确实要删除该方案吗？';
+$_LANG['batch_drop_confirm'] = '彻底删除方案将删除与该方案有关的所有信息。\n您确实要删除选中的方案吗？';
+$_LANG['trash_goods_confirm'] = '您确实要把该方案放入回收站吗？';
 $_LANG['trash_product_confirm'] = '您确实要把该货品删除吗？';
-$_LANG['batch_trash_confirm'] = '您确实要把选中的文案放入回收站吗？';
-$_LANG['restore_goods_confirm'] = '您确实要把该文案还原吗？';
-$_LANG['batch_restore_confirm'] = '您确实要把选中的文案还原吗？';
-$_LANG['batch_on_sale_confirm'] = '您确实要把选中的文案上架吗？';
-$_LANG['batch_not_on_sale_confirm'] = '您确实要把选中的文案下架吗？';
-$_LANG['batch_best_confirm'] = '您确实要把选中的文案设为精品吗？';
-$_LANG['batch_not_best_confirm'] = '您确实要把选中的文案取消精品吗？';
-$_LANG['batch_new_confirm'] = '您确实要把选中的文案设为新品吗？';
-$_LANG['batch_not_new_confirm'] = '您确实要把选中的文案取消新品吗？';
-$_LANG['batch_hot_confirm'] = '您确实要把选中的文案设为热销吗？';
-$_LANG['batch_not_hot_confirm'] = '您确实要把选中的文案取消热销吗？';
-$_LANG['cannot_found_goods'] = '找不到指定的文案。';
-$_LANG['sel_goods_type'] = '请选择文案类型';
+$_LANG['batch_trash_confirm'] = '您确实要把选中的方案放入回收站吗？';
+$_LANG['restore_goods_confirm'] = '您确实要把该方案还原吗？';
+$_LANG['batch_restore_confirm'] = '您确实要把选中的方案还原吗？';
+$_LANG['batch_on_sale_confirm'] = '您确实要把选中的方案上架吗？';
+$_LANG['batch_not_on_sale_confirm'] = '您确实要把选中的方案下架吗？';
+$_LANG['batch_best_confirm'] = '您确实要把选中的方案设为精品吗？';
+$_LANG['batch_not_best_confirm'] = '您确实要把选中的方案取消精品吗？';
+$_LANG['batch_new_confirm'] = '您确实要把选中的方案设为新品吗？';
+$_LANG['batch_not_new_confirm'] = '您确实要把选中的方案取消新品吗？';
+$_LANG['batch_hot_confirm'] = '您确实要把选中的方案设为热销吗？';
+$_LANG['batch_not_hot_confirm'] = '您确实要把选中的方案取消热销吗？';
+$_LANG['cannot_found_goods'] = '找不到指定的方案。';
+$_LANG['sel_goods_type'] = '请选择方案类型';
 $_LANG['sel_goods_suppliers'] = '请选择供货商';
 /*------------------------------------------------------ */
 //-- 图片处理相关提示信息
@@ -52,7 +52,7 @@ $_LANG['safe_mode_warning'] = '您的服务器运行在安全模式下，而且 
 $_LANG['not_writable_warning'] = '目录 %s 不可写，您需要把该目录设为可写才能上传图片。';
 
 /*------------------------------------------------------ */
-//-- 文案列表
+//-- 方案列表
 /*------------------------------------------------------ */
 $_LANG['goods_cat'] = '所有分类';
 $_LANG['goods_brand'] = '所有品牌';
@@ -66,7 +66,7 @@ $_LANG['all_type'] = '全部推荐';
 $_LANG['sort_order'] = '推荐排序';
 $_LANG['virtual_sales'] = '虚拟销量';
 
-$_LANG['goods_name'] = '文案名称';
+$_LANG['goods_name'] = '方案名称';
 $_LANG['goods_sn'] = '货号';
 $_LANG['shop_price'] = '价格';
 $_LANG['is_on_sale'] = '上架';
@@ -87,45 +87,45 @@ $_LANG['not_hot'] = '取消热销';
 $_LANG['move_to'] = '转移到分类';
 
 // ajax
-$_LANG['goods_name_null'] = '请输入文案名称';
+$_LANG['goods_name_null'] = '请输入方案名称';
 $_LANG['goods_sn_null'] = '请输入货号';
 $_LANG['shop_price_not_number'] = '价格不是数字';
 $_LANG['shop_price_invalid'] = '您输入了一个非法的市场价格。';
 $_LANG['goods_sn_exists'] = '您输入的货号已存在，请换一个';
 
 /*------------------------------------------------------ */
-//-- 添加/编辑文案信息
+//-- 添加/编辑方案信息
 /*------------------------------------------------------ */
 $_LANG['tab_general'] = '通用信息';
 $_LANG['tab_detail'] = '详细描述';
 $_LANG['tab_mix'] = '其他信息';
-$_LANG['tab_properties'] = '文案属性';
-$_LANG['tab_gallery'] = '文案相册';
-$_LANG['tab_linkgoods'] = '关联文案';
+$_LANG['tab_properties'] = '方案属性';
+$_LANG['tab_gallery'] = '方案相册';
+$_LANG['tab_linkgoods'] = '关联方案';
 $_LANG['tab_groupgoods'] = '配件';
 $_LANG['tab_article'] = '关联文章';
 
-$_LANG['lab_goods_name'] = '文案名称：';
-$_LANG['lab_goods_sn'] = '文案货号：';
-$_LANG['lab_goods_cat'] = '文案分类：';
+$_LANG['lab_goods_name'] = '方案名称：';
+$_LANG['lab_goods_sn'] = '方案货号：';
+$_LANG['lab_goods_cat'] = '方案分类：';
 $_LANG['lab_other_cat'] = '扩展分类：';
-$_LANG['lab_goods_brand'] = '文案品牌：';
+$_LANG['lab_goods_brand'] = '方案品牌：';
 $_LANG['lab_shop_price'] = '本店售价：';
 $_LANG['lab_market_price'] = '市场售价：';
 $_LANG['lab_user_price'] = '会员价格：';
 $_LANG['lab_promote_price'] = '促销价：';
 $_LANG['lab_promote_date'] = '促销日期：';
 $_LANG['lab_virtual_sales'] = '虚拟销量：';
-$_LANG['lab_picture'] = '上传文案图片：';
-$_LANG['lab_thumb'] = '上传文案缩略图：';
-$_LANG['auto_thumb'] = '自动生成文案缩略图';
-$_LANG['lab_keywords'] = '文案关键词：';
-$_LANG['lab_goods_brief'] = '文案简单描述：';
+$_LANG['lab_picture'] = '上传方案图片：';
+$_LANG['lab_thumb'] = '上传方案缩略图：';
+$_LANG['auto_thumb'] = '自动生成方案缩略图';
+$_LANG['lab_keywords'] = '方案关键词：';
+$_LANG['lab_goods_brief'] = '方案简单描述：';
 $_LANG['lab_seller_note'] = '商家备注：';
-$_LANG['lab_goods_type'] = '文案类型：';
+$_LANG['lab_goods_type'] = '方案类型：';
 $_LANG['Preview'] = '预览';
-$_LANG['lab_picture_url'] = '文案图片外部URL';
-$_LANG['lab_thumb_url'] = '文案缩略图外部URL';
+$_LANG['lab_picture_url'] = '方案图片外部URL';
+$_LANG['lab_thumb_url'] = '方案缩略图外部URL';
 $_LANG['tip_imgSize'] = '单张图片不能大于2m';
 $_LANG['tip_param_error'] = '参数错误!';
 $_LANG['tip_upload_component'] = '上传组件不支持您的浏览器!';
@@ -139,41 +139,41 @@ $_LANG['tip_allSize_exceedslimit'] = '所有文件总大小超过限制!';
 $_LANG['tip_fileType_error'] = '文件类型不正确或者是空文件!';
 $_LANG['tip_unknow_error'] = '未知错误!';
 $_LANG['tip_upload_completed'] = '上传完成';
-$_LANG['lab_goods_weight'] = '文案重量：';
+$_LANG['lab_goods_weight'] = '方案重量：';
 $_LANG['unit_g'] = '克';
 $_LANG['unit_kg'] = '千克';
-$_LANG['lab_goods_number'] = '文案库存数量：';
+$_LANG['lab_goods_number'] = '方案库存数量：';
 $_LANG['lab_warn_number'] = '库存警告数量：';
 $_LANG['lab_integral'] = '积分购买金额：';
 $_LANG['lab_give_integral'] = '赠送消费积分数：';
 $_LANG['lab_rank_integral'] = '赠送等级积分数：';
 $_LANG['lab_intro'] = '加入推荐：';
 $_LANG['lab_is_on_sale'] = '上架：';
-$_LANG['lab_is_alone_sale'] = '能作为普通文案销售：';
-$_LANG['lab_is_free_shipping'] = '是否为免运费文案';
+$_LANG['lab_is_alone_sale'] = '能作为普通方案销售：';
+$_LANG['lab_is_free_shipping'] = '是否为免运费方案';
 $_LANG['compute_by_mp'] = '按市场价计算';
 $_LANG['label_account_bind'] = '账户绑定';
-$_LANG['notice_goods_sn'] = '如果您不输入文案货号，系统将自动生成一个唯一的货号。';
-$_LANG['notice_integral'] = '(此处需填写金额)购买该文案时最多可以使用积分的金额';
-$_LANG['notice_give_integral'] = '购买该文案时赠送消费积分数,-1表示按文案价格赠送';
-$_LANG['notice_rank_integral'] = '购买该文案时赠送等级积分数,-1表示按文案价格赠送';
+$_LANG['notice_goods_sn'] = '如果您不输入方案货号，系统将自动生成一个唯一的货号。';
+$_LANG['notice_integral'] = '(此处需填写金额)购买该方案时最多可以使用积分的金额';
+$_LANG['notice_give_integral'] = '购买该方案时赠送消费积分数,-1表示按方案价格赠送';
+$_LANG['notice_rank_integral'] = '购买该方案时赠送等级积分数,-1表示按方案价格赠送';
 $_LANG['notice_seller_note'] = '仅供商家自己看的信息';
-$_LANG['notice_storage'] = '库存在文案为虚货或文案存在货品时为不可编辑状态，库存数值取决于其虚货数量或货品数量';
+$_LANG['notice_storage'] = '库存在方案为虚货或方案存在货品时为不可编辑状态，库存数值取决于其虚货数量或货品数量';
 $_LANG['notice_keywords'] = '用空格分隔';
 $_LANG['notice_user_price'] = '会员价格为-1时表示会员价格按会员等级折扣率计算。你也可以为每个等级指定一个固定价格';
-$_LANG['notice_goods_type'] = '请选择文案的所属类型，进而完善此文案的属性';
+$_LANG['notice_goods_type'] = '请选择方案的所属类型，进而完善此方案的属性';
 
 $_LANG['on_sale_desc'] = '打勾表示允许销售，否则不允许销售。';
-$_LANG['alone_sale'] = '打勾表示能作为普通文案销售，否则只能作为配件或赠品销售。';
-$_LANG['free_shipping'] = '打勾表示此文案不会产生运费花销，否则按照正常运费计算。';
+$_LANG['alone_sale'] = '打勾表示能作为普通方案销售，否则只能作为配件或赠品销售。';
+$_LANG['free_shipping'] = '打勾表示此方案不会产生运费花销，否则按照正常运费计算。';
 
-$_LANG['invalid_goods_img'] = '文案图片格式不正确！';
-$_LANG['invalid_goods_thumb'] = '文案缩略图格式不正确！';
-$_LANG['invalid_img_url'] = '文案相册中第%s个图片格式不正确!';
+$_LANG['invalid_goods_img'] = '方案图片格式不正确！';
+$_LANG['invalid_goods_thumb'] = '方案缩略图格式不正确！';
+$_LANG['invalid_img_url'] = '方案相册中第%s个图片格式不正确!';
 
-$_LANG['goods_img_too_big'] = '文案图片文件太大了（最大值：%s），无法上传。';
-$_LANG['goods_thumb_too_big'] = '文案缩略图文件太大了（最大值：%s），无法上传。';
-$_LANG['img_url_too_big'] = '文案相册中第%s个图片文件太大了（最大值：%s），无法上传。';
+$_LANG['goods_img_too_big'] = '方案图片文件太大了（最大值：%s），无法上传。';
+$_LANG['goods_thumb_too_big'] = '方案缩略图文件太大了（最大值：%s），无法上传。';
+$_LANG['img_url_too_big'] = '方案相册中第%s个图片文件太大了（最大值：%s），无法上传。';
 $_LANG['img_resolution_fail'] = '图片解析失败。';
 $_LANG['img_upload_fail'] = '图片上传失败。';
 
@@ -191,38 +191,38 @@ $_LANG['category_manage'] = '分类管理';
 $_LANG['brand_manage'] = '品牌管理';
 $_LANG['hide'] = '隐藏';
 
-$_LANG['lab_volume_price']         = '文案优惠价格：';
+$_LANG['lab_volume_price']         = '方案优惠价格：';
 $_LANG['volume_number']            = '优惠数量';
 $_LANG['volume_price']             = '优惠价格';
 $_LANG['notice_volume_price']      = '购买数量达到优惠数量时享受的优惠价格';
 $_LANG['volume_number_continuous'] = '优惠数量重复！';
 
 $_LANG['label_suppliers']          = '选择供货商：';
-$_LANG['suppliers_no']             = '不指定供货商属于本店文案';
+$_LANG['suppliers_no']             = '不指定供货商属于本店方案';
 $_LANG['suppliers_move_to']        = '转移到供货商';
 $_LANG['lab_to_shopex']         = '转移到网店';
 
 /*------------------------------------------------------ */
-//-- 关联文案
+//-- 关联方案
 /*------------------------------------------------------ */
 
-$_LANG['all_goods'] = '可选文案';
-$_LANG['link_goods'] = '跟该文案关联的文案';
+$_LANG['all_goods'] = '可选方案';
+$_LANG['link_goods'] = '跟该方案关联的方案';
 $_LANG['single'] = '单向关联';
 $_LANG['double'] = '双向关联';
 $_LANG['all_article'] = '可选文章';
-$_LANG['goods_article'] = '跟该文案关联的文章';
+$_LANG['goods_article'] = '跟该方案关联的文章';
 $_LANG['top_cat'] = '顶级分类';
 
 /*------------------------------------------------------ */
-//-- 组合文案
+//-- 组合方案
 /*------------------------------------------------------ */
 
-$_LANG['group_goods'] = '该文案的配件';
+$_LANG['group_goods'] = '该方案的配件';
 $_LANG['price'] = '价格';
 
 /*------------------------------------------------------ */
-//-- 文案相册
+//-- 方案相册
 /*------------------------------------------------------ */
 
 $_LANG['img_desc'] = '图片描述';
@@ -234,14 +234,14 @@ $_LANG['img_file'] = '或者输入外部图片链接地址';
 /*------------------------------------------------------ */
 $_LANG['article_title'] = '文章标题';
 
-$_LANG['goods_not_exist'] = '该文案不存在';
-$_LANG['goods_not_in_recycle_bin'] = '该文案尚未放入回收站，不能删除';
+$_LANG['goods_not_exist'] = '该方案不存在';
+$_LANG['goods_not_in_recycle_bin'] = '该方案尚未放入回收站，不能删除';
 
-$_LANG['js_languages']['goods_name_not_null'] = '文案名称不能为空。';
-$_LANG['js_languages']['goods_cat_not_null'] = '文案分类必须选择。';
+$_LANG['js_languages']['goods_name_not_null'] = '方案名称不能为空。';
+$_LANG['js_languages']['goods_cat_not_null'] = '方案分类必须选择。';
 $_LANG['js_languages']['category_cat_not_null'] = '分类名称不能为空';
 $_LANG['js_languages']['brand_cat_not_null'] = '品牌名称不能为空';
-$_LANG['js_languages']['goods_cat_not_leaf'] = '您选择的文案分类不是底级分类，请选择底级分类。';
+$_LANG['js_languages']['goods_cat_not_leaf'] = '您选择的方案分类不是底级分类，请选择底级分类。';
 $_LANG['js_languages']['shop_price_not_null'] = '本店售价不能为空。';
 $_LANG['js_languages']['shop_price_not_number'] = '本店售价不是数值。';
 
@@ -251,17 +251,17 @@ $_LANG['js_languages']['button_del'] = '删除';
 $_LANG['js_languages']['spec_value_not_null'] = '规格不能为空';
 $_LANG['js_languages']['spec_price_not_number'] = '加价不是数字';
 $_LANG['js_languages']['market_price_not_number'] = '市场价格不是数字';
-$_LANG['js_languages']['goods_number_not_int'] = '文案库存不是整数';
+$_LANG['js_languages']['goods_number_not_int'] = '方案库存不是整数';
 $_LANG['js_languages']['warn_number_not_int'] = '库存警告不是整数';
 $_LANG['js_languages']['promote_not_lt'] = '促销开始日期不能大于结束日期';
 $_LANG['js_languages']['promote_start_not_null'] = '促销开始时间不能为空';
 $_LANG['js_languages']['promote_end_not_null'] = '促销结束时间不能为空';
 
 $_LANG['js_languages']['drop_img_confirm'] = '您确实要删除该图片吗？';
-$_LANG['js_languages']['batch_no_on_sale'] = '您确实要将选定的文案下架吗？';
-$_LANG['js_languages']['batch_trash_confirm'] = '您确实要把选中的文案放入回收站吗？';
-$_LANG['js_languages']['go_category_page'] = '本页数据将丢失，确认要去文案分类页添加分类吗？';
-$_LANG['js_languages']['go_brand_page'] = '本页数据将丢失，确认要去文案品牌页添加品牌吗？';
+$_LANG['js_languages']['batch_no_on_sale'] = '您确实要将选定的方案下架吗？';
+$_LANG['js_languages']['batch_trash_confirm'] = '您确实要把选中的方案放入回收站吗？';
+$_LANG['js_languages']['go_category_page'] = '本页数据将丢失，确认要去方案分类页添加分类吗？';
+$_LANG['js_languages']['go_brand_page'] = '本页数据将丢失，确认要去方案品牌页添加品牌吗？';
 
 $_LANG['js_languages']['volume_num_not_null'] = '请输入优惠数量';
 $_LANG['js_languages']['volume_num_not_number'] = '优惠数量不是数字';
@@ -276,8 +276,8 @@ $_LANG['replenish'] = '补货';
 $_LANG['batch_card_add'] = '批量补货';
 $_LANG['add_replenish'] = '添加虚拟卡卡密';
 
-$_LANG['goods_number_error'] = '文案库存数量错误';
-$_LANG['virtual_sales_error'] = '文案虚拟销售数量错误';
+$_LANG['goods_number_error'] = '方案库存数量错误';
+$_LANG['virtual_sales_error'] = '方案虚拟销售数量错误';
 
 /*------------------------------------------------------ */
 //-- 货品
@@ -294,16 +294,16 @@ $_LANG['product_batch_del_success'] = '货品批量删除成功';
 $_LANG['product_batch_del_failure'] = '货品批量删除失败';
 $_LANG['batch_product_add'] = '批量添加';
 $_LANG['batch_product_edit'] = '批量编辑';
-$_LANG['products_title'] = '文案名称：%s';
+$_LANG['products_title'] = '方案名称：%s';
 $_LANG['products_title_2'] = '货号：%s';
-$_LANG['good_shop_price'] = '（文案价格：%d）';
-$_LANG['good_goods_sn'] = '（文案货号：%s）';
+$_LANG['good_shop_price'] = '（方案价格：%d）';
+$_LANG['good_goods_sn'] = '（方案货号：%s）';
 $_LANG['exist_same_goods_sn'] = '货品货号不允许与产品货号重复';
 $_LANG['exist_same_product_sn'] = '货品货号重复';
 $_LANG['cannot_add_products'] = '货品添加失败';
 $_LANG['exist_same_goods_attr'] = '货品规格属性重复';
-$_LANG['cannot_goods_number'] = '此文案存在货品，不能修改文案库存';
-$_LANG['not_exist_goods_attr'] = '此文案不存在规格，请为其添加规格';
+$_LANG['cannot_goods_number'] = '此方案存在货品，不能修改方案库存';
+$_LANG['not_exist_goods_attr'] = '此方案不存在规格，请为其添加规格';
 $_LANG['goods_sn_exists'] = '您输入的货号已存在，请换一个';
 
 ?>

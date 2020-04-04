@@ -71,6 +71,13 @@ $modules['03_promotion']['14_package_list']         = 'package.php?act=list';
 $modules['03_promotion']['15_exchange_goods']       = 'exchange_goods.php?act=list';
 
 
+// 预约管理
+$modules['04_appointment']['01_appointment_list']               = 'appointment.php?act=list';
+$modules['04_appointment']['02_appointment_query']              = 'appointment.php?act=order_query';
+$modules['04_appointment']['03_add_appointment']                = 'appointment.php?act=add';
+$modules['04_appointment']['04_merge_appointment']              = 'appointment.php?act=merge';
+$modules['04_appointment']['05_edit_appointment_print']         = 'appointment.php?act=templates';
+
 $modules['04_order']['02_order_list']               = 'order.php?act=list';
 $modules['04_order']['03_order_query']              = 'order.php?act=order_query';
 $modules['04_order']['04_merge_order']              = 'order.php?act=merge';

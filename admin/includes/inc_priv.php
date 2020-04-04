@@ -188,4 +188,11 @@ if (!defined('IN_ECS'))
     $purview['01_scheme_list']        = array('scheme_manage', 'remove_back');
     $purview['02_scheme_add']         = 'scheme_manage';
     $purview['03_scheme_trash']       = array('scheme_manage', 'remove_back');
+
+// 预约管理
+    $purview['01_appointment_list']        = 'appointment_view';
+    $purview['02_appointment_query']       = 'appointment_view';
+    $purview['03_add_appointment']         = 'appointment_edit';
+    $purview['04_merge_appointment']       = 'appointment_os_edit';
+    $purview['05_edit_appointment_print']  = 'appointment_os_edit';
 ?>

@@ -36,6 +36,9 @@ if (!defined('IN_ECS'))
     //促销管理
     $icon['03_promotion']          = 'promotion';
 
+    //预约管理
+    $icon['04_appointment']        = 'order';
+
     //订单管理
     $icon['04_order']              = 'order';
     

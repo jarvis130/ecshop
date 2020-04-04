@@ -391,4 +391,11 @@ $_LANG['01_scheme_manage'] = '方案管理';
 $_LANG['01_scheme_list'] = '方案列表';
 $_LANG['02_scheme_add'] = '添加新方案';
 $_LANG['03_scheme_trash'] = '方案回收站';
+
+/*预约*/
+$_LANG['01_appointment_list'] = '预约列表';
+$_LANG['02_appointment_query'] = '预约查询';
+$_LANG['03_add_appointment'] = '添加预约';
+$_LANG['04_merge_appointment'] = '合并预约';
+$_LANG['05_edit_appointment_print'] = '预约打印';
 ?>

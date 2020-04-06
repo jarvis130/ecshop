@@ -15,7 +15,7 @@
 
 $_LANG['schp_imgsrc'] = '广告图片地址';
 $_LANG['schp_imgurl'] = '广告图片链接';
-$_LANG['schp_imgdesc'] = '图片说明';
+$_LANG['schp_imgdesc'] = '时间';
 $_LANG['schp_sort'] = '排序';
 $_LANG['schp_type'] = '类型';
 $_LANG['schp_group'] = '分组';

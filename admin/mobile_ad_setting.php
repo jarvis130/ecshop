@@ -21,7 +21,7 @@ $uri = $ecs->url();
 $allow_suffix = array('gif', 'jpg', 'png', 'jpeg', 'bmp');
 
 /*------------------------------------------------------ */
-//-- 移动端应用配置
+//-- 广告位配置
 /*------------------------------------------------------ */
 if ($_REQUEST['act']== 'list')
 {
@@ -70,7 +70,7 @@ if ($_REQUEST['act']== 'list')
     }
     else
     {
-        $links[] = array('text' => '移动端轮播图配置', 'href' => 'mobile_ad_setting.php?act=list');
+        $links[] = array('text' => '移动端广告位配置', 'href' => 'mobile_ad_setting.php?act=list');
         sys_msg($_LANG['id_error'], 0, $links);
     }
 
@@ -268,7 +268,7 @@ function get_banner($id){
 
 function get_banners()
 {
-    $banner_scene = 2;  // 轮播图
+    $banner_scene = 2;  // 广告位
 
     $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('banners') . " WHERE `scene` = " . $banner_scene . " ORDER BY `sort`";
     $banners = $GLOBALS['db']->getAll($sql);
@@ -278,7 +278,7 @@ function get_banners()
 
 function update_banner($banner)
 {
-    $banner_scene = 2;  // 轮播图
+    $banner_scene = 2;  // 广告位
 
     if (!empty($banner))
     {

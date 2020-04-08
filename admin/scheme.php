@@ -25,6 +25,8 @@ $exc = new exchange($ecs->table('goods'), $db, 'goods_id', 'goods_name');
 //-- 商品列表，商品回收站
 /*------------------------------------------------------ */
 
+$is_real = 4;  // 方案
+
 if ($_REQUEST['act'] == 'list' || $_REQUEST['act'] == 'trash')
 {
     admin_priv('scheme_manage');
@@ -76,7 +78,7 @@ if ($_REQUEST['act'] == 'list' || $_REQUEST['act'] == 'trash')
     $suppliers_list_count = count($suppliers_list);
     $smarty->assign('suppliers_list', ($suppliers_list_count == 0 ? 0 : $suppliers_list)); // 取供货商列表
 
-    $goods_list = goods_list($_REQUEST['act'] == 'list' ? 0 : 1, 4);
+    $goods_list = goods_list($_REQUEST['act'] == 'list' ? 0 : 1, $is_real);
     $smarty->assign('goods_list',   $goods_list['goods']);
     $smarty->assign('filter',       $goods_list['filter']);
     $smarty->assign('record_count', $goods_list['record_count']);
@@ -860,7 +862,7 @@ elseif ($_REQUEST['act'] == 'insert' || $_REQUEST['act'] == 'update')
                 "'$brand_id', '$shop_price', '$market_price', '$virtual_sales', '$is_promote','$promote_price', ".
                 "'$promote_start_date', '$promote_end_date', '$goods_img', '$goods_thumb', '$original_img', ".
                 "'$_POST[keywords]', '$_POST[goods_brief]', '$_POST[seller_note]', '$goods_weight', '$goods_number',".
-                " '$warn_number', '$_POST[integral]', '$give_integral', '$is_best', '$is_new', '$is_hot', 4, '$is_on_sale', '$is_alone_sale', $is_shipping, ".
+                " '$warn_number', '$_POST[integral]', '$give_integral', '$is_best', '$is_new', '$is_hot', '$is_real', '$is_on_sale', '$is_alone_sale', $is_shipping, ".
                 " '$_POST[goods_desc]', '" . gmtime() . "', '". gmtime() ."', '$goods_type', '$code', '$rank_integral')";
 //        }
     }

@@ -178,6 +178,7 @@ $modules['16_email_manage']['view_sendlist']        = 'view_sendlist.php?act=lis
 
 $modules['18_lead_manage']['banner_mobile']        = 'mobile_setting.php?act=list';//移动端轮播图设置
 $modules['18_lead_manage']['banner_ad_mobile']        = 'mobile_ad_setting.php?act=list';//移动端广告位设置
+$modules['18_lead_manage']['banner_ad_play_mobile']        = 'mobile_ad_play_setting.php?act=list';//移动端播放页广告位设置
 $modules['18_lead_manage']['lead']        = 'lead.php?act=list';//H5店铺二维码
 $modules['18_lead_manage']['leancloud']        = 'leancloud.php?act=list';//云推送管理
 $modules['18_lead_manage']['mobile_setting']        = 'ecmobile_setting.php?act=list';//移动版应用配置

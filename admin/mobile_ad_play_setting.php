@@ -21,13 +21,13 @@ $uri = $ecs->url();
 $allow_suffix = array('gif', 'jpg', 'png', 'jpeg', 'bmp');
 
 /*------------------------------------------------------ */
-//-- 轮播图配置
+//-- 播放页广告位配置
 /*------------------------------------------------------ */
 if ($_REQUEST['act']== 'list')
 {
     /* 检查权限 */
     admin_priv('mobile_setting');
-    $smarty->assign('ur_here', $_LANG['banner_mobile']);
+    $smarty->assign('ur_here', $_LANG['banner_ad_play_mobile']);
     $cert = new certificate;
     $isOpenWap = $cert->is_open_sn('fy');
     if($isOpenWap==false && $_SESSION['yunqi_login'] && $_SESSION['TOKEN'] ){
@@ -54,11 +54,11 @@ if ($_REQUEST['act']== 'list')
     }
 
     assign_query_info();
-    $flash_dir = ROOT_PATH . 'data/flashdata/';
+    $flash_dir = ROOT_PATH . 'data/flashadplaydata/';
 
     $smarty->assign('playerdb', $playerdb);
     $smarty->assign('group_list',$grouplist);
-    $smarty->display('banner_config.html');
+    $smarty->display('banner_ad_play_config.html');
 } elseif($_REQUEST['act']== 'del') {
     admin_priv('flash_manage');
 
@@ -70,7 +70,7 @@ if ($_REQUEST['act']== 'list')
     }
     else
     {
-        $links[] = array('text' => '移动端轮播图配置', 'href' => 'mobile_setting.php?act=list');
+        $links[] = array('text' => '移动端播放页广告位配置', 'href' => 'mobile_ad_play_setting.php?act=list');
         sys_msg($_LANG['id_error'], 0, $links);
     }
 
@@ -82,7 +82,7 @@ if ($_REQUEST['act']== 'list')
     delete_banner($id);
     $error_msg = '';
     set_flash_data($_CFG['flash_theme'], $error_msg);
-    ecs_header("Location: mobile_setting.php?act=list\n");
+    ecs_header("Location: mobile_ad_play_setting.php?act=list\n");
     exit;
 }
 elseif ($_REQUEST['act'] == 'add')
@@ -103,11 +103,11 @@ elseif ($_REQUEST['act'] == 'add')
             $smarty->assign('width_height', sprintf($_LANG['width_height'], $width_height['width'], $width_height['height']));
         }
 
-        $smarty->assign('action_link', array('text' => $_LANG['go_url'], 'href' => 'mobile_setting.php?act=list'));
+        $smarty->assign('action_link', array('text' => $_LANG['go_url'], 'href' => 'mobile_ad_play_setting.php?act=list'));
         $smarty->assign('rt', $rt);
         $smarty->assign('type_list', get_type_list());
         $smarty->assign('ur_here', $_LANG['add_picad']);
-        $smarty->display('flashplay_add.htm');
+        $smarty->display('flashplay_ad_play_add.htm');
     }
     elseif ($_POST['step'] == 2)
     {
@@ -144,13 +144,13 @@ elseif ($_REQUEST['act'] == 'add')
         }
         else
         {
-            $links[] = array('text' => $_LANG['add_new'], 'href' => 'mobile_setting.php?act=add');
+            $links[] = array('text' => $_LANG['add_new'], 'href' => 'mobile_ad_play_setting.php?act=add');
             sys_msg($_LANG['src_empty'], 0, $links);
         }
 
         if (empty($_POST['img_url']))
         {
-            $links[] = array('text' => $_LANG['add_new'], 'href' => 'mobile_setting.php?act=add');
+            $links[] = array('text' => $_LANG['add_new'], 'href' => 'mobile_ad_play_setting.php?act=add');
             sys_msg($_LANG['link_empty'], 0, $links);
         }
 
@@ -160,7 +160,7 @@ elseif ($_REQUEST['act'] == 'add')
 
         $error_msg = '';
         set_flash_data($_CFG['flash_theme'], $error_msg);
-        $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_setting.php?act=list');
+        $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_ad_play_setting.php?act=list');
         sys_msg($_LANG['edit_ok'], 0, $links);
     }
 }
@@ -176,7 +176,7 @@ elseif ($_REQUEST['act'] == 'edit')
     }
     else
     {
-        $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_setting.php?act=list');
+        $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_ad_play_setting.php?act=list');
         sys_msg($_LANG['id_error'], 0, $links);
     }
     if (empty($_POST['step']))
@@ -189,18 +189,18 @@ elseif ($_REQUEST['act'] == 'edit')
         $rt['img_type'] = $rt['type'];
 
         $rt['id'] = $id;
-        $smarty->assign('action_link', array('text' => $_LANG['go_url'], 'href' => 'mobile_setting.php?act=list'));
+        $smarty->assign('action_link', array('text' => $_LANG['go_url'], 'href' => 'mobile_ad_play_setting.php?act=list'));
         $smarty->assign('rt', $rt);
         $smarty->assign('type_list', get_type_list());
         $smarty->assign('ur_here', $_LANG['edit_picad']);
-        $smarty->display('flashplay_add.htm');
+        $smarty->display('flashplay_ad_play_add.htm');
     }
     elseif ($_POST['step'] == 2)
     {
         // if (empty($_POST['img_url']))
         // {
         //     //若链接地址为空
-        //     $links[] = array('text' => $_LANG['return_edit'], 'href' => 'mobile_setting.php?act=edit&id=' . $id);
+        //     $links[] = array('text' => $_LANG['return_edit'], 'href' => 'mobile_ad_play_setting.php?act=edit&id=' . $id);
         //     sys_msg($_LANG['link_empty'], 0, $links);
         // }
 
@@ -239,7 +239,7 @@ elseif ($_REQUEST['act'] == 'edit')
         }
         else
         {
-            $links[] = array('text' => $_LANG['return_edit'], 'href' => 'mobile_setting.php?act=edit&id=' . $id);
+            $links[] = array('text' => $_LANG['return_edit'], 'href' => 'mobile_ad_play_setting.php?act=edit&id=' . $id);
             sys_msg($_LANG['src_empty'], 0, $links);
         }
 
@@ -252,7 +252,7 @@ elseif ($_REQUEST['act'] == 'edit')
         update_banner($banner);
         $error_msg = '';
         set_flash_data($_CFG['flash_theme'], $error_msg);
-        $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_setting.php?act=list');
+        $links[] = array('text' => $_LANG['go_url'], 'href' => 'mobile_ad_play_setting.php?act=list');
         sys_msg($_LANG['edit_ok'], 0, $links);
     }
 }
@@ -266,7 +266,7 @@ function get_banner($id){
 
 function get_banners()
 {
-    $banner_scene = 1;  // 轮播图
+    $banner_scene = 3;  // 播放页广告位
 
     $sql = "SELECT * FROM " . $GLOBALS['ecs']->table('banners') . " WHERE `scene` = " . $banner_scene . " ORDER BY `sort`";
     $banners = $GLOBALS['db']->getAll($sql);
@@ -276,7 +276,7 @@ function get_banners()
 
 function update_banner($banner)
 {
-    $banner_scene = 1;  // 轮播图
+    $banner_scene = 3;  // 播放页广告位
 
     if (!empty($banner))
     {
@@ -385,7 +385,7 @@ function get_flash_tpl_info($dir, $file)
     if (is_file($dir . $file . '/preview.jpg'))
     {
         $info['code'] = $file;
-        $info['screenshot'] = '../data/flashdata/' . $file . '/preview.jpg';
+        $info['screenshot'] = '../data/flashadplaydata/' . $file . '/preview.jpg';
         $arr = array_slice(file($dir . $file . '/cycle_image.js'), 1, 2);
         $info_name = explode(':', $arr[0]);
         $info_desc = explode(':', $arr[1]);
@@ -440,7 +440,7 @@ function set_flash_data($tplname, &$msg)
 
 function set_flash_uproll($tplname, $flashdata)
 {
-    $data_file = ROOT_PATH . DATA_DIR . '/flashdata/' . $tplname . '/data.xml';
+    $data_file = ROOT_PATH . DATA_DIR . '/flashadplaydata/' . $tplname . '/data.xml';
     $xmldata = '<?xml version="1.0" encoding="' . EC_CHARSET . '"?><myMenu>';
     foreach ($flashdata as $data)
     {
@@ -453,7 +453,7 @@ function set_flash_uproll($tplname, $flashdata)
 
 function set_flash_focus($tplname, $flashdata)
 {
-    $data_file = ROOT_PATH . DATA_DIR . '/flashdata/' . $tplname . '/data.js';
+    $data_file = ROOT_PATH . DATA_DIR . '/flashadplaydata/' . $tplname . '/data.js';
     $jsdata = '';
     $jsdata2 = array('url' => 'var pics=', 'txt' => 'var texts=', 'link' => 'var links=');
     $count = 1;
@@ -480,7 +480,7 @@ function set_flash_focus($tplname, $flashdata)
 
 function set_flash_default($tplname, $flashdata)
 {
-    $data_file = ROOT_PATH . DATA_DIR . '/flashdata/' . $tplname . '/data.xml';
+    $data_file = ROOT_PATH . DATA_DIR . '/flashadplaydata/' . $tplname . '/data.xml';
     $xmldata = '<?xml version="1.0" encoding="' . EC_CHARSET . '"?><bcaster>';
     foreach ($flashdata as $data)
     {
